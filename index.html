@@ -247,10 +247,10 @@
                     
                     <h3 class="text-xl font-bold text-gray-800 mb-4" data-key="kontaktDatenTitel">Kontaktdaten</h3>
                     <div class="flex flex-wrap justify-center md:justify-start gap-4 text-gray-600">
-                        <a href="mailto:dominik.baki@outlook.com" class="text-gray-600 hover:text-blue-600" data-key="kontaktEmail">&#9993; dominik.baki@outlook.com</a>
+                        <a href="mailto:dominik.baki@outlook.com" class="text-gray-600 hover:text-blue-600" data-key="kontaktEmail"></a>
                         <span data-key="kontaktTelefon">&#9742; +4915229029773</span>
-                        <span data-key="kontaktLinkedIn">&#128279; <a href="https://www.linkedin.com/in/domina-haki" target="_blank" class="text-blue-600 hover:underline">LinkedIn Profil</a></span>
-                        <span data-key="kontaktGitHub">&#128187; <a href="https://github.com/VectorMindStudio?tab=repositories" target="_blank" class="text-blue-600 hover:underline">GitHub Profil</a></span>
+                        <a href="https://www.linkedin.com/in/domina-haki" target="_blank" class="text-gray-600 hover:text-blue-600" data-key="kontaktLinkedIn"></a>
+                        <a href="https://github.com/VectorMindStudio?tab=repositories" target="_blank" class="text-gray-600 hover:text-blue-600" data-key="kontaktGitHub"></a>
                         <span data-key="kontaktLocation">&#128205; Mannheim, Deutschland</span>
                     </div>
                 </div>
@@ -626,9 +626,9 @@
                     if (translations[lang] && translations[lang][key]) {
                         // Special handling for the projectsIntro to keep the internal <a> tag
                         if (key === 'projekteIntro') {
-                            element.innerHTML = translations[lang][key].replace('GitHub Profil', '<a href="https://github.com/VectorMindStudio?tab=repositories" target="_blank" class="text-blue-600 hover:underline">GitHub Profil</a>');
-                        } else if (element.tagName === 'A' && (key === 'kontaktLinkedIn' || key === 'kontaktDirectLinkedIn' || key === 'kontaktGitHub')) {
-                            element.textContent = translations[lang][key].replace('🔗 ', '').replace('💻 ', '');
+                            element.innerHTML = translations[lang][key]; // Now, the translation for projekteIntro does not contain the <a> tag
+                        } else if (element.tagName === 'A' && (key === 'kontaktLinkedIn' || key === 'kontaktGitHub' || key === 'kontaktEmail')) { // Added kontaktEmail here
+                            element.textContent = translations[lang][key].replace('🔗 ', '').replace('💻 ', '').replace('✉️ ', ''); // Remove emojis for textContent
                         } else if (element.tagName === 'OPTION' && key === 'navMenu') {
                             element.textContent = translations[lang][key];
                         } else if ((element.tagName === 'INPUT' || element.tagName === 'TEXTAREA') && element.hasAttribute('placeholder')) {
@@ -946,7 +946,7 @@
                         'Verantwortung für Zellbankproduktionen im Reinraumbereich der Klasse C.',
                         'Aseptisches Arbeiten unter Laminar-Flow-Werkbänken.',
                         'Durchführung von Inprozesskontrollen und Sicherstellung der vorschriftsmäßigen Lagerung/Versendung von Zellbänken.',
-                        'Unterstützung bei Qualifizierung/Kalibrierung von Geräten und GMP-gerechter Dokumentation.'
+                        'Unterstützung bei Qualifizierung und Kalibrierung von Geräten und GMP-gerechter Dokumentation.'
                     ],
                     isOpen: false
                 },
