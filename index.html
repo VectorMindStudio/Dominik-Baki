@@ -1,0 +1,589 @@
+<!DOCTYPE html>
+<html lang="de" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lebenslauf – Dominik Baki</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
+    <!-- Chosen Palette: Warm Neutrals -->
+    <!-- Application Structure Plan: The SPA uses a top-down, single-page structure with a sticky navigation bar for easy access to key sections: Profile, Skills, Experience, and Education. This is more intuitive than a simple document scroll. The 'Werdegang' (Experience) is presented as an interactive timeline, prioritizing recent, relevant tech training while keeping past roles accessible but collapsed by default. This visually emphasizes the career transition. The 'Kompetenzen' (Skills) are visualized with a bar chart for core technologies and categorized cards for others, making them more digestible and engaging than a long list. This structure is designed to guide a recruiter's attention to the most important information first, creating a compelling narrative of a dedicated career changer. A new section for the AI-powered cover letter generator has been added after the profile, providing a direct utility feature. A profile picture upload/display feature has been integrated into the 'Profile' section for personalization. -->
+    <!-- Visualization & Content Choices: 
+        - Report Info: Core technical skills. Goal: Inform/Compare. Viz/Presentation: Bar Chart. Interaction: Hover tooltips show skill names. Justification: Provides a quick, visual summary of core competencies, which is more engaging than a long text list. Library/Method: Chart.js on a Canvas element.
+        - Report Info: Full work history. Goal: Show Change/Organize. Viz/Presentation: Interactive Vertical Timeline. Interaction: Users can click to expand/collapse details for each role. The most recent role (IT training) is expanded by default. Justification: This effectively tells the story of the career transition, focusing on the new direction while still providing full background details on demand. This prevents recruiters from being overwhelmed by less relevant past information. Library/Method: HTML/CSS (Tailwind) + Vanilla JS for toggling visibility.
+        - Report Info: All other sections (Summary, Projects, Education). Goal: Inform. Viz/Presentation: Cleanly styled text cards and lists. Interaction: None. Justification: Clear and direct presentation is best for textual information. Library/Method: HTML/CSS (Tailwind).
+        - New Feature (LLM): Cover letter generation. Goal: Utility/Assist. Viz/Presentation: Text area for input, button for action, loading spinner, and a text display area for generated output. Interaction: User input, button click to trigger API call. Justification: Directly assists with job application process, a common need when using a CV. Highlights the potential of AI in practical applications. Library/Method: Vanilla JS for fetch API, Gemini API (gemini-2.0-flash).
+        - New Feature: Profile Picture Upload. Goal: Personalization. Viz/Presentation: Image element for display, file input for upload, buttons for upload/remove. Interaction: File selection, button clicks. Justification: Adds a personal touch to the CV, making it more engaging visually. LocalStorage is used for persistence. Library/Method: HTML/CSS (Tailwind) + Vanilla JS for file handling and localStorage.
+    -->
+    <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f8f7f5;
+            color: #333;
+        }
+        .chart-container {
+            position: relative;
+            width: 100%;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+            height: 350px;
+            max-height: 400px;
+        }
+        @media (min-width: 768px) {
+            .chart-container {
+                height: 400px;
+            }
+        }
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: 19px;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background-color: #d1d5db;
+        }
+        .timeline-item:last-child::before {
+            display: none;
+        }
+        .timeline-dot {
+            position: absolute;
+            left: 10px;
+            top: 4px;
+            width: 20px;
+            height: 20px;
+        }
+        .spinner {
+            border: 4px solid rgba(0, 0, 0, 0.1);
+            border-left-color: #3b82f6;
+            border-radius: 50%;
+            width: 24px;
+            height: 24px;
+            animation: spin 1s linear infinite;
+        }
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+    </style>
+</head>
+<body class="antialiased">
+
+    <header class="bg-white/80 backdrop-blur-lg shadow-sm sticky top-0 z-50">
+        <nav class="container mx-auto px-6 py-4 flex justify-between items-center">
+            <div class="text-xl font-bold text-gray-800">Dominik Baki</div>
+            <div class="hidden md:flex space-x-8">
+                <a href="#profil" class="text-gray-600 hover:text-blue-600 transition-colors">Profil</a>
+                <a href="#anschreiben-generator" class="text-gray-600 hover:text-blue-600 transition-colors">Anschreiben &#x2728;</a>
+                <a href="#kompetenzen" class="text-gray-600 hover:text-blue-600 transition-colors">Kompetenzen</a>
+                <a href="#werdegang" class="text-gray-600 hover:text-blue-600 transition-colors">Werdegang</a>
+                <a href="#ausbildung" class="text-gray-600 hover:text-blue-600 transition-colors">Ausbildung</a>
+            </div>
+            <div class="md:hidden">
+                <select id="mobile-nav" class="bg-gray-200 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5">
+                    <option>Menü</option>
+                    <option value="#profil">Profil</option>
+                    <option value="#anschreiben-generator">Anschreiben &#x2728;</option>
+                    <option value="#kompetenzen">Kompetenzen</option>
+                    <option value="#werdegang">Werdegang</option>
+                    <option value="#ausbildung">Ausbildung</option>
+                </select>
+            </div>
+        </nav>
+    </header>
+
+    <main class="container mx-auto p-6 md:p-8">
+        
+        <section id="profil" class="mb-16 scroll-mt-24">
+            <div class="text-center">
+                <h1 class="text-4xl md:text-5xl font-bold text-gray-800 mb-2">Dominik Baki</h1>
+                <p class="text-xl md:text-2xl text-blue-600 font-medium mb-6">Junior App-Entwickler</p>
+            </div>
+
+            <div class="max-w-4xl mx-auto bg-white rounded-xl shadow-lg p-8 mb-8 flex flex-col items-center">
+                <div class="w-32 h-32 md:w-40 md:h-40 bg-gray-200 rounded-full flex items-center justify-center overflow-hidden mb-4 border-4 border-blue-200 shadow-md">
+                    <img id="profile-picture" src="https://placehold.co/160x160/cbd5e0/475569?text=Profilbild" alt="Profilbild" class="w-full h-full object-cover">
+                </div>
+                <input type="file" id="profile-picture-upload" accept="image/*" class="hidden">
+                <div class="flex flex-wrap justify-center gap-3">
+                    <label for="profile-picture-upload" class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded-full cursor-pointer transition-colors duration-200">
+                        Bild hochladen
+                    </label>
+                    <button id="remove-profile-picture-btn" class="bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-4 rounded-full transition-colors duration-200">
+                        Bild entfernen
+                    </button>
+                </div>
+            </div>
+
+            <div class="max-w-4xl mx-auto bg-white rounded-xl shadow-lg p-8">
+                <h2 class="text-2xl font-bold text-gray-800 mb-4 border-b pb-2">Zusammenfassung</h2>
+                <p class="text-gray-600 mb-4 leading-relaxed" id="summary-text">
+                    Als leidenschaftlicher und zielstrebiger angehender App-Entwickler, aktuell in Ausbildung am renommierten Syntax Institut, konzentriere ich mich auf die Entwicklung nativer Apps für iOS und Android. Ich verfüge über fundierte Kenntnisse in Swift und Kotlin sowie in effizientem Coding und sauberer Architektur, ergänzt durch kontinuierliche Vertiefung in UX/UI-Prinzipien.
+                </p>
+                <p class="text-gray-600 mb-4 leading-relaxed">
+                    Meine frühere Vertriebserfahrung prägt meine ausgeprägte kundenorientierte Denkweise und Problemlösungsfähigkeiten. Mein Antrieb ist es, innovative und benutzerzentrierte Apps zu erstellen, die Nutzern echten Mehrwert bieten und technologische Best Practices umsetzen.
+                </p>
+                <div class="bg-blue-50 border border-blue-200 rounded-lg p-4 mt-6">
+                    <h3 class="font-bold text-lg text-blue-800 mb-2">Aktuelles Projekt: EmigrateIn App</h3>
+                    <p class="text-blue-700">Aktuell arbeite ich an meinem Abschlussprojekt, der EmigrateIn App, um Familien den komplexen Prozess der Auswanderung nach Südzypern zu erleichtern.</p>
+                </div>
+            </div>
+             <div class="max-w-4xl mx-auto bg-white rounded-xl shadow-lg p-8 mt-8">
+                 <h3 class="text-xl font-bold text-gray-800 mb-4">Kontaktdaten</h3>
+                 <div class="flex flex-wrap gap-4 text-gray-600">
+                     <span>&#9993; dominik.baki@outlook.com</span>
+                     <span>&#9742; +4915229029773</span>
+                     <span>&#128279; <a href="https://www.linkedin.com/in/dominik-baki-offcial" target="_blank" class="text-blue-600 hover:underline">LinkedIn Profil</a></span>
+                     <span>&#128205; Mannheim, Deutschland</span>
+                 </div>
+            </div>
+        </section>
+
+        <section id="anschreiben-generator" class="mb-16 scroll-mt-24">
+            <h2 class="text-3xl font-bold text-center text-gray-800 mb-2">Anschreiben-Generator &#x2728;</h2>
+            <p class="text-center text-gray-500 mb-10 max-w-2xl mx-auto">
+                Geben Sie hier eine Stellenbeschreibung ein, und unser KI-Assistent erstellt ein passendes Anschreiben basierend auf den Informationen Ihres Lebenslaufs.
+            </p>
+            <div class="max-w-4xl mx-auto bg-white rounded-xl shadow-lg p-8">
+                <label for="job-description" class="block text-gray-700 text-lg font-bold mb-2">Stellenbeschreibung hier einfügen:</label>
+                <textarea id="job-description" class="w-full p-4 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500 mb-4 h-48 resize-y" placeholder="Z.B.: 'Wir suchen einen erfahrenen iOS-Entwickler mit Kenntnissen in Swift UI und Firebase...'"></textarea>
+                <button id="generate-cover-letter-btn" class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-6 rounded-full shadow-lg transition-all duration-300 ease-in-out transform hover:scale-105 flex items-center justify-center">
+                    <span id="button-text">Anschreiben generieren</span>
+                    <div id="loading-spinner" class="spinner ml-3 hidden"></div>
+                </button>
+                <div id="cover-letter-output" class="mt-8 p-6 bg-gray-50 border border-gray-200 rounded-lg text-gray-700 leading-relaxed min-h-[100px] whitespace-pre-wrap">
+                    Dein generiertes Anschreiben erscheint hier...
+                </div>
+            </div>
+        </section>
+
+        <section id="kompetenzen" class="mb-16 scroll-mt-24">
+            <h2 class="text-3xl font-bold text-center text-gray-800 mb-2">Technische Kompetenzen</h2>
+            <p class="text-center text-gray-500 mb-10 max-w-2xl mx-auto">
+                Hier finden Sie eine Übersicht meiner technischen Fähigkeiten. Das Diagramm hebt meine Kernkompetenzen in der mobilen Entwicklung hervor, während die Karten meine Kenntnisse in weiteren relevanten Bereichen detaillieren.
+            </p>
+            
+            <div class="bg-white rounded-xl shadow-lg p-6 md:p-8 mb-8">
+                <h3 class="text-xl font-bold text-gray-800 mb-4 text-center">Kernkompetenzen in der App-Entwicklung</h3>
+                <div class="chart-container">
+                    <canvas id="skillsChart"></canvas>
+                </div>
+            </div>
+
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <div class="bg-white rounded-xl shadow-lg p-6">
+                    <h3 class="text-xl font-bold text-gray-800 mb-3 border-b pb-2">Architektur & Patterns</h3>
+                    <ul class="space-y-2 text-gray-600">
+                        <li>MVVM</li>
+                        <li>Objektorientierte Programmierung</li>
+                        <li>Deklarative Programmierung</li>
+                        <li>Repository Pattern</li>
+                        <li>Funktionale Programmierung</li>
+                    </ul>
+                </div>
+                <div class="bg-white rounded-xl shadow-lg p-6">
+                    <h3 class="text-xl font-bold text-gray-800 mb-3 border-b pb-2">Backend & Datenbanken</h3>
+                    <ul class="space-y-2 text-gray-600">
+                        <li>Firebase</li>
+                        <li>SwiftData</li>
+                        <li>Room Datenbank</li>
+                    </ul>
+                </div>
+                <div class="bg-white rounded-xl shadow-lg p-6">
+                    <h3 class="text-xl font-bold text-gray-800 mb-3 border-b pb-2">Tools & Bibliotheken</h3>
+                    <ul class="space-y-2 text-gray-600">
+                        <li>Git & GitHub</li>
+                        <li>Xcode & SPM</li>
+                        <li>Netzwerkdienste (API)</li>
+                        <li>Firebase & Google Auth</li>
+                        <li>KI Copilot</li>
+                    </ul>
+                </div>
+                <div class="bg-white rounded-xl shadow-lg p-6 lg:col-span-3">
+                    <h3 class="text-xl font-bold text-gray-800 mb-3 border-b pb-2">UX/UI & Designprozess</h3>
+                    <div class="flex flex-wrap gap-x-6 gap-y-2 text-gray-600">
+                         <span>User Story</span>
+                         <span>Figma</span>
+                         <span>Konkurrenzanalyse</span>
+                         <span>User Flow & UI Design</span>
+                         <span>Human Interface Guidelines</span>
+                         <span>Material Design</span>
+                         <span>Wireframes</span>
+                         <span>Unit Testing</span>
+                         <span>Kanban</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="werdegang" class="mb-16 scroll-mt-24">
+            <h2 class="text-3xl font-bold text-center text-gray-800 mb-2">Beruflicher Werdegang</h2>
+            <p class="text-center text-gray-500 mb-10 max-w-3xl mx-auto">
+                Dieser interaktive Zeitstrahl zeigt meinen beruflichen Werdegang. Klicken Sie auf die einzelnen Stationen, um mehr Details zu erfahren. Der Fokus liegt auf meiner aktuellen Entwicklung im Tech-Bereich, während meine wertvollen Erfahrungen aus früheren Branchen ebenfalls einsehbar sind.
+            </p>
+            <div class="max-w-4xl mx-auto">
+                <div class="relative">
+                    <!-- Timeline Items will be inserted here by JS -->
+                </div>
+            </div>
+        </section>
+
+        <section id="ausbildung" class="scroll-mt-24">
+            <h2 class="text-3xl font-bold text-center text-gray-800 mb-8">Ausbildung</h2>
+            <div class="max-w-4xl mx-auto grid md:grid-cols-2 gap-8">
+                <div class="bg-white rounded-xl shadow-lg p-6 border-l-4 border-blue-500">
+                    <p class="text-sm text-gray-500">Sept 2024 – Okt 2025</p>
+                    <h3 class="text-lg font-bold text-gray-800">IT Fachkraft zur App Entwicklung</h3>
+                    <p class="text-gray-600">Syntax Institut, Deutschland</p>
+                </div>
+                <div class="bg-white rounded-xl shadow-lg p-6">
+                    <p class="text-sm text-gray-500">2002 – 2004</p>
+                    <h3 class="text-lg font-bold text-gray-800">Biotechnologischer Assistent</h3>
+                    <p class="text-gray-600">Johannes-Gutenberg-Schule, Heidelberg</p>
+                </div>
+                <div class="bg-white rounded-xl shadow-lg p-6">
+                    <p class="text-sm text-gray-500">2001 – 2002</p>
+                    <h3 class="text-lg font-bold text-gray-800">Mittlere Reife, Realschule</h3>
+                    <p class="text-gray-600">Johannes-Gutenberg-Schule, Heidelberg</p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="bg-gray-800 text-white mt-16">
+        <div class="container mx-auto p-6 text-center">
+            <p>&copy; 2025 Dominik Baki. Alle Rechte vorbehalten.</p>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Mobile navigation
+            const mobileNav = document.getElementById('mobile-nav');
+            mobileNav.addEventListener('change', (e) => {
+                if(e.target.value) {
+                    window.location.href = e.target.value;
+                }
+            });
+
+            // Profile Picture Handling
+            const profilePicture = document.getElementById('profile-picture');
+            const profilePictureUpload = document.getElementById('profile-picture-upload');
+            const removeProfilePictureBtn = document.getElementById('remove-profile-picture-btn');
+            const defaultProfilePic = "https://placehold.co/160x160/cbd5e0/475569?text=Profilbild"; // Placeholder image
+
+            // Load saved image on startup
+            const savedImage = localStorage.getItem('profileImage');
+            if (savedImage) {
+                profilePicture.src = savedImage;
+            } else {
+                profilePicture.src = defaultProfilePic;
+            }
+
+            profilePictureUpload.addEventListener('change', function() {
+                const file = this.files[0];
+                if (file) {
+                    const reader = new FileReader();
+                    reader.onload = function(e) {
+                        profilePicture.src = e.target.result;
+                        localStorage.setItem('profileImage', e.target.result);
+                    };
+                    reader.readAsDataURL(file);
+                }
+            });
+
+            removeProfilePictureBtn.addEventListener('click', function() {
+                profilePicture.src = defaultProfilePic;
+                localStorage.removeItem('profileImage');
+            });
+
+            // Skills Chart
+            const ctx = document.getElementById('skillsChart').getContext('2d');
+            const skillsChart = new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: ['Swift', 'Kotlin', 'iOS Entwicklung', 'Android Studio', 'Jetpack Compose', 'SQL', 'Firebase'],
+                    datasets: [{
+                        label: 'Kompetenzniveau',
+                        data: [90, 85, 90, 80, 85, 70, 75],
+                        backgroundColor: 'rgba(59, 130, 246, 0.7)',
+                        borderColor: 'rgba(59, 130, 246, 1)',
+                        borderWidth: 1,
+                        borderRadius: 5,
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    indexAxis: 'y',
+                    scales: {
+                        x: {
+                            beginAtZero: true,
+                            max: 100,
+                            grid: {
+                                display: false
+                            }
+                        },
+                        y: {
+                           grid: {
+                                color: '#e5e7eb'
+                           }
+                        }
+                    },
+                    plugins: {
+                        legend: {
+                            display: false
+                        },
+                        tooltip: {
+                            callbacks: {
+                                label: function(context) {
+                                    let label = context.dataset.label || '';
+                                    if (label) {
+                                        label += ': ';
+                                    }
+                                    if (context.parsed.x !== null) {
+                                        label += context.parsed.x + '%';
+                                    }
+                                    return label;
+                                }
+                            }
+                        }
+                    }
+                }
+            });
+
+            // Timeline Data & Rendering
+            const experienceData = [
+                {
+                    title: 'Ausbildung zur IT-Fachkraft für App Entwicklung',
+                    company: 'Syntax Institut, Deutschland, Österreich und die Schweiz',
+                    period: 'Oktober 2024 – Aktuell',
+                    details: [
+                        'Intensive Qualifizierung mit Fokus auf native App-Entwicklung (iOS & Android).',
+                        'Erwerb fundierter Kenntnisse in Swift und Kotlin, effizientem Coding und sauberer Architektur.',
+                        'Vertiefung im Verständnis von UX/UI-Prinzipien.',
+                        'Entwicklung des Abschlussprojekts "EmigrateIn" (iOS MVP) zur Erleichterung der Auswanderung für Familien.'
+                    ],
+                    isOpen: true
+                },
+                {
+                    title: 'Selbständiger Vertriebspartner',
+                    company: 'LR Health & Beauty, Deutschland',
+                    period: 'Juni 2022 – September 2024',
+                    details: [
+                        'Expertise im Vertrieb von Beauty- und Gesundheitsprodukten.',
+                        'Aufbau und Pflege eines umfangreichen Kundenstamms zur Steigerung des Umsatzes und Erreichung von Verkaufszielen.',
+                        'Verantwortungsvolle Betreuung und Beratung von Kunden zur Sicherstellung hoher Zufriedenheit.',
+                        'Aktive Teilnahme an Schulungen zur Erweiterung von Produktkenntnissen und Verkaufstechniken.'
+                    ],
+                    isOpen: false
+                },
+                {
+                    title: 'Handelsvertreter',
+                    company: 'Vorwerk Gruppe, Deutschland',
+                    period: 'April 2023 – Dezember 2023',
+                    details: [
+                         'Erfolgreiche selbstständige Tätigkeit als Handelsvertreter.',
+                         'Aufbau und Pflege eines umfangreichen sowie Betreuung eines bestehenden Kundenstamms.',
+                         'Steigerung des Umsatzes und Erreichen von Verkaufszielen.'
+                    ],
+                    isOpen: false
+                },
+                {
+                    title: 'Coordinator Combination Products (Leasing)',
+                    company: 'AbbVie, Ludwigshafen am Rhein',
+                    period: 'September 2021 – Juli 2022',
+                    details: [],
+                    isOpen: false
+                },
+                {
+                    title: 'Technician Process Transfer',
+                    company: 'AGC Biologics, Heidelberg',
+                    period: 'Juli 2021 – August 2021',
+                    details: [
+                        'Eigenständige Vorbereitung und Durchführung von Pilotfermentationen im 10 L-Maßstab.',
+                        'Mitarbeit bei GMP-Fermentationen im 100-1000 L-Maßstab im Reinraumbereich.',
+                        'Zellernte, Zellaufschluss, Filtration, Chromatographische Aufreinigung, TFF und Abfüllung von Wirkstoffen.'
+                    ],
+                    isOpen: false
+                },
+                 {
+                    title: 'Technician Upstream Processing',
+                    company: 'AGC Biologics, Heidelberg',
+                    period: 'Januar 2015 – Juli 2021',
+                    details: [
+                        'Vorbereitung und Durchführung von Fermentationen im Reinraumbereich der Klasse D.',
+                        'Erfahrung mit verschiedenen Filtrationstechniken und aseptischem Arbeiten.',
+                        'GMP-gerechte Dokumentation.'
+                    ],
+                    isOpen: false
+                },
+                {
+                    title: 'Technician Cellbanking',
+                    company: 'AGC Biologics, Heidelberg',
+                    period: 'Januar 2005 – Dezember 2014',
+                    details: [
+                        'Verantwortung für Zellbankproduktionen im Reinraumbereich der Klasse C.',
+                        'Aseptisches Arbeiten unter Laminar-Flow-Werkbänken.',
+                        'Inprozesskontrollen und Sicherstellung der vorschriftsmäßigen Lagerung/Versendung.'
+                    ],
+                    isOpen: false
+                },
+                {
+                    title: 'Lehrling',
+                    company: 'Stadtbäckerei Frick, Sinsheim',
+                    period: 'September 1998 – Juli 2001',
+                    details: [],
+                    isOpen: false
+                }
+            ];
+
+            const timelineContainer = document.querySelector('#werdegang .relative');
+            experienceData.forEach(item => {
+                const itemEl = document.createElement('div');
+                itemEl.className = 'timeline-item relative pl-12 pb-8';
+                
+                const dotColor = item.isOpen ? 'bg-blue-500' : 'bg-gray-400';
+                const detailsVisibility = item.isOpen ? '' : 'hidden';
+
+                itemEl.innerHTML = `
+                    <div class="timeline-dot rounded-full border-4 border-white ${dotColor}"></div>
+                    <div class="cursor-pointer">
+                        <p class="text-sm text-gray-500">${item.period}</p>
+                        <h3 class="text-lg font-bold text-gray-800">${item.title}</h3>
+                        <p class="text-gray-600 font-medium">${item.company}</p>
+                        <span class="text-blue-600 text-sm mt-1 inline-block">Details ${item.isOpen ? 'verbergen' : 'anzeigen'}...</span>
+                    </div>
+                    <div class="timeline-details mt-4 pl-4 border-l-2 border-gray-200 ${detailsVisibility}">
+                        <ul class="space-y-2 text-gray-600 list-disc list-inside">
+                            ${item.details.map(d => `<li>${d}</li>`).join('')}
+                        </ul>
+                    </div>
+                `;
+
+                itemEl.querySelector('.cursor-pointer').addEventListener('click', () => {
+                    const details = itemEl.querySelector('.timeline-details');
+                    const dot = itemEl.querySelector('.timeline-dot');
+                    const toggleText = itemEl.querySelector('.cursor-pointer span');
+                    
+                    const isHidden = details.classList.contains('hidden');
+                    details.classList.toggle('hidden');
+                    
+                    if (isHidden) {
+                        dot.classList.remove('bg-gray-400');
+                        dot.classList.add('bg-blue-500');
+                        toggleText.textContent = 'Details verbergen...';
+                    } else {
+                        dot.classList.add('bg-gray-400');
+                        dot.classList.remove('bg-blue-500');
+                        toggleText.textContent = 'Details anzeigen...';
+                    }
+                });
+
+                timelineContainer.appendChild(itemEl);
+            });
+
+            // Gemini API Integration: Cover Letter Generator
+            const generateBtn = document.getElementById('generate-cover-letter-btn');
+            const jobDescriptionInput = document.getElementById('job-description');
+            const coverLetterOutput = document.getElementById('cover-letter-output');
+            const loadingSpinner = document.getElementById('loading-spinner');
+            const buttonText = document.getElementById('button-text');
+            const summaryText = document.getElementById('summary-text').textContent;
+
+            // Extract skills from the HTML directly for the prompt
+            const skillCategories = document.querySelectorAll('#kompetenzen .bg-white.rounded-xl.shadow-lg p-6');
+            let allSkills = [];
+            skillCategories.forEach(category => {
+                const ul = category.querySelector('ul');
+                const div = category.querySelector('div');
+                if (ul) {
+                    Array.from(ul.children).forEach(li => allSkills.push(li.textContent.trim()));
+                }
+                if (div) {
+                    Array.from(div.children).forEach(span => allSkills.push(span.textContent.trim()));
+                }
+            });
+            const skillsString = allSkills.join(', ');
+
+            generateBtn.addEventListener('click', async () => {
+                const jobDescription = jobDescriptionInput.value.trim();
+
+                if (!jobDescription) {
+                    coverLetterOutput.textContent = 'Bitte geben Sie eine Stellenbeschreibung ein.';
+                    return;
+                }
+
+                loadingSpinner.classList.remove('hidden');
+                buttonText.textContent = 'Generiere...';
+                generateBtn.disabled = true;
+                coverLetterOutput.textContent = ''; // Clear previous output
+
+                // Format relevant experience data for the prompt
+                const relevantExperience = experienceData
+                    .filter(item => item.title.includes('App Entwicklung') || item.title.includes('Vertriebspartner') || item.title.includes('Handelsvertreter'))
+                    .map(item => {
+                        const detailsList = item.details.length > 0 ? ` - Details: ${item.details.join('; ')}` : '';
+                        return `${item.title} (${item.company}, ${item.period})${detailsList}`;
+                    })
+                    .join('\n');
+
+                const prompt = `
+                    Du bist ein erfahrener Recruiter und schreibst ein überzeugendes Anschreiben für einen Bewerber.
+                    Hier sind die relevanten Informationen aus dem Lebenslauf des Bewerbers Dominik Baki:
+
+                    Zusammenfassung: ${summaryText}
+
+                    Technische Fähigkeiten: ${skillsString}
+
+                    Berufserfahrung (besonders relevant für den Übergang in die Tech-Branche und übertragbare Fähigkeiten):
+                    ${relevantExperience}
+
+                    Hier ist die Stellenbeschreibung, auf die sich der Bewerber bewirbt:
+                    ${jobDescription}
+
+                    Erstelle ein prägnantes, professionelles und auf die Stellenbeschreibung zugeschnittenes Anschreiben im Fließtext.
+                    Hebe hervor, wie die Ausbildung und die Fähigkeiten des Bewerbers (insbesondere im Bereich iOS/Android App-Entwicklung)
+                    sowie übertragbare Soft Skills (Kundenorientierung, Problemlösung, Vertriebserfahrung) zu den Anforderungen der Stelle passen.
+                    Beginne mit einer passenden Anrede (z.B. "Sehr geehrte Damen und Herren," oder "Sehr geehrte/r [Ansprechpartner/in],") und schließe mit einer gängigen Grußformel (z.B. "Mit freundlichen Grüßen, Dominik Baki").
+                    Das Anschreiben sollte etwa 200-300 Wörter lang sein und direkt auf die Stellenbeschreibung eingehen.
+                `;
+
+                try {
+                    const payload = { contents: [{ role: "user", parts: [{ text: prompt }] }] };
+                    const apiKey = "";
+                    const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${apiKey}`;
+
+                    const response = await fetch(apiUrl, {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify(payload)
+                    });
+
+                    const result = await response.json();
+
+                    if (result.candidates && result.candidates.length > 0 &&
+                        result.candidates[0].content && result.candidates[0].content.parts &&
+                        result.candidates[0].content.parts.length > 0) {
+                        const text = result.candidates[0].content.parts[0].text;
+                        coverLetterOutput.textContent = text;
+                    } else {
+                        coverLetterOutput.textContent = 'Fehler beim Generieren des Anschreibens: Unerwartete Antwortstruktur.';
+                    }
+                } catch (error) {
+                    console.error('Fehler bei der API-Anfrage:', error);
+                    coverLetterOutput.textContent = 'Entschuldigung, beim Generieren des Anschreibens ist ein Fehler aufgetreten. Bitte versuchen Sie es später erneut.';
+                } finally {
+                    loadingSpinner.classList.add('hidden');
+                    buttonText.textContent = 'Anschreiben generieren';
+                    generateBtn.disabled = false;
+                }
+            });
+        });
+    </script>
+</body>
+</html>
