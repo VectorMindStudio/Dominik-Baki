@@ -9,6 +9,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
     <!-- Chosen Palette: Modern Professional (Cool Blues & Grays) -->
     <!-- Application Structure Plan: The SPA uses a top-down, single-page structure with a sticky navigation bar for easy access to key sections: Profile, Skills, Portfolio, Experience, Education, and Certifications. This is more intuitive than a simple document scroll. The 'Werdegang' (Experience) is presented as an interaktive timeline, prioritizing recent, relevant tech training while keeping past roles accessible but collapsed by default. This visually emphasizes the career transition. The 'Kompetenzen' (Skills) are visualized with a bar chart for core technologies and categorized cards for others, making them more digestible and engaging than a simple list. The 'Projekte' section now primarily references GitHub for project details. Language and Dark Mode toggles are integrated into the header for enhanced user experience. This structure is designed to guide a recruiter's attention to the most important information first, creating a compelling narrative of a dedicated career changer, while offering advanced utility and personalization. -->
     <!-- Visualization & Content Choices: 
@@ -26,7 +27,7 @@
         - Updated Header: Language switcher and dark mode toggle moved to the far right, consolidated with navigation links. Name removed from header.
         - Updated Job Title: Job title now includes "native iOS und Android Apps".
         - Updated Projects Intro: Removed inline GitHub link; text now explicitly mentions GitHub profile.
-        - Fixed Icons: Emojis for LinkedIn, GitHub, and Email in contact details are now properly displayed and translated.
+        - Fixed Icons: Emojis for LinkedIn, GitHub, and Email in contact details are now properly displayed and translated (handled solely by JS using innerHTML for correct rendering of Font Awesome and Unicode).
     -->
     <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
     <style>
@@ -250,7 +251,7 @@
                     <div class="flex flex-wrap justify-center md:justify-start gap-4 text-gray-600">
                         <a href="mailto:dominik.baki@outlook.com" class="text-gray-600 hover:text-blue-600 flex items-center gap-1" data-key="kontaktEmail"></a>
                         <span class="flex items-center gap-1" data-key="kontaktTelefon"></span>
-                        <a href="https://www.linkedin.com/in/dominik-baki" target="_blank" class="text-gray-600 hover:text-blue-600 flex items-center gap-1" data-key="kontaktLinkedIn"></a>
+                        <a href="https://www.linkedin.com/in/domina-haki" target="_blank" class="text-gray-600 hover:text-blue-600 flex items-center gap-1" data-key="kontaktLinkedIn"></a>
                         <a href="https://github.com/VectorMindStudio?tab=repositories" target="_blank" class="text-gray-600 hover:text-blue-600 flex items-center gap-1" data-key="kontaktGitHub"></a>
                         <span class="flex items-center gap-1" data-key="kontaktLocation"></span>
                     </div>
@@ -420,8 +421,8 @@
                     navAusbildung: 'Ausbildung',
                     navMenu: 'Menü',
                     profilJobTitle: 'Junior App Entwickler für native iOS und Android Apps',
-                    uploadBild: 'Bild hochladen', // Kept for completeness in translation object, but not used in HTML
-                    removeBild: 'Bild entfernen', // Kept for completeness in translation object, but not used in HTML
+                    uploadBild: 'Bild hochladen', 
+                    removeBild: 'Bild entfernen', 
                     profilZusammenfassungTitel: 'Zusammenfassung',
                     profilZusammenfassungText1: 'Als leidenschaftlicher und zielstrebiger angehender App-Entwickler befinde ich mich aktuell in einer intensiven und praxisorientierten Ausbildung am renommierten Syntax Institut. Hier konzentriere ich mich auf die Entwicklung nativer Apps für iOS und Android, um modernste Technologien optimal zu nutzen und ein breites Publikum zu erreichen.',
                     profilZusammenfassungText2: 'Der Kurs vermittelt mir fundierte Kenntnisse in den Kernsprachen Swift (für iOS) und Kotlin (für Android), und ich vertiefe mein Verständnis für effizientes Coding und saubere Architektur. Parallel dazu stärke ich mein Bewusstsein und meine Fähigkeiten in den Bereichen UX/UI-Prinzipien. Denn für mich ist eine großartige App nicht nur technisch brillant, sondern vor allem auch intuitiv bedienbar und visuell ansprechend.',
@@ -432,8 +433,8 @@
                     kontaktDatenTitel: 'Kontaktdaten',
                     kontaktEmail: '✉️ dominik.baki@outlook.com',
                     kontaktTelefon: '📞 +4915229029773',
-                    kontaktLinkedIn: '🔗 LinkedIn Profil',
-                    kontaktGitHub: '💻 GitHub Profil',
+                    kontaktLinkedIn: '<i class="fab fa-linkedin"></i> LinkedIn Profil',
+                    kontaktGitHub: '<i class="fab fa-github"></i> GitHub Profil',
                     kontaktLocation: '📍 Mannheim, Deutschland',
                     anschrGeneratorTitel: 'Anschreiben-Generator ✨',
                     anschrGeneratorIntro: 'Geben Sie hier eine Stellenbeschreibung ein, und unser KI-Assistent erstellt ein passendes Anschreiben basierend auf den Informationen Ihres Lebenslaufs.',
@@ -473,18 +474,18 @@
                     unitTesting: 'Unit Testing',
                     kanban: 'Kanban',
                     projekteTitel: 'Meine Projekte',
-                    projekteIntro: 'Alle meine aktuellen Projekte finden Sie auf meinem GitHub Profil.', // Text changed here
+                    projekteIntro: 'Alle meine aktuellen Projekte finden Sie auf meinem GitHub Profil.', 
                     projektEmigrateInTitel: 'Abschlussprojekt zur Erleichterung des komplexen Prozesses der Auswanderung nach Südzypern für Familien. Konzeption, Design und Entwicklung eines Minimum Viable Products für iOS.',
                     projektPlaceholderTitel: 'Zukünftiges Projekt (Android)',
                     projektPlaceholderDesc: 'Ein geplantes Android-Projekt, um meine Fähigkeiten in Kotlin und Jetpack Compose weiter zu vertiefen. Konzeptentwicklung läuft, Fokus auf datengetriebene mobile Lösungen.',
-                    projektHinzufuegenTitel: 'Neues Projekt hinzufügen', // Not used in HTML, but kept for consistency
-                    projektNameLabel: 'Projektname:', // Not used in HTML, but kept for consistency
-                    projektBeschreibungLabel: 'Beschreibung:', // Not used in HTML, but kept for consistency
-                    projektLinkLabel: 'Link (optional):', // Not used in HTML, but kept for consistency
-                    projektHinzufuegenButton: 'Projekt hinzufügen', // Not used in HTML, but kept for consistency
-                    projektNamePlaceholder: 'Name des Projekts', // Not used in HTML, but kept for consistency
-                    projektBeschreibungPlaceholder: 'Kurze Beschreibung des Projekts', // Not used in HTML, but kept for consistency
-                    projektLinkPlaceholder: 'https://beispiel.com/projekt', // Not used in HTML, but kept for consistency
+                    projektHinzufuegenTitel: 'Neues Projekt hinzufügen', 
+                    projektNameLabel: 'Projektname:', 
+                    projektBeschreibungLabel: 'Beschreibung:', 
+                    projektLinkLabel: 'Link (optional):', 
+                    projektHinzufuegenButton: 'Projekt hinzufügen', 
+                    projektNamePlaceholder: 'Name des Projekts', 
+                    projektBeschreibungPlaceholder: 'Kurze Beschreibung des Projekts', 
+                    projektLinkPlaceholder: 'https://beispiel.com/projekt', 
                     projektLoeschen: 'Löschen',
                     keineProjekte: 'Noch keine Projekte hinzugefügt.',
                     zertifizierungenTitel: 'Zertifizierungen',
@@ -510,7 +511,7 @@
                 },
                 en: {
                     pageTitle: 'Resume – Dominik Baki',
-                    headerTitle: '', // Name removed from header
+                    headerTitle: '', 
                     navProfil: 'Profile',
                     navKompetenzen: 'Skills',
                     navProjekte: 'Projects',
@@ -531,8 +532,8 @@
                     kontaktDatenTitel: 'Contact Details',
                     kontaktEmail: '✉️ dominik.baki@outlook.com',
                     kontaktTelefon: '📞 +4915229029773',
-                    kontaktLinkedIn: '🔗 LinkedIn Profile',
-                    kontaktGitHub: '💻 GitHub Profile',
+                    kontaktLinkedIn: '<i class="fab fa-linkedin"></i> LinkedIn Profile',
+                    kontaktGitHub: '<i class="fab fa-github"></i> GitHub Profile',
                     kontaktLocation: '📍 Mannheim, Germany',
                     kompetenzenTitel: 'Technical Skills',
                     kompetenzenIntro: 'Here is an overview of my technical skills. The chart highlights my core competencies in mobile development, while the cards detail my knowledge in other relevant areas.',
@@ -566,7 +567,7 @@
                     unitTesting: 'Unit Testing',
                     kanban: 'Kanban',
                     projekteTitel: 'My Projects',
-                    projekteIntro: 'All my current projects can be found on my GitHub Profile.', // Text changed here
+                    projekteIntro: 'All my current projects can be found on my GitHub Profile.', 
                     projektEmigrateInTitel: 'Final project to facilitate the complex process of emigration to South Cyprus for families. Conception, design, and development of a Minimum Viable Product for iOS.',
                     projektPlaceholderTitel: 'Future Project (Android)',
                     projektPlaceholderDesc: 'A planned Android project to further deepen my skills in Kotlin and Jetpack Compose. Concept development is underway, focusing on data-driven mobile solutions.',
@@ -629,11 +630,7 @@
                         if (key === 'projekteIntro') {
                             element.innerHTML = translations[lang][key].replace('GitHub Profil', '<a href="https://github.com/VectorMindStudio?tab=repositories" target="_blank" class="text-blue-600 hover:underline">GitHub Profil</a>');
                         } else if (element.tagName === 'A' && (key === 'kontaktLinkedIn' || key === 'kontaktGitHub' || key === 'kontaktEmail')) { 
-                            let icon = '';
-                            if (key === 'kontaktEmail') icon = '✉️ ';
-                            else if (key === 'kontaktLinkedIn') icon = '🔗 ';
-                            else if (key === 'kontaktGitHub') icon = '💻 ';
-                            element.textContent = icon + translations[lang][key]; // Prepend emoji
+                            element.innerHTML = translations[lang][key]; // Use innerHTML for these specific links to render icons
                         } else if (element.tagName === 'OPTION' && key === 'navMenu') {
                             element.textContent = translations[lang][key];
                         } else if ((element.tagName === 'INPUT' || element.tagName === 'TEXTAREA') && element.hasAttribute('placeholder')) {
@@ -669,27 +666,14 @@
             // Projects Section Logic
             // Removed initialProjectsData as the user now wants all projects directly from GitHub link in text
             // Kept for structure, but modified loadProjects to not use it
-            const initialProjectsData = [
-                // { // Removed these as per user request to directly reference GitHub
-                //     id: 'proj1',
-                //     name: 'EmigrateIn App (iOS MVP)',
-                //     description: 'Abschlussprojekt zur Erleichterung des komplexen Prozesses der Auswanderung nach Südzypern für Familien. Konzeption, Design und Entwicklung eines Minimum Viable Products für iOS.',
-                //     link: 'https://github.com/YourGitHub/EmigrateIn' // Example link
-                // },
-                // {
-                //     id: 'proj2',
-                //     name: 'Zukünftiges Projekt (Android)',
-                //     description: 'Ein geplantes Android-Projekt, um meine Fähigkeiten in Kotlin und Jetpack Compose weiter zu vertiefen. Konzeptentwicklung läuft, Fokus auf datengetriebene mobile Lösungen.',
-                //     link: 'https://github.com/YourGitHub/AndroidProject' // Example link
-                // }
-            ];
+            const initialProjectsData = []; // No longer using initial project data directly
 
             function loadProjects() {
                 const storedProjects = localStorage.getItem('userProjects');
                 if (storedProjects) {
                     projects = JSON.parse(storedProjects);
                 } else {
-                    projects = []; // Initialize as empty array, no default projects
+                    projects = initialProjectsData; // Initialize as empty array, no default projects
                 }
             }
             loadProjects(); // Call loadProjects BEFORE setLanguage
