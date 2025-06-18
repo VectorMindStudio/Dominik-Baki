@@ -26,6 +26,7 @@
         - Updated Header: Language switcher and dark mode toggle moved to the far right, consolidated with navigation links. Name removed from header.
         - Updated Job Title: Job title now includes "native iOS und Android Apps".
         - Updated Projects Intro: Removed inline GitHub link; text now explicitly mentions GitHub profile.
+        - Fixed Icons: Emojis for LinkedIn, GitHub, and Email in contact details are now properly displayed and translated.
     -->
     <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
     <style>
@@ -247,11 +248,11 @@
                     
                     <h3 class="text-xl font-bold text-gray-800 mb-4" data-key="kontaktDatenTitel">Kontaktdaten</h3>
                     <div class="flex flex-wrap justify-center md:justify-start gap-4 text-gray-600">
-                        <a href="mailto:dominik.baki@outlook.com" class="text-gray-600 hover:text-blue-600" data-key="kontaktEmail"></a>
-                        <span data-key="kontaktTelefon">&#9742; +4915229029773</span>
-                        <a href="https://www.linkedin.com/in/domina-haki" target="_blank" class="text-gray-600 hover:text-blue-600" data-key="kontaktLinkedIn"></a>
-                        <a href="https://github.com/VectorMindStudio?tab=repositories" target="_blank" class="text-gray-600 hover:text-blue-600" data-key="kontaktGitHub"></a>
-                        <span data-key="kontaktLocation">&#128205; Mannheim, Deutschland</span>
+                        <a href="mailto:dominik.baki@outlook.com" class="text-gray-600 hover:text-blue-600 flex items-center gap-1" data-key="kontaktEmail"></a>
+                        <span class="flex items-center gap-1" data-key="kontaktTelefon"></span>
+                        <a href="https://www.linkedin.com/in/domina-haki" target="_blank" class="text-gray-600 hover:text-blue-600 flex items-center gap-1" data-key="kontaktLinkedIn"></a>
+                        <a href="https://github.com/VectorMindStudio?tab=repositories" target="_blank" class="text-gray-600 hover:text-blue-600 flex items-center gap-1" data-key="kontaktGitHub"></a>
+                        <span class="flex items-center gap-1" data-key="kontaktLocation"></span>
                     </div>
                 </div>
             </div>
@@ -430,7 +431,7 @@
                     profilProjektText: 'Aktuell arbeite ich an meinem Abschlussprojekt, der EmigrateIn App (iOS MVP) zur Erleichterung der Auswanderung für Familien.',
                     kontaktDatenTitel: 'Kontaktdaten',
                     kontaktEmail: '✉️ dominik.baki@outlook.com',
-                    kontaktTelefon: '� +4915229029773',
+                    kontaktTelefon: '📞 +4915229029773',
                     kontaktLinkedIn: '🔗 LinkedIn Profil',
                     kontaktGitHub: '💻 GitHub Profil',
                     kontaktLocation: '📍 Mannheim, Deutschland',
@@ -626,9 +627,13 @@
                     if (translations[lang] && translations[lang][key]) {
                         // Special handling for the projectsIntro to keep the internal <a> tag
                         if (key === 'projekteIntro') {
-                            element.innerHTML = translations[lang][key]; // Now, the translation for projekteIntro does not contain the <a> tag
-                        } else if (element.tagName === 'A' && (key === 'kontaktLinkedIn' || key === 'kontaktGitHub' || key === 'kontaktEmail')) { // Added kontaktEmail here
-                            element.textContent = translations[lang][key].replace('🔗 ', '').replace('💻 ', '').replace('✉️ ', ''); // Remove emojis for textContent
+                            element.innerHTML = translations[lang][key].replace('GitHub Profil', '<a href="https://github.com/VectorMindStudio?tab=repositories" target="_blank" class="text-blue-600 hover:underline">GitHub Profil</a>');
+                        } else if (element.tagName === 'A' && (key === 'kontaktLinkedIn' || key === 'kontaktGitHub' || key === 'kontaktEmail')) { 
+                            let icon = '';
+                            if (key === 'kontaktEmail') icon = '✉️ ';
+                            else if (key === 'kontaktLinkedIn') icon = '🔗 ';
+                            else if (key === 'kontaktGitHub') icon = '💻 ';
+                            element.textContent = icon + translations[lang][key]; // Prepend emoji
                         } else if (element.tagName === 'OPTION' && key === 'navMenu') {
                             element.textContent = translations[lang][key];
                         } else if ((element.tagName === 'INPUT' || element.tagName === 'TEXTAREA') && element.hasAttribute('placeholder')) {
@@ -946,7 +951,7 @@
                         'Verantwortung für Zellbankproduktionen im Reinraumbereich der Klasse C.',
                         'Aseptisches Arbeiten unter Laminar-Flow-Werkbänken.',
                         'Durchführung von Inprozesskontrollen und Sicherstellung der vorschriftsmäßigen Lagerung/Versendung von Zellbänken.',
-                        'Unterstützung bei Qualifizierung und Kalibrierung von Geräten und GMP-gerechter Dokumentation.'
+                        'Unterstützung bei Qualifizierung/Kalibrierung von Geräten und GMP-gerechter Dokumentation.'
                     ],
                     isOpen: false
                 },
@@ -1112,4 +1117,3 @@
     </script>
 </body>
 </html>
-�
