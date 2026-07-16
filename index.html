@@ -3,1101 +3,893 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title data-key="pageTitle">Lebenslauf – Dominik Baki</title>
+    <meta name="description" content="Lebenslauf von Dominik Baki – Native iOS App Developer mit Fokus auf SwiftUI, Firebase, MapKit und nutzerzentrierte MVP-Entwicklung.">
+    <title>Lebenslauf – Dominik Baki</title>
+
     <script src="https://cdn.tailwindcss.com"></script>
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
-    <!-- Chosen Palette: Modern Professional (Cool Blues & Grays) -->
-    <!-- Application Structure Plan: The SPA uses a top-down, single-page structure with a sticky navigation bar for easy access to key sections: Profile, Skills, Portfolio, Experience, Education, and Certifications. This is more intuitive than a simple document scroll. The 'Werdegang' (Experience) is presented as an interaktive timeline, prioritizing recent, relevant tech training while keeping past roles accessible but collapsed by default. This visually emphasizes the career transition. The 'Kompetenzen' (Skills) are visualized with a bar chart for core technologies and categorized cards for others, making them more digestible and engaging than a simple list. The 'Projekte' section now primarily references GitHub for project details. Language and Dark Mode toggles are integrated into the header for enhanced user experience. This structure is designed to guide a recruiter's attention to the most important information first, creating a compelling narrative of a dedicated career changer, while offering advanced utility and personalization. -->
-    <!-- Visualization & Content Choices: 
-        - Report Info: Core technical skills. Goal: Inform/Compare. Viz/Presentation: Bar Chart. Interaction: Hover tooltips show skill names. Justification: Provides a quick, visual summary of core competencies, which is more engaging than a long text list. Library/Method: Chart.js on a Canvas element.
-        - Report Info: Full work history. Goal: Show Change/Organize. Viz/Presentation: Interactive Vertical Timeline. Interaction: Users can click to expand/collapse details for each role. The most recent role (IT training) is expanded by default. Justification: This effectively tells the story of the career transition, focusing on the new direction while still providing full background details on demand. This prevents recruiters from being overwhelmed by less relevant past information. Library/Method: HTML/CSS (Tailwind) + Vanilla JS for toggling visibility.
-        - Report Info: All other sections (Summary, Projects, Education). Goal: Inform. Viz/Presentation: Cleanly styled text cards and lists. Interaction: None. Justification: Clear and direct presentation is best for textual information. Library/Method: HTML/CSS (Tailwind).
-        - New Feature: Profile Picture Upload. Goal: Personalization. Viz/Presentation: Image element for display, file input for upload. Interaction: Click on image to upload. Justification: Adds a personal touch to the CV, making it more engaging visually. LocalStorage is used for persistence.
-        - Updated Feature: Portfolio/Projects. Goal: Showcase work. Viz/Presentation: Static list of mock projects (initial data) and a text reference to GitHub profile for real projects. Removed project add/delete functionality. Interaction: Click name/link to view. Justification: Simplifies maintenance for the user by directing them to a central source (GitHub). LocalStorage for initial placeholders. Library/Method: HTML/CSS (Tailwind) + Vanilla JS for dynamic content.
-        - New Feature: Language Switcher. Goal: Accessibility. Viz/Presentation: Dropdown menu in header. Interaction: Select to change language. Justification: Improves usability for international recruiters. Library/Method: HTML/CSS (Tailwind) + Vanilla JS for text manipulation and localStorage.
-        - New Feature: Dark Mode. Goal: User Preference/Accessibility. Viz/Presentation: Toggle button (emoji icon). Interaction: Click to switch theme. Justification: Enhances user comfort and caters to preference. Library/Method: HTML/CSS (Tailwind 'dark:' variant) + Vanilla JS for class toggling and localStorage.
-        - New Feature: Certifications Upload/Display. Goal: Inform/Document. Viz/Presentation: File input, list of clickable links for PDFs, delete buttons. Interaction: File upload, click to view PDF, click to delete. Justification: Allows user to attach important supporting documents. LocalStorage for persistence. Library/Method: HTML/CSS (Tailwind) + Vanilla JS for file handling and localStorage.
-        - Removed Feature: Contact Form. Goal: Simplify page. Justification: User requested removal.
-        - Removed Feature: AI Cover Letter Generator. Goal: Simplify page. Justification: User requested removal.
-        - Updated Section: Profile Picture with Name, Job Title, and Contact Info consolidated and left-aligned. Email address and LinkedIn are now clickable mailto/href links. GitHub link added to contact data.
-        - Updated Header: Language switcher and dark mode toggle moved to the far right, consolidated with navigation links. Name removed from header.
-        - Updated Job Title: Job title now includes "native iOS und Android Apps".
-        - Updated Projects Intro: Removed inline GitHub link; text now explicitly mentions GitHub profile.
-        - Fixed Icons: Emojis for LinkedIn, GitHub, and Email in contact details are now properly displayed and translated (handled solely by JS using innerHTML for correct rendering of Font Awesome and Unicode).
-    -->
-    <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif']
+                    }
+                }
+            }
+        };
+    </script>
+
     <style>
         body {
             font-family: 'Inter', sans-serif;
-            background-color: #f0f2f5; /* Light Gray Background */
-            color: #2d3748; /* Dark Charcoal Text */
-            transition: background-color 0.3s ease, color 0.3s ease;
-        }
-        body.dark {
-            background-color: #1a2634; /* Dark Blue-Gray Background */
-            color: #e2e8f0; /* Light Gray Text */
-        }
-        .bg-white {
-            background-color: #ffffff; /* Pure White for Light Mode Cards */
-        }
-        .dark .bg-white {
-            background-color: #2d3e50; /* Slightly lighter dark blue for Dark Mode Cards */
-        }
-        .text-gray-800 {
-            color: #2d3748; /* Dark Charcoal */
-        }
-        .dark .text-gray-800 {
-            color: #edf2f7; /* Very Light Gray */
-        }
-        .text-gray-600 {
-            color: #4a5568; /* Medium Gray */
-        }
-        .dark .text-gray-600 {
-            color: #a0aec0; /* Lighter Gray */
-        }
-        .text-gray-500 {
-            color: #718096; /* Light Gray */
-        }
-        .dark .text-gray-500 {
-            color: #cbd5e0; /* Very Light Gray */
-        }
-        .text-blue-600 { /* Accent for links and specific text */
-            color: #3b82f6; /* A slightly muted but clear blue */
-        }
-        .dark .text-blue-600 {
-            color: #63b3ed; /* Lighter blue for dark mode */
-        }
-        .text-blue-700 { /* Accent for project text in profile */
-            color: #2b6cb0; /* A darker accent blue */
-        }
-        .dark .text-blue-700 {
-            color: #90cdf4; /* Lighter blue for dark mode */
         }
 
-        /* Borders and Dividers */
-        .border-b {
-            border-color: #e2e8f0; /* Light border */
-        }
-        .dark .border-b {
-            border-color: #4a5568; /* Darker border */
-        }
-        .border-blue-200 { /* For profile pic border */
-            border-color: #90cdf4; /* Light Blue */
-        }
-        .dark .border-blue-200 {
-            border-color: #4299e1; /* Medium Blue */
-        }
-        .border-gray-300 { /* For input fields, selects */
-            border-color: #cbd5e0;
-        }
-        .dark .border-gray-300 {
-            border-color: #4a5568;
-        }
-        .bg-gray-50 { /* For generated output, certificate items */
-            background-color: #edf2f7; /* Very light grey */
-        }
-        .dark .bg-gray-50 {
-            background-color: #2a3d52; /* Darker blue-gray */
-        }
-        .border-gray-200 { /* For other borders */
-            border-color: #edf2f7;
-        }
-        .dark .border-gray-200 {
-            border-color: #2d3748;
-        }
-
-        /* Buttons (general) */
-        .bg-blue-600 { /* Primary buttons */
-            background-color: #2a69c0; /* Stronger blue */
-        }
-        .hover\:bg-blue-700:hover {
-            background-color: #1e529a; /* Darker hover blue */
-        }
-        /* Special accent for project technologies */
-        .bg-blue-100 {
-            background-color: #ebf8ff;
-        }
-        .dark .bg-blue-100 {
-            background-color: #2a4365;
-        }
-        .text-blue-800 {
-            color: #2c5282;
-        }
-        .dark .text-blue-800 {
-            color: #90cdf4;
-        }
-        .bg-green-100 {
-            background-color: #e6fffa;
-        }
-        .dark .bg-green-100 {
-            background-color: #2c6f62;
-        }
-        .text-green-800 {
-            color: #2c7a7b;
-        }
-        .dark .text-green-800 {
-            color: #81e6d9;
-        }
-
-
-        /* Specific components */
         .timeline-item::before {
-            background-color: #a0aec0; /* Medium gray for timeline line */
+            content: "";
+            position: absolute;
+            left: 0.55rem;
+            top: 1.4rem;
+            bottom: -1rem;
+            width: 2px;
+            background: #cbd5e1;
         }
+
+        .timeline-item:last-child::before {
+            display: none;
+        }
+
         .dark .timeline-item::before {
-            background-color: #718096;
+            background: #475569;
         }
-        .timeline-dot {
-            border-color: #f0f2f5; /* Match body background */
-        }
-        .dark .timeline-dot {
-            border-color: #1a2634; /* Match dark body background */
-        }
-        .bg-gray-400 { /* Default dot color */
-            background-color: #a0aec0;
-        }
-        .dark .bg-gray-400 {
-            background-color: #718096;
-        }
-        .chart-container {
-            position: relative;
-            width: 100%;
-            max-width: 800px;
-            margin-left: auto;
-            margin-right: auto;
-            height: 350px;
-            max-height: 400px;
-        }
-        @media (min-width: 768px) {
-            .chart-container {
-                height: 400px;
+
+        @media print {
+            header,
+            #theme-toggle,
+            #language-switcher,
+            .print-hidden {
+                display: none !important;
             }
-        }
-        .spinner {
-            border: 4px solid rgba(0, 0, 0, 0.1);
-            border-left-color: #3b82f6;
-            border-radius: 50%;
-            width: 24px;
-            height: 24px;
-            animation: spin 1s linear infinite;
-        }
-        @keyframes spin {
-            to { transform: rotate(360deg); }
+
+            body {
+                background: white !important;
+                color: #111827 !important;
+            }
+
+            main {
+                max-width: none !important;
+                padding: 0 !important;
+            }
+
+            section {
+                break-inside: avoid;
+                margin-bottom: 1.5rem !important;
+            }
+
+            .shadow-lg,
+            .shadow-sm {
+                box-shadow: none !important;
+            }
+
+            .bg-white,
+            .dark\:bg-slate-800 {
+                background: white !important;
+            }
         }
     </style>
 </head>
-<body class="antialiased">
 
-    <header class="bg-white/80 backdrop-blur-lg shadow-sm sticky top-0 z-50">
-        <nav class="container mx-auto px-6 py-4 flex justify-between items-center">
-            <div class="text-xl font-bold text-gray-800" data-key="headerTitle"></div>
-            <div class="hidden md:flex space-x-8 items-center">
-                <a href="#profil" class="text-gray-600 hover:text-blue-600 transition-colors" data-key="navProfil">Profil</a>
-                <a href="#kompetenzen" class="text-gray-600 hover:text-blue-600 transition-colors" data-key="navKompetenzen">Kompetenzen</a>
-                <a href="#projekte" class="text-gray-600 hover:text-blue-600 transition-colors" data-key="navProjekte">Projekte</a>
-                <a href="#zertifizierungen" class="text-gray-600 hover:text-blue-600 transition-colors" data-key="navZertifizierungen">Zertifizierungen</a>
-                <a href="#werdegang" class="text-gray-600 hover:text-blue-600 transition-colors" data-key="navWerdegang">Werdegang</a>
-                <a href="#ausbildung" class="text-gray-600 hover:text-blue-600 transition-colors" data-key="navAusbildung">Ausbildung</a>
-                
-                <!-- Language Switcher -->
-                <div class="relative ml-8">
-                    <select id="language-switcher" class="bg-gray-200 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:text-white">
-                        <option value="de">Deutsch</option>
-                        <option value="en">English</option>
-                    </select>
-                </div>
-                <!-- Dark Mode Toggle -->
-                <button id="dark-mode-toggle" class="p-2 rounded-full bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-yellow-300 hover:bg-gray-300 dark:hover:bg-gray-600 transition-colors duration-200">
-                    <span id="dark-mode-icon">&#9788;</span>
-                </button>
-            </div>
-            <div class="md:hidden">
-                <select id="mobile-nav" class="bg-gray-200 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:text-white">
-                    <option data-key="navMenu">Menü</option>
-                    <option value="#profil" data-key="navProfil">Profil</option>
-                    <option value="#kompetenzen" data-key="navKompetenzen">Kompetenzen</option>
-                    <option value="#projekte" data-key="navProjekte">Projekte</option>
-                    <option value="#zertifizierungen" data-key="navZertifizierungen">Zertifizierungen</option>
-                    <option value="#werdegang" data-key="navWerdegang">Werdegang</option>
-                    <option value="#ausbildung" data-key="navAusbildung">Ausbildung</option>
-                </select>
-            </div>
-        </nav>
-    </header>
+<body class="bg-slate-100 text-slate-800 antialiased transition-colors duration-300 dark:bg-slate-950 dark:text-slate-100">
 
-    <main class="container mx-auto p-6 md:p-8">
-        
-        <section id="profil" class="mb-16 scroll-mt-24">
-            <div class="max-w-4xl mx-auto bg-white rounded-xl shadow-lg p-8 mb-8 flex flex-col md:flex-row items-start">
-                <!-- Profile Picture and Upload Controls -->
-                <div class="flex-shrink-0 mr-6 mb-6 md:mb-0">
-                    <div class="w-32 h-32 md:w-40 md:h-40 bg-gray-200 rounded-full flex items-center justify-center overflow-hidden border-4 border-blue-200 shadow-md mx-auto cursor-pointer" id="profile-picture-container">
-                        <img id="profile-picture" src="https://placehold.co/160x160/cbd5e0/475569?text=Profilbild" alt="Profilbild" class="w-full h-full object-cover">
-                    </div>
-                    <input type="file" id="profile-picture-upload" accept="image/*" class="hidden">
-                    <!-- Removed explicit upload/remove buttons as per user request -->
-                </div>
+<header class="sticky top-0 z-50 border-b border-slate-200 bg-white/90 backdrop-blur dark:border-slate-800 dark:bg-slate-900/90">
+    <nav class="mx-auto flex max-w-6xl items-center justify-between px-5 py-4">
+        <a href="#profil" class="font-bold tracking-tight text-slate-900 dark:text-white">
+            Dominik Baki
+        </a>
 
-                <!-- Name, Job Title, and Contact Data -->
-                <div class="flex-grow text-center md:text-left">
-                    <h1 class="text-4xl md:text-5xl font-bold text-gray-800 mb-2" data-key="profilName">Dominik Baki</h1>
-                    <p class="text-xl md:text-2xl text-blue-600 font-medium mb-6" data-key="profilJobTitle">Junior App Entwickler für native iOS und Android Apps</p>
-                    
-                    <h3 class="text-xl font-bold text-gray-800 mb-4" data-key="kontaktDatenTitel">Kontaktdaten</h3>
-                    <div class="flex flex-wrap justify-center md:justify-start gap-4 text-gray-600">
-                        <a href="mailto:dominik.baki@outlook.com" class="text-gray-600 hover:text-blue-600 flex items-center gap-1" data-key="kontaktEmail"></a>
-                        <span class="flex items-center gap-1" data-key="kontaktTelefon"></span>
-                        <a href="https://www.linkedin.com/in/dominik-baki" target="_blank" class="text-gray-600 hover:text-blue-600 flex items-center gap-1" data-key="kontaktLinkedIn"></a>
-                        <a href="https://github.com/VectorMindStudio?tab=repositories" target="_blank" class="text-gray-600 hover:text-blue-600 flex items-center gap-1" data-key="kontaktGitHub"></a>
-                        <span class="flex items-center gap-1" data-key="kontaktLocation"></span>
-                    </div>
-                </div>
-            </div>
+        <div class="hidden items-center gap-6 md:flex">
+            <a href="#profil" class="text-sm text-slate-600 hover:text-blue-600 dark:text-slate-300">Profil</a>
+            <a href="#kompetenzen" class="text-sm text-slate-600 hover:text-blue-600 dark:text-slate-300">Kompetenzen</a>
+            <a href="#projekte" class="text-sm text-slate-600 hover:text-blue-600 dark:text-slate-300">Projekte</a>
+            <a href="#werdegang" class="text-sm text-slate-600 hover:text-blue-600 dark:text-slate-300">Werdegang</a>
+            <a href="#ausbildung" class="text-sm text-slate-600 hover:text-blue-600 dark:text-slate-300">Ausbildung</a>
 
-            <div class="max-w-4xl mx-auto bg-white rounded-xl shadow-lg p-8">
-                <h2 class="text-2xl font-bold text-gray-800 mb-4 border-b pb-2" data-key="profilZusammenfassungTitel">Zusammenfassung</h2>
-                <p class="text-gray-600 mb-4 leading-relaxed" id="summary-text" data-key="profilZusammenfassungText1">
-                    Als leidenschaftlicher und zielstrebiger angehender App-Entwickler befinde ich mich aktuell in einer intensiven und praxisorientierten Ausbildung am renommierten Syntax Institut. Hier konzentriere ich mich auf die Entwicklung nativer Apps für iOS und Android, um modernste Technologien optimal zu nutzen und ein breites Publikum zu erreichen.
-                </p>
-                <p class="text-gray-600 mb-4 leading-relaxed" data-key="profilZusammenfassungText2">
-                    Der Kurs vermittelt mir fundierte Kenntnisse in den Kernsprachen Swift (für iOS) und Kotlin (für Android), und ich vertiefe mein Verständnis für effizientes Coding und saubere Architektur. Parallel dazu stärke ich mein Bewusstsein und meine Fähigkeiten in den Bereichen UX/UI-Prinzipien. Denn für mich ist eine großartige App nicht nur technisch brillant, sondern vor allem auch intuitiv bedienbar und visuell ansprechend.
-                </p>
-                <p class="text-gray-600 mb-4 leading-relaxed" data-key="profilZusammenfassungText3">
-                    Meine Reise in die Welt der App-Entwicklung ist geprägt von einer tief verwurzelten kundenorientierten Denkweise und einer ausgeprägten Fähigkeit zur Problemlösung. Diese Eigenschaften habe ich in meiner früheren Erfahrung im Vertrieb auf einzigartige Weise schärfen können. Dort lernte ich, die Bedürfnisse von Menschen wirklich zu verstehen, komplexe Sachverhalte klar zu kommunizieren und maßgeschneiderte Lösungen zu finden – Fähigkeiten, die im Entwicklungsprozess von benutzerzentrierten Apps unerlässlich sind.
-                </p>
-                <p class="text-gray-600 mb-4 leading-relaxed" data-key="profilZusammenfassungText4">
-                    Mein Antrieb ist es, genau diese Brücke zu schlagen: innovative und benutzerzentrierte Apps zu erstellen, die den Nutzern einen echten Mehrwert bieten und zugleich technologische Best Practices umsetzen. Ich bin überzeugt, dass Technologie dazu da ist, das Leben einfacher und besser zu machen.
-                </p>
-                <div class="bg-blue-50 border border-blue-200 rounded-lg p-4 mt-6">
-                    <h3 class="font-bold text-lg text-blue-800 mb-2" data-key="profilProjektTitel">Aktuelles Projekt: EmigrateIn App</h3>
-                    <p class="text-blue-700" data-key="profilProjektText">Aktuell arbeite ich an meinem Abschlussprojekt, der EmigrateIn App (iOS MVP) zur Erleichterung der Auswanderung für Familien.</p>
-                </div>
-            </div>
-        </section>
+            <select id="language-switcher"
+                    class="rounded-lg border border-slate-300 bg-white px-3 py-2 text-sm dark:border-slate-700 dark:bg-slate-800">
+                <option value="de">Deutsch</option>
+                <option value="en">English</option>
+            </select>
 
-        <section id="kompetenzen" class="mb-16 scroll-mt-24">
-            <h2 class="text-3xl font-bold text-center text-gray-800 mb-2" data-key="kompetenzenTitel">Technische Kompetenzen</h2>
-            <p class="text-center text-gray-500 mb-10 max-w-2xl mx-auto" data-key="kompetenzenIntro">
-                Hier finden Sie eine Übersicht meiner technischen Fähigkeiten. Das Diagramm hebt meine Kernkompetenzen in der mobilen Entwicklung hervor, während die Karten meine Kenntnisse in weiteren relevanten Bereichen detaillieren.
-            </p>
-            
-            <div class="bg-white rounded-xl shadow-lg p-6 md:p-8 mb-8">
-                <h3 class="text-xl font-bold text-gray-800 mb-4 text-center" data-key="kompetenzenKern">Kernkompetenzen in der App-Entwicklung</h3>
-                <div class="chart-container">
-                    <canvas id="skillsChart"></canvas>
-                </div>
-            </div>
-
-            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-                <div class="bg-white rounded-xl shadow-lg p-6">
-                    <h3 class="text-xl font-bold text-gray-800 mb-3 border-b pb-2" data-key="kompetenzenArchitekturTitel">Architektur & Patterns</h3>
-                    <ul class="space-y-2 text-gray-600">
-                        <li data-key="mvvm">MVVM</li>
-                        <li data-key="oop">Objektorientierte Programmierung (OOP)</li>
-                        <li data-key="deklarativ">Deklarative Programmierung</li>
-                        <li data-key="repoPattern">Repository Pattern</li>
-                        <li data-key="funktional">Funktionale Programmierung</li>
-                    </ul>
-                </div>
-                <div class="bg-white rounded-xl shadow-lg p-6">
-                    <h3 class="text-xl font-bold text-gray-800 mb-3 border-b pb-2" data-key="kompetenzenBackendTitel">Backend & Datenbanken</h3>
-                    <ul class="space-y-2 text-gray-600">
-                        <li data-key="firebase">Firebase</li>
-                        <li data-key="swiftData">SwiftData</li>
-                        <li data-key="roomDB">Room Datenbank</li>
-                    </ul>
-                </div>
-                <div class="bg-white rounded-xl shadow-lg p-6">
-                    <h3 class="text-xl font-bold text-gray-800 mb-3 border-b pb-2" data-key="kompetenzenToolsTitel">Tools & Bibliotheken</h3>
-                    <ul class="space-y-2 text-gray-600">
-                        <li data-key="gitHub">Git & GitHub</li>
-                        <li data-key="xcode">Xcode</li>
-                        <li data-key="api">Netzwerkdienste (API)</li>
-                        <li data-key="googleAuth">GoogleSignIn, GoogleSignInSwift</li>
-                        <li data-key="firebaseAuthFirestore">Firebase Authentication, Firebase Firestore</li>
-                        <li data-key="copilot">KI Copilot</li>
-                        <li data-key="spm">SPM (Swift Package Manager)</li>
-                    </ul>
-                </div>
-                <div class="bg-white rounded-xl shadow-lg p-6 lg:col-span-3">
-                    <h3 class="text-xl font-bold text-gray-800 mb-3 border-b pb-2" data-key="kompetenzenUixUiTitel">UX/UI & Designprozess</h3>
-                    <div class="flex flex-wrap gap-x-6 gap-y-2 text-gray-600">
-                         <span data-key="userStory">User Story</span>
-                         <span data-key="figma">Figma</span>
-                         <span data-key="konkurrenzanalyse">Konkurrenzanalyse</span>
-                         <span data-key="userFlow">User Flow UI Design</span>
-                         <span data-key="humanInterface">Human Interface Guidelines</span>
-                         <span data-key="materialDesign">Material Design</span>
-                         <span data-key="wireframes">Wireframes</span>
-                         <span data-key="unitTesting">Unit Testing</span>
-                         <span data-key="kanban">Kanban</span>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <section id="projekte" class="mb-16 scroll-mt-24">
-            <h2 class="text-3xl font-bold text-center text-gray-800 mb-2" data-key="projekteTitel">Meine Projekte</h2>
-            <p class="text-center text-gray-500 mb-10 max-w-2xl mx-auto" data-key="projekteIntro">
-                Alle meine aktuellen Projekte finden Sie auf meinem GitHub Profil.
-            </p>
-            <div id="current-projects-display" class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-                <!-- Dynamically loaded projects (initial placeholders) will be rendered here -->
-            </div>
-        </section>
-
-        <section id="zertifizierungen" class="mb-16 scroll-mt-24">
-            <h2 class="text-3xl font-bold text-center text-gray-800 mb-2" data-key="zertifizierungenTitel">Zertifizierungen</h2>
-            <p class="text-center text-gray-500 mb-10 max-w-2xl mx-auto" data-key="zertifizierungenIntro">
-                Hier können Sie wichtige Zertifikate und Bescheinigungen einsehen, die meine Qualifikationen belegen.
-            </p>
-            <div class="max-w-4xl mx-auto bg-white rounded-xl shadow-lg p-8">
-                <input type="file" id="certificate-upload-input" accept="application/pdf" class="hidden">
-                <label for="certificate-upload-input" class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-6 rounded-full shadow-lg transition-all duration-300 ease-in-out transform hover:scale-105 flex items-center justify-center cursor-pointer mb-6 max-w-xs mx-auto" data-key="uploadZertifikat">
-                    Zertifikat hochladen
-                </label>
-                <div id="certificates-list" class="space-y-4">
-                    <p class="text-center text-gray-500" data-key="keineZertifikate">Noch keine Zertifikate hochgeladen.</p>
-                </div>
-            </div>
-        </section>
-
-        <section id="werdegang" class="mb-16 scroll-mt-24">
-            <h2 class="text-3xl font-bold text-center text-gray-800 mb-2" data-key="werdegangTitel">Beruflicher Werdegang</h2>
-            <p class="text-center text-gray-500 mb-10 max-w-3xl mx-auto" data-key="werdegangIntro">
-                Dieser interaktive Zeitstrahl zeigt meinen beruflichen Werdegang. Klicken Sie auf die einzelnen Stationen, um mehr Details zu erfahren. Der Fokus liegt auf meiner aktuellen Entwicklung im Tech-Bereich, während meine wertvollen Erfahrungen aus früheren Branchen ebenfalls einsehbar sind.
-            </p>
-            <div class="max-w-4xl mx-auto">
-                <div class="relative">
-                    <!-- Timeline Items will be inserted here by JS -->
-                </div>
-            </div>
-        </section>
-
-        <section id="ausbildung" class="scroll-mt-24">
-            <h2 class="text-3xl font-bold text-center text-gray-800 mb-8" data-key="ausbildungTitel">Ausbildung</h2>
-            <div class="max-w-4xl mx-auto grid md:grid-cols-2 gap-8">
-                <div class="bg-white rounded-xl shadow-lg p-6 border-l-4 border-blue-500">
-                    <p class="text-sm text-gray-500" data-key="ausbildungITZeit">Sept 2024 – Aktuell</p>
-                    <h3 class="text-lg font-bold text-gray-800" data-key="ausbildungITTitel">Qualifizierung zur IT-Fachkraft für App-Entwicklung</h3>
-                    <p class="text-gray-600" data-key="ausbildungITOrt">Syntax Institut, Deutschland (Remote)</p>
-                </div>
-                <div class="bg-white rounded-xl shadow-lg p-6">
-                    <p class="text-sm text-gray-500" data-key="ausbildungBioZeit">Sept 2002 – Juli 2004</p>
-                    <h3 class="text-lg font-bold text-gray-800" data-key="ausbildungBioTitel">Biotechnologischer Assistent</h3>
-                    <p class="text-gray-600" data-key="ausbildungBioOrt">Johannes-Gutenberg-Schule, Heidelberg</p>
-                </div>
-                <div class="bg-white rounded-xl shadow-lg p-6">
-                    <p class="text-sm text-gray-500" data-key="ausbildungReifeZeit">Sept 2001 – Juli 2002</p>
-                    <h3 class="text-lg font-bold text-gray-800" data-key="ausbildungReifeTitel">Mittlere Reife</h3>
-                    <p class="text-gray-600" data-key="ausbildungReifeOrt">Johannes-Gutenberg-Realschule, Heidelberg</p>
-                </div>
-            </div>
-        </section>
-    </main>
-
-    <footer class="bg-gray-800 text-white mt-16">
-        <div class="container mx-auto p-6 text-center">
-            <p data-key="footerCopyright">&copy; 2025 Dominik Baki. Alle Rechte vorbehalten.</p>
+            <button id="theme-toggle"
+                    type="button"
+                    aria-label="Farbschema wechseln"
+                    class="rounded-full bg-slate-200 px-3 py-2 text-slate-800 transition hover:bg-slate-300 dark:bg-slate-700 dark:text-yellow-300 dark:hover:bg-slate-600">
+                <i id="theme-icon" class="fa-solid fa-sun"></i>
+            </button>
         </div>
-    </footer>
 
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            // Translations Object
-            const translations = {
-                de: {
-                    pageTitle: 'Lebenslauf – Dominik Baki',
-                    headerTitle: '', // Name removed from header
-                    navProfil: 'Profil',
-                    navKompetenzen: 'Kompetenzen',
-                    navProjekte: 'Projekte',
-                    navZertifizierungen: 'Zertifizierungen',
-                    navWerdegang: 'Werdegang',
-                    navAusbildung: 'Ausbildung',
-                    navMenu: 'Menü',
-                    profilJobTitle: 'Junior App Entwickler für native iOS und Android Apps',
-                    uploadBild: 'Bild hochladen', 
-                    removeBild: 'Bild entfernen', 
-                    profilZusammenfassungTitel: 'Zusammenfassung',
-                    profilZusammenfassungText1: 'Als leidenschaftlicher und zielstrebiger angehender App-Entwickler befinde ich mich aktuell in einer intensiven und praxisorientierten Ausbildung am renommierten Syntax Institut. Hier konzentriere ich mich auf die Entwicklung nativer Apps für iOS und Android, um modernste Technologien optimal zu nutzen und ein breites Publikum zu erreichen.',
-                    profilZusammenfassungText2: 'Der Kurs vermittelt mir fundierte Kenntnisse in den Kernsprachen Swift (für iOS) und Kotlin (für Android), und ich vertiefe mein Verständnis für effizientes Coding und saubere Architektur. Parallel dazu stärke ich mein Bewusstsein und meine Fähigkeiten in den Bereichen UX/UI-Prinzipien. Denn für mich ist eine großartige App nicht nur technisch brillant, sondern vor allem auch intuitiv bedienbar und visuell ansprechend.',
-                    profilZusammenfassungText3: 'Meine Reise in die Welt der App-Entwicklung ist geprägt von einer tief verwurzelten kundenorientierten Denkweise und einer ausgeprägten Fähigkeit zur Problemlösung. Diese Eigenschaften habe ich in meiner früheren Erfahrung im Vertrieb auf einzigartige Weise schärfen können. Dort lernte ich, die Bedürfnisse von Menschen wirklich zu verstehen, komplexe Sachverhalte klar zu kommunizieren und maßgeschneiderte Lösungen zu finden – Fähigkeiten, die im Entwicklungsprozess von benutzerzentrierten Apps unerlässlich sind.',
-                    profilZusammenfassungText4: 'Mein Antrieb ist es, genau diese Brücke zu schlagen: innovative und benutzerzentrierte Apps zu erstellen, die den Nutzern einen echten Mehrwert bieten und zugleich technologische Best Practices umsetzen. Ich bin überzeugt, dass Technologie dazu da ist, das Leben einfacher und besser zu machen.',
-                    profilProjektTitel: 'Aktuelles Projekt: EmigrateIn App',
-                    profilProjektText: 'Aktuell arbeite ich an meinem Abschlussprojekt, der EmigrateIn App (iOS MVP) zur Erleichterung der Auswanderung für Familien.',
-                    kontaktDatenTitel: 'Kontaktdaten',
-                    kontaktEmail: '✉️ dominik.baki@outlook.com',
-                    kontaktTelefon: '📞 +4915256524345',
-                    kontaktLinkedIn: '<i class="fab fa-linkedin"></i> LinkedIn Profil',
-                    kontaktGitHub: '<i class="fab fa-github"></i> GitHub Profil',
-                    kontaktLocation: '📍 Mannheim, Deutschland',
-                    anschrGeneratorTitel: 'Anschreiben-Generator ✨',
-                    anschrGeneratorIntro: 'Geben Sie hier eine Stellenbeschreibung ein, und unser KI-Assistent erstellt ein passendes Anschreiben basierend auf den Informationen Ihres Lebenslaufs.',
-                    anschrGeneratorLabel: 'Stellenbeschreibung hier einfügen:',
-                    anschrGeneratorPlaceholder: 'Z.B.: "Wir suchen einen erfahrenen iOS-Entwickler mit Kenntnissen in Swift UI und Firebase..."',
-                    anschrGeneratorButton: 'Anschreiben generieren',
-                    anschrGeneratorOutputPlaceholder: 'Dein generiertes Anschreiben erscheint hier...',
-                    kompetenzenTitel: 'Technische Kompetenzen',
-                    kompetenzenIntro: 'Hier finden Sie eine Übersicht meiner technischen Fähigkeiten. Das Diagramm hebt meine Kernkompetenzen in der mobilen Entwicklung hervor, während die Karten meine Kenntnisse in weiteren relevanten Bereichen detaillieren.',
-                    kompetenzenKern: 'Kernkompetenzen in der App-Entwicklung',
-                    kompetenzenArchitekturTitel: 'Architektur & Patterns',
-                    mvvm: 'MVVM',
-                    oop: 'Objektorientierte Programmierung (OOP)',
-                    deklarativ: 'Deklarative Programmierung',
-                    repoPattern: 'Repository Pattern',
-                    funktional: 'Funktionale Programmierung',
-                    kompetenzenBackendTitel: 'Backend & Datenbanken',
-                    firebase: 'Firebase',
-                    swiftData: 'SwiftData',
-                    roomDB: 'Room Datenbank',
-                    kompetenzenToolsTitel: 'Tools & Bibliotheken',
-                    gitHub: 'Git & GitHub',
-                    xcode: 'Xcode',
-                    api: 'Netzwerkdienste (API)',
-                    googleAuth: 'GoogleSignIn, GoogleSignInSwift',
-                    firebaseAuthFirestore: 'Firebase Authentication, Firebase Firestore',
-                    copilot: 'KI Copilot',
-                    spm: 'SPM (Swift Package Manager)',
-                    kompetenzenUixUiTitel: 'UX/UI & Designprozess',
-                    userStory: 'User Story',
-                    figma: 'Figma',
-                    konkurrenzanalyse: 'Konkurrenzanalyse',
-                    userFlow: 'User Flow UI Design',
-                    humanInterface: 'Human Interface Guidelines',
-                    materialDesign: 'Material Design',
-                    wireframes: 'Wireframes',
-                    unitTesting: 'Unit Testing',
-                    kanban: 'Kanban',
-                    projekteTitel: 'Meine Projekte',
-                    projekteIntro: 'Alle meine aktuellen Projekte finden Sie auf meinem GitHub Profil.', 
-                    projektEmigrateInTitel: 'Abschlussprojekt zur Erleichterung des komplexen Prozesses der Auswanderung nach Südzypern für Familien. Konzeption, Design und Entwicklung eines Minimum Viable Products für iOS.',
-                    projektPlaceholderTitel: 'Zukünftiges Projekt (Android)',
-                    projektPlaceholderDesc: 'Ein geplantes Android-Projekt, um meine Fähigkeiten in Kotlin und Jetpack Compose weiter zu vertiefen. Konzeptentwicklung läuft, Fokus auf datengetriebene mobile Lösungen.',
-                    projektHinzufuegenTitel: 'Neues Projekt hinzufügen', 
-                    projektNameLabel: 'Projektname:', 
-                    projektBeschreibungLabel: 'Beschreibung:', 
-                    projektLinkLabel: 'Link (optional):', 
-                    projektHinzufuegenButton: 'Projekt hinzufügen', 
-                    projektNamePlaceholder: 'Name des Projekts', 
-                    projektBeschreibungPlaceholder: 'Kurze Beschreibung des Projekts', 
-                    projektLinkPlaceholder: 'https://beispiel.com/projekt', 
-                    projektLoeschen: 'Löschen',
-                    keineProjekte: 'Noch keine Projekte hinzugefügt.',
-                    zertifizierungenTitel: 'Zertifizierungen',
-                    zertifizierungenIntro: 'Hier können Sie wichtige Zertifikate und Bescheinigungen einsehen, die meine Qualifikationen belegen.',
-                    uploadZertifikat: 'Zertifikat hochladen',
-                    keineZertifikate: 'Noch keine Zertifikate hochgeladen.',
-                    werdegangTitel: 'Beruflicher Werdegang',
-                    werdegangIntro: 'Dieser interaktive Zeitstrahl zeigt meinen beruflichen Werdegang. Klicken Sie auf die einzelnen Stationen, um mehr Details zu erfahren. Der Fokus liegt auf meiner aktuellen Entwicklung im Tech-Bereich, während meine wertvollen Erfahrungen aus früheren Branchen ebenfalls einsehbar sind.',
-                    ausbildungTitel: 'Ausbildung',
-                    ausbildungITZeit: 'Sept 2024 – Aktuell',
-                    ausbildungITTitel: 'Qualifizierung zur IT-Fachkraft für App-Entwicklung',
-                    ausbildungITOrt: 'Syntax Institut, Deutschland (Remote)',
-                    ausbildungBioZeit: 'Sept 2002 – Juli 2004',
-                    ausbildungBioTitel: 'Biotechnologischer Assistent',
-                    ausbildungBioOrt: 'Johannes-Gutenberg-Schule, Heidelberg',
-                    ausbildungReifeZeit: 'Sept 2001 – Juli 2002',
-                    ausbildungReifeTitel: 'Mittlere Reife',
-                    ausbildungReifeOrt: 'Johannes-Gutenberg-Realschule, Heidelberg',
-                    footerCopyright: '© 2025 Dominik Baki. Alle Rechte vorbehalten.',
-                    detailsAnzeigen: 'Details anzeigen...',
-                    detailsVerbergen: 'Details verbergen...'
+        <div class="flex items-center gap-2 md:hidden">
+            <select id="mobile-language-switcher"
+                    class="rounded-lg border border-slate-300 bg-white px-2 py-2 text-sm dark:border-slate-700 dark:bg-slate-800">
+                <option value="de">DE</option>
+                <option value="en">EN</option>
+            </select>
 
-                },
-                en: {
-                    pageTitle: 'Resume – Dominik Baki',
-                    headerTitle: '', 
-                    navProfil: 'Profile',
-                    navKompetenzen: 'Skills',
-                    navProjekte: 'Projects',
-                    navZertifizierungen: 'Certifications',
-                    navWerdegang: 'Experience',
-                    navAusbildung: 'Education',
-                    navMenu: 'Menu',
-                    profilJobTitle: 'Junior App Developer for native iOS and Android Apps',
-                    uploadBild: 'Upload Image', 
-                    removeBild: 'Remove Image', 
-                    profilZusammenfassungTitel: 'Summary',
-                    profilZusammenfassungText1: 'As a passionate and goal-oriented aspiring app developer, I am currently undergoing intensive and practical training at the renowned Syntax Institute. Here, I focus on developing native apps for iOS and Android to optimally utilize modern technologies and reach a broad audience.',
-                    profilZusammenfassungText2: 'The course provides me with fundamental knowledge in the core languages Swift (for iOS) and Kotlin (for Android), and I deepen my understanding of efficient coding and clean architecture. In parallel, I strengthen my awareness and skills in UX/UI principles. For me, a great app is not only technically brilliant but, above all, intuitive to use and visually appealing.',
-                    profilZusammenfassungText3: 'My journey into the world of app development is characterized by a deeply rooted customer-oriented mindset and a strong problem-solving ability. I have uniquely honed these qualities in my previous sales experience. There, I learned to truly understand people\'s needs, communicate complex matters clearly, and find tailored solutions – skills that are essential in the development process of user-centered apps.',
-                    profilZusammenfassungText4: 'My drive is to bridge precisely this gap: to create innovative and user-centric apps that offer real added value to users while implementing technological best practices. I am convinced that technology is meant to make life simpler and better.',
-                    profilProjektTitel: 'Current Project: EmigrateIn App',
-                    profilProjektText: 'Currently, I am working on my final project, the EmigrateIn App (iOS MVP), to facilitate the complex process of emigration to South Cyprus for families.',
-                    kontaktDatenTitel: 'Contact Details',
-                    kontaktEmail: '✉️ dominik.baki@outlook.com',
-                    kontaktTelefon: '📞 +4915256524345',
-                    kontaktLinkedIn: '<i class="fab fa-linkedin"></i> LinkedIn Profile',
-                    kontaktGitHub: '<i class="fab fa-github"></i> GitHub Profile',
-                    kontaktLocation: '📍 Mannheim, Germany',
-                    kompetenzenTitel: 'Technical Skills',
-                    kompetenzenIntro: 'Here is an overview of my technical skills. The chart highlights my core competencies in mobile development, while the cards detail my knowledge in other relevant areas.',
-                    kompetenzenKern: 'Core Competencies in App Development',
-                    kompetenzenArchitekturTitel: 'Architecture & Patterns',
-                    mvvm: 'MVVM',
-                    oop: 'Object-Oriented Programming (OOP)',
-                    deklarativ: 'Declarative Programming',
-                    repoPattern: 'Repository Pattern',
-                    funktional: 'Functional Programming',
-                    kompetenzenBackendTitel: 'Backend & Databases',
-                    firebase: 'Firebase',
-                    swiftData: 'SwiftData',
-                    roomDB: 'Room Database',
-                    kompetenzenToolsTitel: 'Tools & Libraries',
-                    gitHub: 'Git & GitHub',
-                    xcode: 'Xcode',
-                    api: 'Network Services (API)',
-                    googleAuth: 'GoogleSignIn, GoogleSignInSwift',
-                    firebaseAuthFirestore: 'Firebase Authentication, Firebase Firestore',
-                    copilot: 'AI Copilot',
-                    spm: 'SPM (Swift Package Manager)',
-                    kompetenzenUixUiTitel: 'UX/UI & Design Process',
-                    userStory: 'User Story',
-                    figma: 'Figma',
-                    konkurrenzanalyse: 'Competitor Analysis',
-                    userFlow: 'User Flow UI Design',
-                    humanInterface: 'Human Interface Guidelines',
-                    materialDesign: 'Material Design',
-                    wireframes: 'Wireframes',
-                    unitTesting: 'Unit Testing',
-                    kanban: 'Kanban',
-                    projekteTitel: 'My Projects',
-                    projekteIntro: 'All my current projects can be found on my GitHub Profile.', 
-                    projektEmigrateInTitel: 'Final project to facilitate the complex process of emigration to South Cyprus for families. Conception, design, and development of a Minimum Viable Product for iOS.',
-                    projektPlaceholderTitel: 'Future Project (Android)',
-                    projektPlaceholderDesc: 'A planned Android project to further deepen my skills in Kotlin and Jetpack Compose. Concept development is underway, focusing on data-driven mobile solutions.',
-                    projektHinzufuegenTitel: 'Add New Project', 
-                    projektNameLabel: 'Project Name:', 
-                    projektBeschreibungLabel: 'Description:', 
-                    projektLinkLabel: 'Link (optional):', 
-                    projektHinzufuegenButton: 'Add Project', 
-                    projektNamePlaceholder: 'Project name', 
-                    projektBeschreibungPlaceholder: 'Short project description', 
-                    projektLinkPlaceholder: 'https://example.com/project', 
-                    projektLoeschen: 'Delete',
-                    keineProjekte: 'No projects added yet.',
-                    zertifizierungenTitel: 'Certifications',
-                    zertifizierungenIntro: 'Here you can view important certificates and attestations that prove my qualifications.',
-                    uploadZertifikat: 'Upload Certificate',
-                    keineZertifikate: 'No certificates uploaded yet.',
-                    werdegangTitel: 'Professional Experience',
-                    werdegangIntro: 'This interactive timeline shows my professional career. Click on each station to learn more details. The focus is on my current development in the tech field, while my valuable experiences from previous industries are also visible.',
-                    ausbildungTitel: 'Education',
-                    ausbildungITZeit: 'Sept 2024 – Present',
-                    ausbildungITTitel: 'Qualification as IT Specialist for App Development',
-                    ausbildungITOrt: 'Syntax Institute, Germany (Remote)',
-                    ausbildungBioZeit: 'Sept 2002 – July 2004',
-                    ausbildungBioTitel: 'Biotechnological Assistant',
-                    ausbildungBioOrt: 'Johannes-Gutenberg-School, Heidelberg',
-                    ausbildungReifeZeit: 'Sept 2001 – July 2002',
-                    ausbildungReifeTitel: 'Intermediate Secondary School Certificate',
-                    ausbildungReifeOrt: 'Johannes-Gutenberg-Realschule, Heidelberg',
-                    footerCopyright: '© 2025 Dominik Baki. All rights reserved.',
-                    detailsAnzeigen: 'Show details...',
-                    detailsVerbergen: 'Hide details...'
-                }
-            };
+            <button id="mobile-theme-toggle"
+                    type="button"
+                    aria-label="Farbschema wechseln"
+                    class="rounded-full bg-slate-200 px-3 py-2 dark:bg-slate-700 dark:text-yellow-300">
+                <i id="mobile-theme-icon" class="fa-solid fa-sun"></i>
+            </button>
+        </div>
+    </nav>
+</header>
 
-            // Declare DOM elements at the very beginning of DOMContentLoaded
-            const elementsToTranslate = document.querySelectorAll('[data-key]');
-            const languageSwitcher = document.getElementById('language-switcher');
-            const mobileNav = document.getElementById('mobile-nav');
-            const darkModeToggle = document.getElementById('dark-mode-toggle');
-            const darkModeIcon = document.getElementById('dark-mode-icon');
-            const profilePicture = document.getElementById('profile-picture');
-            const profilePictureUpload = document.getElementById('profile-picture-upload');
-            const profilePictureContainer = document.getElementById('profile-picture-container');
-            const skillsChartCanvas = document.getElementById('skillsChart'); // Get canvas element for Chart.js
-            const currentProjectsDisplay = document.getElementById('current-projects-display');
-            const certificateUploadInput = document.getElementById('certificate-upload-input');
-            const certificatesList = document.getElementById('certificates-list');
+<main class="mx-auto max-w-6xl px-5 py-8 md:py-12">
 
-            let skillsChartInstance; // Variable to hold the Chart.js instance
-            let projects = []; // Array to store projects, initialized here
-            let certificates = []; // Array to store certificate objects {id, name, dataURL}, initialized here
+    <section id="profil" class="scroll-mt-24">
+        <div class="overflow-hidden rounded-2xl bg-white shadow-lg dark:bg-slate-900">
+            <div class="h-2 bg-gradient-to-r from-green-500 to-blue-500"></div>
 
-
-            function setLanguage(lang) {
-                elementsToTranslate.forEach(element => {
-                    const key = element.getAttribute('data-key');
-                    if (translations[lang] && translations[lang][key]) {
-                        // Special handling for the projectsIntro to keep the internal <a> tag
-                        if (key === 'projekteIntro') {
-                            element.innerHTML = translations[lang][key].replace('GitHub Profil', '<a href="https://github.com/VectorMindStudio?tab=repositories" target="_blank" class="text-blue-600 hover:underline">GitHub Profil</a>');
-                        } else if (element.tagName === 'A' && (key === 'kontaktLinkedIn' || key === 'kontaktGitHub' || key === 'kontaktEmail')) { 
-                            element.innerHTML = translations[lang][key]; // Use innerHTML for these specific links to render icons
-                        } else if (element.tagName === 'OPTION' && key === 'navMenu') {
-                            element.textContent = translations[lang][key];
-                        } else if ((element.tagName === 'INPUT' || element.tagName === 'TEXTAREA') && element.hasAttribute('placeholder')) {
-                            element.setAttribute('placeholder', translations[lang][key]);
-                        } else {
-                            element.textContent = translations[lang][key];
-                        }
-                    }
-                });
-                document.title = translations[lang].pageTitle;
-                localStorage.setItem('language', lang);
-                updateTimelineDetailsText(lang);
-                renderProjects(); // Re-render projects to apply new language for delete button
-                renderCertificates(); // Re-render certificates to apply new language for delete button
-                if (skillsChartInstance) { // Update chart label if chart exists
-                    skillsChartInstance.data.datasets[0].label = translations[lang].kompetenzenKern;
-                    skillsChartInstance.update();
-                }
-            }
-
-            function updateTimelineDetailsText(lang) {
-                document.querySelectorAll('.timeline-item').forEach(itemEl => {
-                    const toggleTextSpan = itemEl.querySelector('.cursor-pointer span');
-                    const detailsDiv = itemEl.querySelector('.timeline-details');
-                    if (toggleTextSpan) {
-                        const isHidden = detailsDiv.classList.contains('hidden');
-                        toggleTextSpan.textContent = isHidden ? translations[lang].detailsAnzeigen : translations[lang].detailsVerbergen;
-                    }
-                });
-            }
-
-            // --- Initial data loading for projects and certificates MUST happen here ---
-            // Projects Section Logic
-            // Removed initialProjectsData as the user now wants all projects directly from GitHub link in text
-            // Kept for structure, but modified loadProjects to not use it
-            const initialProjectsData = []; // No longer using initial project data directly
-
-            function loadProjects() {
-                const storedProjects = localStorage.getItem('userProjects');
-                if (storedProjects) {
-                    projects = JSON.parse(storedProjects);
-                } else {
-                    projects = initialProjectsData; // Initialize as empty array, no default projects
-                }
-            }
-            loadProjects(); // Call loadProjects BEFORE setLanguage
-
-            // Certifications Section Logic
-            function loadCertificates() {
-                const storedCerts = localStorage.getItem('userCertificates');
-                if (storedCerts) {
-                    certificates = JSON.parse(storedCerts);
-                }
-            }
-            loadCertificates(); // Call loadCertificates BEFORE setLanguage
-            // --- End of initial data loading ---
-
-
-            const savedLanguage = localStorage.getItem('language') || 'de';
-            languageSwitcher.value = savedLanguage;
-            setLanguage(savedLanguage); // Initial language setting, now data is loaded
-
-
-            languageSwitcher.addEventListener('change', (e) => {
-                setLanguage(e.target.value);
-            });
-
-            // Mobile navigation
-            mobileNav.addEventListener('change', (e) => {
-                if(e.target.value) {
-                    window.location.href = e.target.value;
-                }
-            });
-
-            // Dark Mode Toggle
-            const prefersDarkMode = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
-            const savedDarkMode = localStorage.getItem('darkMode');
-
-            function enableDarkMode() {
-                document.body.classList.add('dark');
-                darkModeIcon.innerHTML = '&#9790;'; // Moon icon
-                localStorage.setItem('darkMode', 'enabled');
-                if (skillsChartInstance) skillsChartInstance.update(); // Update chart on theme change
-            }
-
-            function disableDarkMode() {
-                document.body.classList.remove('dark');
-                darkModeIcon.innerHTML = '&#9788;'; // Sun icon
-                localStorage.setItem('darkMode', 'disabled');
-                if (skillsChartInstance) skillsChartInstance.update(); // Update chart on theme change
-            }
-
-            if (savedDarkMode === 'enabled' || (savedDarkMode === null && prefersDarkMode)) {
-                enableDarkMode();
-            } else {
-                disableDarkMode();
-            }
-
-            darkModeToggle.addEventListener('click', () => {
-                if (document.body.classList.contains('dark')) {
-                    disableDarkMode();
-                } else {
-                    enableDarkMode();
-                }
-            });
-
-
-            // Profile Picture Handling
-            const defaultProfilePic = "https://placehold.co/160x160/cbd5e0/475569?text=Profilbild";
-
-            const savedImage = localStorage.getItem('profileImage');
-            if (savedImage) {
-                profilePicture.src = savedImage;
-            } else {
-                profilePicture.src = defaultProfilePic;
-            }
-
-            profilePictureContainer.addEventListener('click', function() {
-                profilePictureUpload.click();
-            });
-
-            profilePictureUpload.addEventListener('change', function() {
-                const file = this.files[0];
-                if (file) {
-                    const reader = new FileReader();
-                    reader.onload = function(e) {
-                        profilePicture.src = e.target.result;
-                        localStorage.setItem('profileImage', e.target.result);
-                    };
-                    reader.readAsDataURL(file);
-                }
-            });
-
-
-            // Skills Chart
-            skillsChartInstance = new Chart(skillsChartCanvas.getContext('2d'), {
-                type: 'bar',
-                data: {
-                    labels: ['Swift', 'Kotlin', 'SwiftUI', 'Jetpack Compose', 'Firebase', 'MVVM', 'OOP'],
-                    datasets: [{
-                        label: translations[savedLanguage].kompetenzenKern,
-                        data: [90, 85, 88, 80, 75, 82, 85], 
-                        backgroundColor: 'rgba(59, 130, 246, 0.7)',
-                        borderColor: 'rgba(59, 130, 246, 1)',
-                        borderWidth: 1,
-                        borderRadius: 5,
-                    }]
-                },
-                options: {
-                    responsive: true,
-                    maintainAspectRatio: false,
-                    indexAxis: 'y',
-                    scales: {
-                        x: {
-                            beginAtZero: true,
-                            max: 100,
-                            grid: {
-                                display: false
-                            },
-                            ticks: {
-                                color: document.body.classList.contains('dark') ? '#e2e8f0' : '#333'
-                            }
-                        },
-                        y: {
-                           grid: {
-                                color: document.body.classList.contains('dark') ? '#4a5568' : '#e5e7eb'
-                           },
-                           ticks: {
-                                color: document.body.classList.contains('dark') ? '#e2e8f0' : '#333'
-                           }
-                        }
-                    },
-                    plugins: {
-                        legend: {
-                            display: false
-                        },
-                        tooltip: {
-                            callbacks: {
-                                label: function(context) {
-                                    let label = context.dataset.label || '';
-                                    if (label) {
-                                        label += ': ';
-                                    }
-                                    if (context.parsed.x !== null) {
-                                        label += context.parsed.x + '%';
-                                    }
-                                    return label;
-                                }
-                            }
-                        }
-                    }
-                }
-            });
-
-            // Update chart colors on dark mode toggle
-            const observer = new MutationObserver((mutations) => {
-                mutations.forEach((mutation) => {
-                    if (mutation.attributeName === 'class') {
-                        if (skillsChartInstance) { // Check if chart instance exists before updating
-                            skillsChartInstance.options.scales.x.ticks.color = document.body.classList.contains('dark') ? '#e2e8f0' : '#333';
-                            skillsChartInstance.options.scales.y.ticks.color = document.body.classList.contains('dark') ? '#e2e8f0' : '#333';
-                            skillsChartInstance.options.scales.y.grid.color = document.body.classList.contains('dark') ? '#4a5568' : '#e5e7eb';
-                            skillsChartInstance.update();
-                        }
-                    }
-                });
-            });
-            observer.observe(document.body, { attributes: true });
-
-
-            // Timeline Data & Rendering (remains unchanged as per request, just re-formatted)
-            const experienceData = [
-                {
-                    title: 'Ausbildung zur IT-Fachkraft für App Entwicklung',
-                    company: 'SYTAX INSTITUT, Deutschland, Österreich und die Schweiz',
-                    period: 'Sep 2024 – Aktuell',
-                    details: [
-                        'Intensive Qualifizierung mit Fokus auf nativer App-Entwicklung (iOS & Android).',
-                        'Erwerb fundierter Kenntnisse in Swift und Kotlin, effizientem Coding und sauberer Architektur.',
-                        'Vertiefung im Verständnis von UX/UI-Prinzipien.',
-                        'Entwicklung des Abschlussprojekts "EmigrateIn" (iOS MVP) zur Erleichterung der Auswanderung für Familien.'
-                    ],
-                    isOpen: true
-                },
-                {
-                    title: 'Selbständiger Vertriebspartner',
-                    company: 'LR HEALTH & BEAUTY, Deutschland',
-                    period: 'Jun 2022 – Sep 2024',
-                    details: [
-                        'Expertise im Vertrieb von Beauty- und Gesundheitsprodukten.',
-                        'Aufbau und Pflege eines umfangreichen Kundenstamms zur Steigerung des Umsatzes und Erreichung von Verkaufszielen.',
-                        'Verantwortungsvolle Betreuung und Beratung von Kunden zur Sicherstellung hoher Zufriedenheit.',
-                        'Aktive Teilnahme an Schulungen zur Erweiterung von Produktkenntnissen und Verkaufstechniken.'
-                    ],
-                    isOpen: false
-                },
-                {
-                    title: 'Handelsvertreter',
-                    company: 'VORWERK GRUPPE, Deutschland, Ladenburg',
-                    period: 'Apr 2023 – Dez 2023',
-                    details: [
-                         'Erfolgreiche Tätigkeit als selbständiger Handelsvertreter für Vorwerk Deutschland Stiftung & Co. KG.',
-                         'Aufbau und Pflege eines umfangreichen Kundenstamms.',
-                         'Betreuung eines bestehenden Kundenstamms.',
-                         'Steigerung des Umsatzes und Erreichen von Verkaufszielen.',
-                         'Regelmäßige Teilnahme an Schulungen und Weiterbildungen zur Produktkenntnis und Vertriebstechniken.'
-                    ],
-                    isOpen: false
-                },
-                {
-                    title: 'Coordinator Combination Products (Leasing)',
-                    company: 'ABBVIE, Ludwigshafen am Rhein, Deutschland',
-                    period: 'Sep 2021 – Jul 2022',
-                    details: [
-                        'Koordinator für Combination Products in der Pharmaindustrie mit umfassendem Wissen über Entwicklung und Regulierung.',
-                        'Fundierte Kenntnisse der gesetzlichen Anforderungen und Richtlinien für Combination Products.',
-                        'Erfolgreich mit interdisziplinären Teams zusammengearbeitet, um die Produktions- und Testprozesse für Combination Products zu optimieren.',
-                        'Umfangreiche Kenntnisse in der Risikoanalyse und Produktbewertung, um frühzeitig potenzielle Herausforderungen zu identifizieren.'
-                    ],
-                    isOpen: false
-                },
-                {
-                    title: 'Technician Process Transfer',
-                    company: 'AGC BIOLOGICS, Heidelberg, Deutschland',
-                    period: 'Jul 2021 – Aug 2021',
-                    details: [
-                        'Erfahrener Technician im Bereich Prozessübertragung von Pilotprojekten zu Scale-Up für größere Maßstäbe.',
-                        'Vertraut mit GMP-Richtlinien und regulatorischen Anforderungen für Arzneimittelherstellung.',
-                        'Fundierte Kenntnisse in der Implementierung und Optimierung von Produktionsprozessen.',
-                        'Analytisches Denken und Problemlösungsfähigkeiten zur Identifizierung von Prozessverbesserungen.',
-                        'Erfahrung in der Nutzung moderner Analysetechniken zur Qualitätskontrolle.',
-                        'Eigenständige Vorbereitung und Durchführung von Pilotfermentationen im 10 L-Maßstab.',
-                        'Mitarbeit bei GMP-Fermentationen im 100-1000 L-L-Maßstab im Reinraumbereich der Klasse D und C.',
-                        'Zellernte, Zellaufschluss, Filtration, Chromatographische Aufreinigung, TFF und Abfüllung von Wirkstoffen.',
-                        'Durchführung von Inprozesskontrollen und Geräteverantwortlichkeit an der Pilotanlage.'
-                    ],
-                    isOpen: false
-                },
-                 {
-                    title: 'Technician Upstream Processing',
-                    company: 'AGC BIOLOGICS, Heidelberg, Deutschland',
-                    period: 'Jan 2015 – Jul 2021',
-                    details: [
-                        'Umfassende Erfahrung im Bereich der Prozessentwicklung für biopharmazeutische Produkte.',
-                        'Fundierte Kenntnisse in der Anwendung von biotechnologischen Verfahren und deren Übertragung in die Produktion.',
-                        'Kenntnisse in der Analyse und Auswertung von Prozessdaten tragen zur kontinuierlichen Verbesserung und Qualitätssicherung bei.',
-                        'Vorbereitung und Durchführung von Fermentationen im Reinraumbereich der Klasse D.',
-                        'Erfahrung mit verschiedenen Filtrationstechniken und aseptischem Arbeiten unter Laminar-Flow-Werkbänken.',
-                        'Durchführung von Inprozesskontrollen und Vor-/Nachbereitung von Produktionskampagnen.',
-                        'Unterstützung bei Qualifizierung und Kalibrierung von Geräten sowie GMP-gerechter Dokumentation.'
-                    ],
-                    isOpen: false
-                },
-                {
-                    title: 'Technician Cellbanking',
-                    company: 'AGC BIOLOGICS, Heidelberg, Deutschland',
-                    period: 'Jan 2005 – Dez 2014',
-                    details: [
-                        'Umfassende Erfahrung in der Zellbank-Technologie und im Umgang mit verschiedenen Zelllinien.',
-                        'Vorbereitung, Lagerung und Charakterisierung von Zellen in einer kontrollierten Umgebung.',
-                        'Fachwissen in Verfahren der Kryokonservierung trägt zur Verbesserung der Zellstabilität bei.',
-                        'Verantwortung für Zellbankproduktionen im Reinraumbereich der Klasse C.',
-                        'Aseptisches Arbeiten unter Laminar-Flow-Werkbänken.',
-                        'Durchführung von Inprozesskontrollen und Sicherstellung der vorschriftsmäßigen Lagerung/Versendung von Zellbänken.',
-                        'Unterstützung bei Qualifizierung/Kalibrierung von Geräten und GMP-gerechter Dokumentation.'
-                    ],
-                    isOpen: false
-                },
-                {
-                    title: 'Lehrling',
-                    company: 'STADTBÄCKEREI FRICK, Sinsheim, Deutschland',
-                    period: 'Sep 1998 – Jul 2001',
-                    details: [],
-                    isOpen: false
-                }
-            ];
-
-            const timelineContainer = document.querySelector('#werdegang .relative');
-            experienceData.forEach(item => {
-                const itemEl = document.createElement('div');
-                itemEl.className = 'timeline-item relative pl-12 pb-8';
-                
-                const dotColor = item.isOpen ? 'bg-blue-500' : 'bg-gray-400';
-                const detailsVisibility = item.isOpen ? '' : 'hidden';
-
-                itemEl.innerHTML = `
-                    <div class="timeline-dot rounded-full border-4 border-white ${dotColor}"></div>
-                    <div class="cursor-pointer">
-                        <p class="text-sm text-gray-500">${item.period}</p>
-                        <h3 class="text-lg font-bold text-gray-800">${item.title}</h3>
-                        <p class="text-gray-600 font-medium">${item.company}</p>
-                        <span class="text-blue-600 text-sm mt-1 inline-block">${item.isOpen ? translations[savedLanguage].detailsVerbergen : translations[savedLanguage].detailsAnzeigen}...</span>
+            <div class="grid gap-8 p-7 md:grid-cols-[180px_1fr] md:p-10">
+                <div class="flex justify-center md:justify-start">
+                    <div class="flex h-40 w-40 items-center justify-center overflow-hidden rounded-full border-4 border-blue-200 bg-slate-200 shadow-md dark:border-blue-700 dark:bg-slate-800">
+                        <img
+                            src="Dominik Baki.png"
+                            alt="Profilbild von Dominik Baki"
+                            class="h-full w-full object-cover">
                     </div>
-                    <div class="timeline-details mt-4 pl-4 border-l-2 border-gray-200 ${detailsVisibility}">
-                        <ul class="space-y-2 text-gray-600 list-disc list-inside">
-                            ${item.details.map(d => `<li>${d}</li>`).join('')}
-                        </ul>
+                </div>
+
+                <div>
+                    <p class="mb-2 text-sm font-semibold uppercase tracking-[0.2em] text-blue-600 dark:text-blue-400"
+                       data-key="eyebrow">
+                        Native Mobile Development
+                    </p>
+
+                    <h1 class="text-4xl font-extrabold tracking-tight text-slate-900 dark:text-white md:text-5xl">
+                        Dominik Baki
+                    </h1>
+
+                    <p class="mt-3 text-xl font-semibold text-slate-700 dark:text-slate-200"
+                       data-key="jobTitle">
+                        Native iOS App Developer
+                    </p>
+
+                    <p class="mt-5 max-w-3xl leading-relaxed text-slate-600 dark:text-slate-300"
+                       data-key="heroText">
+                        Ich entwickle native iOS-Anwendungen für reale Anwendungsfälle – gemeinsam mit den Menschen,
+                        die sie später im Alltag nutzen. Mein Schwerpunkt liegt auf SwiftUI, Firebase, MapKit,
+                        sauberer Architektur und iterativer MVP-Entwicklung auf Basis belastbaren Nutzerfeedbacks.
+                    </p>
+
+                    <div class="mt-6 flex flex-wrap gap-x-5 gap-y-3 text-sm text-slate-600 dark:text-slate-300">
+                        <a href="mailto:dominik.baki@outlook.com" class="hover:text-blue-600">
+                            <i class="fa-solid fa-envelope mr-1.5"></i>
+                            dominik.baki@outlook.com
+                        </a>
+
+                        <a href="tel:+4915256524345" class="hover:text-blue-600">
+                            <i class="fa-solid fa-phone mr-1.5"></i>
+                            +49 152 290 297 73
+                        </a>
+
+                        <a href="https://www.linkedin.com/in/dominik-baki"
+                           target="_blank"
+                           rel="noopener noreferrer"
+                           class="hover:text-blue-600">
+                            <i class="fa-brands fa-linkedin mr-1.5"></i>
+                            LinkedIn
+                        </a>
+
+                        <a href="https://github.com/Code-Noob82"
+                           target="_blank"
+                           rel="noopener noreferrer"
+                           class="hover:text-blue-600">
+                            <i class="fa-brands fa-github mr-1.5"></i>
+                            GitHub
+                        </a>
+
+                        <span>
+                            <i class="fa-solid fa-location-dot mr-1.5"></i>
+                            Mannheim, Deutschland
+                        </span>
                     </div>
-                `;
+                </div>
+            </div>
+        </div>
 
-                itemEl.querySelector('.cursor-pointer').addEventListener('click', () => {
-                    const details = itemEl.querySelector('.timeline-details');
-                    const dot = itemEl.querySelector('.timeline-dot');
-                    const toggleText = itemEl.querySelector('.cursor-pointer span');
-                    
-                    const isHidden = details.classList.contains('hidden');
-                    details.classList.toggle('hidden');
-                    
-                    if (isHidden) {
-                        dot.classList.remove('bg-gray-400');
-                        dot.classList.add('bg-blue-500');
-                        toggleText.textContent = translations[savedLanguage].detailsVerbergen;
-                    } else {
-                        dot.classList.add('bg-gray-400');
-                        dot.classList.remove('bg-blue-500');
-                        toggleText.textContent = translations[savedLanguage].detailsAnzeigen;
-                    }
-                });
+        <div class="mt-8 grid gap-6 md:grid-cols-3">
+            <article class="rounded-2xl bg-white p-6 shadow-sm dark:bg-slate-900">
+                <p class="text-sm font-semibold uppercase tracking-wide text-blue-600 dark:text-blue-400"
+                   data-key="focusLabel">
+                    Fachlicher Fokus
+                </p>
+                <h2 class="mt-2 text-xl font-bold text-slate-900 dark:text-white"
+                    data-key="focusTitle">
+                    Native iOS-Entwicklung
+                </h2>
+                <p class="mt-3 text-sm leading-relaxed text-slate-600 dark:text-slate-300"
+                   data-key="focusText">
+                    Swift, SwiftUI, SwiftData, MapKit, Firebase Authentication und Firestore.
+                </p>
+            </article>
 
-                timelineContainer.appendChild(itemEl);
+            <article class="rounded-2xl bg-white p-6 shadow-sm dark:bg-slate-900">
+                <p class="text-sm font-semibold uppercase tracking-wide text-blue-600 dark:text-blue-400"
+                   data-key="methodLabel">
+                    Arbeitsweise
+                </p>
+                <h2 class="mt-2 text-xl font-bold text-slate-900 dark:text-white"
+                    data-key="methodTitle">
+                    Nutzergetriebene MVPs
+                </h2>
+                <p class="mt-3 text-sm leading-relaxed text-slate-600 dark:text-slate-300"
+                   data-key="methodText">
+                    Problemvalidierung, frühe Pilotgruppen, strukturierte Feedbackschleifen und schrittweise Weiterentwicklung.
+                </p>
+            </article>
+
+            <article class="rounded-2xl bg-white p-6 shadow-sm dark:bg-slate-900">
+                <p class="text-sm font-semibold uppercase tracking-wide text-blue-600 dark:text-blue-400"
+                   data-key="backgroundLabel">
+                    Beruflicher Hintergrund
+                </p>
+                <h2 class="mt-2 text-xl font-bold text-slate-900 dark:text-white"
+                    data-key="backgroundTitle">
+                    Praxis vor Theorie
+                </h2>
+                <p class="mt-3 text-sm leading-relaxed text-slate-600 dark:text-slate-300"
+                   data-key="backgroundText">
+                    Erfahrung aus Lebensmittelhandwerk, Biotechnologie, GMP-Produktion und Vertrieb.
+                </p>
+            </article>
+        </div>
+    </section>
+
+    <section id="kompetenzen" class="mt-16 scroll-mt-24">
+        <div class="mb-8 text-center">
+            <h2 class="text-3xl font-bold text-slate-900 dark:text-white" data-key="skillsTitle">
+                Technische Kompetenzen
+            </h2>
+            <p class="mx-auto mt-3 max-w-3xl text-slate-600 dark:text-slate-300" data-key="skillsIntro">
+                Keine abstrakten Prozentwerte, sondern Technologien und Methoden, die ich in Ausbildung,
+                Projektarbeit und Pilotanwendungen praktisch eingesetzt habe.
+            </p>
+        </div>
+
+        <div class="grid gap-6 md:grid-cols-2 lg:grid-cols-4">
+            <article class="rounded-2xl bg-white p-6 shadow-sm dark:bg-slate-900">
+                <h3 class="text-lg font-bold text-slate-900 dark:text-white" data-key="iosTitle">iOS</h3>
+                <ul class="mt-4 space-y-2 text-sm text-slate-600 dark:text-slate-300">
+                    <li>Swift</li>
+                    <li>SwiftUI</li>
+                    <li>SwiftData / Core Data</li>
+                    <li>MapKit</li>
+                    <li>async/await</li>
+                    <li>Swift Package Manager</li>
+                </ul>
+            </article>
+
+            <article class="rounded-2xl bg-white p-6 shadow-sm dark:bg-slate-900">
+                <h3 class="text-lg font-bold text-slate-900 dark:text-white" data-key="androidTitle">Android</h3>
+                <ul class="mt-4 space-y-2 text-sm text-slate-600 dark:text-slate-300">
+                    <li>Kotlin</li>
+                    <li>Jetpack Compose</li>
+                    <li>Room</li>
+                    <li>DataStore</li>
+                    <li>Coroutines & Flows</li>
+                    <li>Hilt / Koin</li>
+                </ul>
+            </article>
+
+            <article class="rounded-2xl bg-white p-6 shadow-sm dark:bg-slate-900">
+                <h3 class="text-lg font-bold text-slate-900 dark:text-white" data-key="backendTitle">
+                    Backend & Daten
+                </h3>
+                <ul class="mt-4 space-y-2 text-sm text-slate-600 dark:text-slate-300">
+                    <li>Firebase Authentication</li>
+                    <li>Cloud Firestore</li>
+                    <li>Supabase</li>
+                    <li>REST APIs</li>
+                    <li>SQL-Grundlagen</li>
+                    <li>Repository Pattern</li>
+                </ul>
+            </article>
+
+            <article class="rounded-2xl bg-white p-6 shadow-sm dark:bg-slate-900">
+                <h3 class="text-lg font-bold text-slate-900 dark:text-white" data-key="architectureTitle">
+                    Architektur & Delivery
+                </h3>
+                <ul class="mt-4 space-y-2 text-sm text-slate-600 dark:text-slate-300">
+                    <li>MVVM / MVVM-C</li>
+                    <li>Clean Architecture</li>
+                    <li>Git & GitHub</li>
+                    <li>GitHub Actions</li>
+                    <li>TestFlight</li>
+                    <li>GitHub Issues & Projects</li>
+                </ul>
+            </article>
+        </div>
+
+        <div class="mt-6 rounded-2xl bg-white p-6 shadow-sm dark:bg-slate-900">
+            <h3 class="text-lg font-bold text-slate-900 dark:text-white" data-key="productSkillsTitle">
+                Produktentwicklung & Zusammenarbeit
+            </h3>
+
+            <div class="mt-4 flex flex-wrap gap-2">
+                <span class="rounded-full bg-blue-100 px-3 py-1.5 text-sm text-blue-800 dark:bg-blue-950 dark:text-blue-200">Problemvalidierung</span>
+                <span class="rounded-full bg-blue-100 px-3 py-1.5 text-sm text-blue-800 dark:bg-blue-950 dark:text-blue-200">User Stories</span>
+                <span class="rounded-full bg-blue-100 px-3 py-1.5 text-sm text-blue-800 dark:bg-blue-950 dark:text-blue-200">Wireframes</span>
+                <span class="rounded-full bg-blue-100 px-3 py-1.5 text-sm text-blue-800 dark:bg-blue-950 dark:text-blue-200">Figma</span>
+                <span class="rounded-full bg-blue-100 px-3 py-1.5 text-sm text-blue-800 dark:bg-blue-950 dark:text-blue-200">Human Interface Guidelines</span>
+                <span class="rounded-full bg-blue-100 px-3 py-1.5 text-sm text-blue-800 dark:bg-blue-950 dark:text-blue-200">Material Design</span>
+                <span class="rounded-full bg-blue-100 px-3 py-1.5 text-sm text-blue-800 dark:bg-blue-950 dark:text-blue-200">Kanban</span>
+                <span class="rounded-full bg-blue-100 px-3 py-1.5 text-sm text-blue-800 dark:bg-blue-950 dark:text-blue-200">Iterative Entwicklung</span>
+                <span class="rounded-full bg-blue-100 px-3 py-1.5 text-sm text-blue-800 dark:bg-blue-950 dark:text-blue-200">Stakeholder-Kommunikation</span>
+            </div>
+        </div>
+    </section>
+
+    <section id="projekte" class="mt-16 scroll-mt-24">
+        <div class="mb-8 text-center">
+            <h2 class="text-3xl font-bold text-slate-900 dark:text-white" data-key="projectsTitle">
+                Ausgewählte Projekte
+            </h2>
+            <p class="mx-auto mt-3 max-w-3xl text-slate-600 dark:text-slate-300" data-key="projectsIntro">
+                Projekte mit realem Anwendungskontext, Pilotgruppen und kontinuierlicher Weiterentwicklung.
+            </p>
+        </div>
+
+        <div class="grid gap-6 lg:grid-cols-2">
+            <article class="rounded-2xl bg-white p-7 shadow-lg dark:bg-slate-900">
+                <div class="flex flex-wrap items-start justify-between gap-3">
+                    <div>
+                        <p class="text-sm font-semibold uppercase tracking-wide text-green-600 dark:text-green-400">
+                            iOS · TestFlight
+                        </p>
+                        <h3 class="mt-1 text-2xl font-bold text-slate-900 dark:text-white">RevierHege</h3>
+                    </div>
+                    <span class="rounded-full bg-green-100 px-3 py-1 text-xs font-semibold text-green-800 dark:bg-green-950 dark:text-green-200">
+                        Pilotphase
+                    </span>
+                </div>
+
+                <p class="mt-4 leading-relaxed text-slate-600 dark:text-slate-300" data-key="projectRevierText">
+                    Native iOS-App zur digitalen Unterstützung kleiner Jagdgemeinschaften.
+                    Entstanden in Zusammenarbeit mit einer realen Nutzergruppe und fortlaufend durch Praxisfeedback weiterentwickelt.
+                </p>
+
+                <div class="mt-5 flex flex-wrap gap-2 text-xs">
+                    <span class="rounded-full bg-slate-100 px-3 py-1.5 dark:bg-slate-800">SwiftUI</span>
+                    <span class="rounded-full bg-slate-100 px-3 py-1.5 dark:bg-slate-800">Firebase</span>
+                    <span class="rounded-full bg-slate-100 px-3 py-1.5 dark:bg-slate-800">Firestore</span>
+                    <span class="rounded-full bg-slate-100 px-3 py-1.5 dark:bg-slate-800">MapKit</span>
+                    <span class="rounded-full bg-slate-100 px-3 py-1.5 dark:bg-slate-800">MVVM</span>
+                    <span class="rounded-full bg-slate-100 px-3 py-1.5 dark:bg-slate-800">TestFlight</span>
+                </div>
+            </article>
+
+            <article class="rounded-2xl bg-white p-7 shadow-lg dark:bg-slate-900">
+                <div class="flex flex-wrap items-start justify-between gap-3">
+                    <div>
+                        <p class="text-sm font-semibold uppercase tracking-wide text-orange-600 dark:text-orange-400">
+                            Android · Showcase
+                        </p>
+                        <h3 class="mt-1 text-2xl font-bold text-slate-900 dark:text-white">TreueBiss</h3>
+                    </div>
+                    <span class="rounded-full bg-orange-100 px-3 py-1 text-xs font-semibold text-orange-800 dark:bg-orange-950 dark:text-orange-200">
+                        Showcase
+                    </span>
+                </div>
+
+                <p class="mt-4 leading-relaxed text-slate-600 dark:text-slate-300" data-key="projectTreueText">
+                    White-Label-Konzept für digitale Kundenbindung im Lebensmittelhandwerk.
+                    Fokus auf einfache Stempel- und Gutscheinlogik für Bäckereien und vergleichbare Betriebe.
+                </p>
+
+                <div class="mt-5 flex flex-wrap gap-2 text-xs">
+                    <span class="rounded-full bg-slate-100 px-3 py-1.5 dark:bg-slate-800">Kotlin</span>
+                    <span class="rounded-full bg-slate-100 px-3 py-1.5 dark:bg-slate-800">Jetpack Compose</span>
+                    <span class="rounded-full bg-slate-100 px-3 py-1.5 dark:bg-slate-800">Hilt</span>
+                    <span class="rounded-full bg-slate-100 px-3 py-1.5 dark:bg-slate-800">Room</span>
+                    <span class="rounded-full bg-slate-100 px-3 py-1.5 dark:bg-slate-800">Supabase</span>
+                </div>
+            </article>
+
+            <article class="rounded-2xl bg-white p-7 shadow-lg dark:bg-slate-900">
+                <div class="flex flex-wrap items-start justify-between gap-3">
+                    <div>
+                        <p class="text-sm font-semibold uppercase tracking-wide text-purple-600 dark:text-purple-400">
+                            iOS · Abschlussprojekt
+                        </p>
+                        <h3 class="mt-1 text-2xl font-bold text-slate-900 dark:text-white">EmigrateIn</h3>
+                    </div>
+                    <span class="rounded-full bg-purple-100 px-3 py-1 text-xs font-semibold text-purple-800 dark:bg-purple-950 dark:text-purple-200">
+                        Abgeschlossen
+                    </span>
+                </div>
+
+                <p class="mt-4 leading-relaxed text-slate-600 dark:text-slate-300" data-key="projectEmigrateText">
+                    IHK-Abschlussprojekt: iOS-MVP zur strukturierten Unterstützung von Familien bei der Vorbereitung einer Auswanderung.
+                </p>
+
+                <div class="mt-5 flex flex-wrap gap-2 text-xs">
+                    <span class="rounded-full bg-slate-100 px-3 py-1.5 dark:bg-slate-800">Swift</span>
+                    <span class="rounded-full bg-slate-100 px-3 py-1.5 dark:bg-slate-800">SwiftUI</span>
+                    <span class="rounded-full bg-slate-100 px-3 py-1.5 dark:bg-slate-800">Core Data</span>
+                    <span class="rounded-full bg-slate-100 px-3 py-1.5 dark:bg-slate-800">Firebase</span>
+                    <span class="rounded-full bg-slate-100 px-3 py-1.5 dark:bg-slate-800">MVVM</span>
+                </div>
+            </article>
+        </div>
+
+        <div class="mt-8 text-center">
+            <a href="https://github.com/Code-Noob82"
+               target="_blank"
+               rel="noopener noreferrer"
+               class="inline-flex items-center gap-2 rounded-full bg-slate-900 px-6 py-3 font-semibold text-white transition hover:bg-blue-700 dark:bg-blue-600 dark:hover:bg-blue-500">
+                <i class="fa-brands fa-github"></i>
+                <span data-key="githubButton">Projekte auf GitHub ansehen</span>
+            </a>
+        </div>
+    </section>
+
+    <section id="werdegang" class="mt-16 scroll-mt-24">
+        <div class="mb-8 text-center">
+            <h2 class="text-3xl font-bold text-slate-900 dark:text-white" data-key="experienceTitle">
+                Beruflicher Werdegang
+            </h2>
+            <p class="mx-auto mt-3 max-w-3xl text-slate-600 dark:text-slate-300" data-key="experienceIntro">
+                Mein beruflicher Hintergrund verbindet technische Präzision, regulierte Produktionsumgebungen,
+                Kundenorientierung und praktische Problemlösung.
+            </p>
+        </div>
+
+        <div id="timeline" class="mx-auto max-w-4xl rounded-2xl bg-white p-7 shadow-lg dark:bg-slate-900 md:p-9"></div>
+    </section>
+
+    <section id="ausbildung" class="mt-16 scroll-mt-24">
+        <div class="mb-8 text-center">
+            <h2 class="text-3xl font-bold text-slate-900 dark:text-white" data-key="educationTitle">
+                Ausbildung & Zertifikate
+            </h2>
+        </div>
+
+        <div class="grid gap-6 md:grid-cols-2">
+            <article class="rounded-2xl border-l-4 border-blue-500 bg-white p-6 shadow-sm dark:bg-slate-900">
+                <p class="text-sm text-slate-500 dark:text-slate-400">09/2024 – 10/2025</p>
+                <h3 class="mt-1 text-lg font-bold text-slate-900 dark:text-white" data-key="syntaxTitle">
+                    IT-Fachkraft für App-Entwicklung (iOS & Android)
+                </h3>
+                <p class="mt-1 text-slate-600 dark:text-slate-300">Syntax Institut · Remote</p>
+                <p class="mt-3 text-sm leading-relaxed text-slate-600 dark:text-slate-300" data-key="syntaxText">
+                    Rund 2.300 Unterrichtseinheiten mit Schwerpunkt auf nativer App-Entwicklung,
+                    UX/UI, Architektur, Datenhaltung, APIs und Projektarbeit.
+                </p>
+            </article>
+
+            <article class="rounded-2xl border-l-4 border-green-500 bg-white p-6 shadow-sm dark:bg-slate-900">
+                <p class="text-sm text-slate-500 dark:text-slate-400">06/2025</p>
+                <h3 class="mt-1 text-lg font-bold text-slate-900 dark:text-white">
+                    iOS App Developer (IHK)
+                </h3>
+                <p class="mt-1 text-slate-600 dark:text-slate-300">IHK-Zertifikatslehrgang · 290 UE</p>
+                <p class="mt-3 text-sm leading-relaxed text-slate-600 dark:text-slate-300" data-key="iosCertificateText">
+                    Abschlussprojekt EmigrateIn mit Swift, SwiftUI, MVVM, Core Data und Firebase.
+                </p>
+            </article>
+
+            <article class="rounded-2xl bg-white p-6 shadow-sm dark:bg-slate-900">
+                <p class="text-sm text-slate-500 dark:text-slate-400">09/2002 – 07/2004</p>
+                <h3 class="mt-1 text-lg font-bold text-slate-900 dark:text-white" data-key="bioTitle">
+                    Biotechnologischer Assistent
+                </h3>
+                <p class="mt-1 text-slate-600 dark:text-slate-300">
+                    Johannes-Gutenberg-Schule, Heidelberg
+                </p>
+            </article>
+
+            <article class="rounded-2xl bg-white p-6 shadow-sm dark:bg-slate-900">
+                <p class="text-sm text-slate-500 dark:text-slate-400">09/1998 – 07/2001</p>
+                <h3 class="mt-1 text-lg font-bold text-slate-900 dark:text-white" data-key="bakerTitle">
+                    Ausbildung zum Bäcker
+                </h3>
+                <p class="mt-1 text-slate-600 dark:text-slate-300">
+                    Stadtbäckerei Frick, Sinsheim
+                </p>
+            </article>
+        </div>
+    </section>
+
+</main>
+
+<footer class="mt-16 border-t border-slate-200 bg-white dark:border-slate-800 dark:bg-slate-900">
+    <div class="mx-auto flex max-w-6xl flex-col items-center justify-between gap-3 px-5 py-7 text-sm text-slate-500 md:flex-row dark:text-slate-400">
+        <p>© 2026 Dominik Baki</p>
+        <p data-key="footerText">Native Apps. Reale Probleme. Iterative Lösungen.</p>
+    </div>
+</footer>
+
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+    const translations = {
+        de: {
+            pageTitle: 'Lebenslauf – Dominik Baki',
+            eyebrow: 'Native Mobile Development',
+            jobTitle: 'Native iOS App Developer',
+            heroText: 'Ich entwickle native iOS-Anwendungen für reale Anwendungsfälle – gemeinsam mit den Menschen, die sie später im Alltag nutzen. Mein Schwerpunkt liegt auf SwiftUI, Firebase, MapKit, sauberer Architektur und iterativer MVP-Entwicklung auf Basis belastbaren Nutzerfeedbacks.',
+            focusLabel: 'Fachlicher Fokus',
+            focusTitle: 'Native iOS-Entwicklung',
+            focusText: 'Swift, SwiftUI, SwiftData, MapKit, Firebase Authentication und Firestore.',
+            methodLabel: 'Arbeitsweise',
+            methodTitle: 'Nutzergetriebene MVPs',
+            methodText: 'Problemvalidierung, frühe Pilotgruppen, strukturierte Feedbackschleifen und schrittweise Weiterentwicklung.',
+            backgroundLabel: 'Beruflicher Hintergrund',
+            backgroundTitle: 'Praxis vor Theorie',
+            backgroundText: 'Erfahrung aus Lebensmittelhandwerk, Biotechnologie, GMP-Produktion und Vertrieb.',
+            skillsTitle: 'Technische Kompetenzen',
+            skillsIntro: 'Keine abstrakten Prozentwerte, sondern Technologien und Methoden, die ich in Ausbildung, Projektarbeit und Pilotanwendungen praktisch eingesetzt habe.',
+            iosTitle: 'iOS',
+            androidTitle: 'Android',
+            backendTitle: 'Backend & Daten',
+            architectureTitle: 'Architektur & Delivery',
+            productSkillsTitle: 'Produktentwicklung & Zusammenarbeit',
+            projectsTitle: 'Ausgewählte Projekte',
+            projectsIntro: 'Projekte mit realem Anwendungskontext, Pilotgruppen und kontinuierlicher Weiterentwicklung.',
+            projectRevierText: 'Native iOS-App zur digitalen Unterstützung kleiner Jagdgemeinschaften. Entstanden in Zusammenarbeit mit einer realen Nutzergruppe und fortlaufend durch Praxisfeedback weiterentwickelt.',
+            projectKirrungText: 'Schlanke Revier-App zur Verwaltung von Kirrungen, Sitzen und Fallen. Mit Kartenansicht, Historie, Rollenmodell und Admin-Freigabe für kleine Jagdgruppen.',
+            projectTreueText: 'White-Label-Konzept für digitale Kundenbindung im Lebensmittelhandwerk. Fokus auf einfache Stempel- und Gutscheinlogik für Bäckereien und vergleichbare Betriebe.',
+            projectEmigrateText: 'IHK-Abschlussprojekt: iOS-MVP zur strukturierten Unterstützung von Familien bei der Vorbereitung einer Auswanderung.',
+            githubButton: 'Projekte auf GitHub ansehen',
+            experienceTitle: 'Beruflicher Werdegang',
+            experienceIntro: 'Mein beruflicher Hintergrund verbindet technische Präzision, regulierte Produktionsumgebungen, Kundenorientierung und praktische Problemlösung.',
+            educationTitle: 'Ausbildung & Zertifikate',
+            syntaxTitle: 'IT-Fachkraft für App-Entwicklung (iOS & Android)',
+            syntaxText: 'Rund 2.300 Unterrichtseinheiten mit Schwerpunkt auf nativer App-Entwicklung, UX/UI, Architektur, Datenhaltung, APIs und Projektarbeit.',
+            iosCertificateText: 'Abschlussprojekt EmigrateIn mit Swift, SwiftUI, MVVM, Core Data und Firebase.',
+            bioTitle: 'Biotechnologischer Assistent',
+            bakerTitle: 'Ausbildung zum Bäcker',
+            footerText: 'Native Apps. Reale Probleme. Iterative Lösungen.',
+            showDetails: 'Details anzeigen',
+            hideDetails: 'Details verbergen'
+        },
+        en: {
+            pageTitle: 'Resume – Dominik Baki',
+            eyebrow: 'Native Mobile Development',
+            jobTitle: 'Native iOS App Developer',
+            heroText: 'I build native iOS applications for real-world use cases together with the people who use them in their daily work. My focus is on SwiftUI, Firebase, MapKit, maintainable architecture and iterative MVP development based on meaningful user feedback.',
+            focusLabel: 'Technical focus',
+            focusTitle: 'Native iOS development',
+            focusText: 'Swift, SwiftUI, SwiftData, MapKit, Firebase Authentication and Firestore.',
+            methodLabel: 'Approach',
+            methodTitle: 'User-driven MVPs',
+            methodText: 'Problem validation, early pilot groups, structured feedback loops and incremental product development.',
+            backgroundLabel: 'Professional background',
+            backgroundTitle: 'Practice before theory',
+            backgroundText: 'Experience in food craftsmanship, biotechnology, GMP production and sales.',
+            skillsTitle: 'Technical Skills',
+            skillsIntro: 'No arbitrary percentage ratings, but technologies and methods I have used in training, project work and pilot applications.',
+            iosTitle: 'iOS',
+            androidTitle: 'Android',
+            backendTitle: 'Backend & Data',
+            architectureTitle: 'Architecture & Delivery',
+            productSkillsTitle: 'Product Development & Collaboration',
+            projectsTitle: 'Selected Projects',
+            projectsIntro: 'Projects with real-world contexts, pilot groups and continuous iteration.',
+            projectRevierText: 'Native iOS app supporting small hunting communities. Developed with a real user group and continuously improved through practical feedback.',
+            projectKirrungText: 'Focused territory app for managing feeding sites, hunting stands and traps, including map view, history, roles and admin approval.',
+            projectTreueText: 'White-label concept for digital customer loyalty in the food trade, focused on simple stamp and voucher logic for bakeries and similar businesses.',
+            projectEmigrateText: 'IHK final project: an iOS MVP designed to support families in planning and structuring an emigration process.',
+            githubButton: 'View projects on GitHub',
+            experienceTitle: 'Professional Experience',
+            experienceIntro: 'My professional background combines technical precision, regulated production environments, customer orientation and practical problem solving.',
+            educationTitle: 'Education & Certifications',
+            syntaxTitle: 'IT Specialist for App Development (iOS & Android)',
+            syntaxText: 'Approximately 2,300 training units focused on native app development, UX/UI, architecture, persistence, APIs and project work.',
+            iosCertificateText: 'Final project EmigrateIn using Swift, SwiftUI, MVVM, Core Data and Firebase.',
+            bioTitle: 'Biotechnology Assistant',
+            bakerTitle: 'Apprenticeship as a Baker',
+            footerText: 'Native apps. Real problems. Iterative solutions.',
+            showDetails: 'Show details',
+            hideDetails: 'Hide details'
+        }
+    };
+
+    const experienceData = {
+        de: [
+            {
+                title: 'App-Entwicklung & eigene Produktprojekte',
+                company: 'byte & Handwerk / Eigenprojekte',
+                period: 'Seit 2025',
+                details: [
+                    'Konzeption und Entwicklung nativer iOS- und Android-Anwendungen.',
+                    'Aufbau realer Pilotprojekte mit kleinen Nutzergruppen und kontinuierlichen Feedbackschleifen.',
+                    'Arbeit mit SwiftUI, Firebase, Firestore, MapKit, Kotlin und Jetpack Compose.',
+                    'Strukturierung der Entwicklung über GitHub Issues, Tickets, Roadmaps und dokumentierte Anforderungen.'
+                ],
+                open: true
+            },
+            {
+                title: 'Teilzeitbeschäftigung',
+                company: 'Aktuelle berufliche Tätigkeit',
+                period: 'Seit 04/2026',
+                details: [
+                    'Berufliche Tätigkeit parallel zur Weiterentwicklung eigener App-Projekte.',
+                    'Schwerpunkt auf verlässlicher Organisation und eigenständiger Arbeitsweise.'
+                ]
+            },
+            {
+                title: 'Selbstständiger Vertriebspartner',
+                company: 'LR Health & Beauty',
+                period: '06/2022 – 09/2024',
+                details: [
+                    'Beratung und Betreuung von Kunden im Gesundheits- und Schönheitsbereich.',
+                    'Aufbau und Pflege langfristiger Kundenbeziehungen.',
+                    'Bedarfsanalyse, verständliche Kommunikation und lösungsorientierter Vertrieb.'
+                ]
+            },
+            {
+                title: 'Selbstständiger Handelsvertreter',
+                company: 'Vorwerk Gruppe, Ladenburg',
+                period: '04/2023 – 12/2023',
+                details: [
+                    'Beratung und Verkauf erklärungsbedürftiger Produkte.',
+                    'Eigenständige Terminplanung, Kundenbetreuung und Nachverfolgung.',
+                    'Regelmäßige Produkt- und Vertriebsschulungen.'
+                ]
+            },
+            {
+                title: 'Coordinator Combination Products',
+                company: 'AbbVie, Ludwigshafen',
+                period: '09/2021 – 07/2022',
+                details: [
+                    'Koordination regulatorisch relevanter Prozesse für Combination Products.',
+                    'Zusammenarbeit mit interdisziplinären Teams.',
+                    'Risikoanalyse, Produktbewertung und strukturierte Dokumentation.'
+                ]
+            },
+            {
+                title: 'Technician Process Transfer',
+                company: 'AGC Biologics, Heidelberg',
+                period: '07/2021 – 08/2021',
+                details: [
+                    'Übertragung und Skalierung biotechnologischer Produktionsprozesse.',
+                    'Arbeit nach GMP-Vorgaben in regulierten Reinraumbereichen.',
+                    'Durchführung von Fermentation, Filtration, Aufreinigung und Inprozesskontrollen.'
+                ]
+            },
+            {
+                title: 'Technician Upstream Processing',
+                company: 'AGC Biologics, Heidelberg',
+                period: '01/2015 – 07/2021',
+                details: [
+                    'Vorbereitung und Durchführung biopharmazeutischer Fermentationsprozesse.',
+                    'Auswertung von Prozessdaten und Mitarbeit an kontinuierlicher Prozessverbesserung.',
+                    'GMP-gerechte Dokumentation sowie Unterstützung bei Qualifizierung und Kalibrierung.'
+                ]
+            },
+            {
+                title: 'Technician Cellbanking',
+                company: 'AGC Biologics, Heidelberg',
+                period: '01/2005 – 12/2014',
+                details: [
+                    'Herstellung, Charakterisierung, Lagerung und Versand von Zellbanken.',
+                    'Aseptisches Arbeiten in kontrollierten Reinraumbereichen.',
+                    'Sicherstellung von Qualität, Rückverfolgbarkeit und GMP-konformer Dokumentation.'
+                ]
+            },
+            {
+                title: 'Ausbildung zum Bäcker',
+                company: 'Stadtbäckerei Frick, Sinsheim',
+                period: '09/1998 – 07/2001',
+                details: [
+                    'Handwerkliche Ausbildung mit Schwerpunkt auf Zuverlässigkeit, Qualität und strukturierten Arbeitsabläufen.'
+                ]
+            }
+        ],
+        en: [
+            {
+                title: 'App Development & Product Projects',
+                company: 'byte & Handwerk / Independent Projects',
+                period: 'Since 2025',
+                details: [
+                    'Design and development of native iOS and Android applications.',
+                    'Creation of pilot projects with small user groups and continuous feedback loops.',
+                    'Work with SwiftUI, Firebase, Firestore, MapKit, Kotlin and Jetpack Compose.',
+                    'Structured delivery through GitHub Issues, tickets, roadmaps and documented requirements.'
+                ],
+                open: true
+            },
+            {
+                title: 'Part-time Employment',
+                company: 'Current role',
+                period: 'Since 04/2026',
+                details: [
+                    'Professional employment alongside ongoing development of independent app projects.',
+                    'Focus on reliable organisation and autonomous work.'
+                ]
+            },
+            {
+                title: 'Independent Sales Partner',
+                company: 'LR Health & Beauty',
+                period: '06/2022 – 09/2024',
+                details: [
+                    'Customer consulting in the health and beauty sector.',
+                    'Development and maintenance of long-term customer relationships.',
+                    'Needs analysis, clear communication and solution-oriented sales.'
+                ]
+            },
+            {
+                title: 'Independent Sales Representative',
+                company: 'Vorwerk Group, Ladenburg',
+                period: '04/2023 – 12/2023',
+                details: [
+                    'Consulting and sales of products requiring detailed explanation.',
+                    'Independent appointment planning, customer support and follow-up.',
+                    'Regular product and sales training.'
+                ]
+            },
+            {
+                title: 'Coordinator Combination Products',
+                company: 'AbbVie, Ludwigshafen',
+                period: '09/2021 – 07/2022',
+                details: [
+                    'Coordination of regulatory processes for combination products.',
+                    'Collaboration with interdisciplinary teams.',
+                    'Risk analysis, product evaluation and structured documentation.'
+                ]
+            },
+            {
+                title: 'Technician Process Transfer',
+                company: 'AGC Biologics, Heidelberg',
+                period: '07/2021 – 08/2021',
+                details: [
+                    'Transfer and scale-up of biotechnological production processes.',
+                    'Work under GMP requirements in regulated clean-room environments.',
+                    'Fermentation, filtration, purification and in-process controls.'
+                ]
+            },
+            {
+                title: 'Technician Upstream Processing',
+                company: 'AGC Biologics, Heidelberg',
+                period: '01/2015 – 07/2021',
+                details: [
+                    'Preparation and execution of biopharmaceutical fermentation processes.',
+                    'Process data analysis and continuous process improvement.',
+                    'GMP documentation and support for equipment qualification and calibration.'
+                ]
+            },
+            {
+                title: 'Technician Cell Banking',
+                company: 'AGC Biologics, Heidelberg',
+                period: '01/2005 – 12/2014',
+                details: [
+                    'Production, characterisation, storage and shipment of cell banks.',
+                    'Aseptic work in controlled clean-room environments.',
+                    'Quality assurance, traceability and GMP-compliant documentation.'
+                ]
+            },
+            {
+                title: 'Apprenticeship as a Baker',
+                company: 'Stadtbäckerei Frick, Sinsheim',
+                period: '09/1998 – 07/2001',
+                details: [
+                    'Craft apprenticeship with a focus on reliability, quality and structured workflows.'
+                ]
+            }
+        ]
+    };
+
+    const desktopLanguage = document.getElementById('language-switcher');
+    const mobileLanguage = document.getElementById('mobile-language-switcher');
+    const themeToggle = document.getElementById('theme-toggle');
+    const mobileThemeToggle = document.getElementById('mobile-theme-toggle');
+    const themeIcon = document.getElementById('theme-icon');
+    const mobileThemeIcon = document.getElementById('mobile-theme-icon');
+    const timeline = document.getElementById('timeline');
+
+    let currentLanguage = localStorage.getItem('language') || 'de';
+
+    function renderTimeline(lang) {
+        timeline.innerHTML = '';
+
+        experienceData[lang].forEach((item) => {
+            const wrapper = document.createElement('article');
+            wrapper.className = 'timeline-item relative pb-8 pl-9';
+
+            const detailsId = `details-${crypto.randomUUID()}`;
+            const initiallyOpen = Boolean(item.open);
+
+            wrapper.innerHTML = `
+                <div class="absolute left-0 top-1.5 h-5 w-5 rounded-full border-4 border-white bg-blue-500 dark:border-slate-900"></div>
+                <button type="button"
+                        class="w-full text-left"
+                        aria-expanded="${initiallyOpen}"
+                        aria-controls="${detailsId}">
+                    <p class="text-sm text-slate-500 dark:text-slate-400">${item.period}</p>
+                    <h3 class="mt-1 text-lg font-bold text-slate-900 dark:text-white">${item.title}</h3>
+                    <p class="text-slate-600 dark:text-slate-300">${item.company}</p>
+                    <span class="mt-2 inline-block text-sm font-medium text-blue-600 dark:text-blue-400">
+                        ${initiallyOpen ? translations[lang].hideDetails : translations[lang].showDetails}
+                    </span>
+                </button>
+
+                <div id="${detailsId}" class="${initiallyOpen ? '' : 'hidden'} mt-4 border-l-2 border-slate-200 pl-4 dark:border-slate-700">
+                    <ul class="space-y-2 text-sm leading-relaxed text-slate-600 dark:text-slate-300">
+                        ${item.details.map(detail => `<li class="flex gap-2"><span class="mt-2 h-1.5 w-1.5 flex-none rounded-full bg-blue-500"></span><span>${detail}</span></li>`).join('')}
+                    </ul>
+                </div>
+            `;
+
+            const button = wrapper.querySelector('button');
+            const details = wrapper.querySelector(`#${CSS.escape(detailsId)}`);
+            const label = button.querySelector('span');
+
+            button.addEventListener('click', () => {
+                const isOpen = button.getAttribute('aria-expanded') === 'true';
+                button.setAttribute('aria-expanded', String(!isOpen));
+                details.classList.toggle('hidden');
+                label.textContent = isOpen
+                    ? translations[currentLanguage].showDetails
+                    : translations[currentLanguage].hideDetails;
             });
 
-            function saveProjects() {
-                localStorage.setItem('userProjects', JSON.stringify(projects));
-            }
-
-            function renderProjects() {
-                currentProjectsDisplay.innerHTML = ''; // Clear existing projects
-
-                if (projects.length === 0) {
-                    currentProjectsDisplay.innerHTML = `<p class="text-center text-gray-500 col-span-full" data-key="keineProjekte">${translations[savedLanguage].keineProjekte}</p>`;
-                    return;
-                }
-
-                projects.forEach(project => {
-                    const projectCard = document.createElement('div');
-                    projectCard.className = 'bg-white rounded-xl shadow-lg p-6 flex flex-col';
-                    projectCard.innerHTML = `
-                        <h3 class="text-xl font-bold text-gray-800 mb-2">${project.name}</h3>
-                        <p class="text-gray-600 mb-4 flex-grow">${project.description}</p>
-                        ${project.link ? `<a href="${project.link}" target="_blank" class="text-blue-600 hover:underline text-sm mb-2">${project.link}</a>` : ''}
-                        <button class="delete-project-btn bg-red-500 hover:bg-red-600 text-white font-bold py-1 px-3 rounded-full text-sm self-end transition-colors duration-200 mt-2" data-project-id="${project.id}" data-key="projektLoeschen">${translations[savedLanguage].projektLoeschen}</button>
-                    `;
-                    currentProjectsDisplay.appendChild(projectCard);
-                });
-
-                // Add event listeners for delete buttons
-                document.querySelectorAll('.delete-project-btn').forEach(button => {
-                    button.addEventListener('click', (event) => {
-                        const projectId = event.target.dataset.projectId;
-                        deleteProject(projectId);
-                    });
-                });
-            }
-
-            function addProject() {
-                // This function is no longer called from HTML, but kept for completeness
-                // (no project input fields)
-            }
-
-            function deleteProject(id) {
-                projects = projects.filter(project => project.id !== id);
-                saveProjects();
-                renderProjects();
-            }
-            
-
-            function saveCertificates() {
-                localStorage.setItem('userCertificates', JSON.stringify(certificates));
-            }
-
-            function renderCertificates() {
-                certificatesList.innerHTML = ''; // Clear current list
-
-                if (certificates.length === 0) {
-                    certificatesList.innerHTML = `<p class="text-center text-gray-500" data-key="keineZertifikate">${translations[savedLanguage].keineZertifikate}</p>`;
-                    return;
-                }
-
-                certificates.forEach(cert => {
-                    const certItem = document.createElement('div');
-                    certItem.className = 'flex items-center justify-between bg-gray-50 dark:bg-gray-800 p-3 rounded-lg shadow-sm';
-                    certItem.innerHTML = `
-                        <a href="${cert.dataURL}" target="_blank" class="text-blue-600 hover:underline flex-grow mr-4 truncate" title="${cert.name}">📄 ${cert.name}</a>
-                        <button class="delete-cert-btn bg-red-500 hover:bg-red-600 text-white font-bold py-1 px-3 rounded-full text-sm transition-colors duration-200" data-cert-id="${cert.id}" data-key="projektLoeschen">${translations[savedLanguage].projektLoeschen}</button>
-                    `;
-                    certificatesList.appendChild(certItem);
-                });
-
-                document.querySelectorAll('.delete-cert-btn').forEach(button => {
-                    button.addEventListener('click', (event) => {
-                        const certId = event.target.dataset.certId;
-                        deleteCertificate(certId);
-                    });
-                });
-            }
-
-            function addCertificate(file) {
-                const reader = new FileReader();
-                reader.onload = function(e) {
-                    const newCert = {
-                        id: crypto.randomUUID(),
-                        name: file.name,
-                        dataURL: e.target.result
-                    };
-                    certificates.push(newCert);
-                    saveCertificates();
-                    renderCertificates();
-                };
-                reader.readAsDataURL(file);
-            }
-
-            function deleteCertificate(id) {
-                certificates = certificates.filter(cert => cert.id !== id);
-                saveCertificates();
-                renderCertificates();
-            }
-
-            certificateUploadInput.addEventListener('change', function() {
-                const file = this.files[0];
-                if (file && file.type === 'application/pdf') {
-                    addCertificate(file);
-                } else {
-                    alert('Bitte laden Sie eine PDF-Datei hoch.'); // Consider custom modal
-                }
-            });
+            timeline.appendChild(wrapper);
         });
-    </script>
+    }
+
+    function setLanguage(lang) {
+        currentLanguage = lang;
+        document.documentElement.lang = lang;
+        document.title = translations[lang].pageTitle;
+
+        document.querySelectorAll('[data-key]').forEach(element => {
+            const key = element.dataset.key;
+            if (translations[lang][key]) {
+                element.textContent = translations[lang][key];
+            }
+        });
+
+        desktopLanguage.value = lang;
+        mobileLanguage.value = lang;
+        localStorage.setItem('language', lang);
+        renderTimeline(lang);
+    }
+
+    function applyTheme(theme) {
+        const dark = theme === 'dark';
+        document.documentElement.classList.toggle('dark', dark);
+
+        themeIcon.className = dark ? 'fa-solid fa-moon' : 'fa-solid fa-sun';
+        mobileThemeIcon.className = dark ? 'fa-solid fa-moon' : 'fa-solid fa-sun';
+
+        localStorage.setItem('theme', theme);
+    }
+
+    function toggleTheme() {
+        const dark = document.documentElement.classList.contains('dark');
+        applyTheme(dark ? 'light' : 'dark');
+    }
+
+    desktopLanguage.addEventListener('change', event => setLanguage(event.target.value));
+    mobileLanguage.addEventListener('change', event => setLanguage(event.target.value));
+    themeToggle.addEventListener('click', toggleTheme);
+    mobileThemeToggle.addEventListener('click', toggleTheme);
+
+    const savedTheme = localStorage.getItem('theme');
+    const preferredTheme = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+
+    applyTheme(savedTheme || preferredTheme);
+    setLanguage(currentLanguage);
+});
+</script>
+
 </body>
 </html>
