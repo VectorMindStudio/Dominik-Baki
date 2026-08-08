@@ -174,11 +174,7 @@ Vorgehensweise
 5. Root-Verzeichnis / verwenden
 6. Änderungen speichern
 
-Nach der Bereitstellung ist die Webseite über eine GitHub-Pages-Adresse erreichbar.
-
-Beispiel:
-
-https://BENUTZERNAME.github.io/REPOSITORY-NAME/
+Die veröffentlichte Webseite ist unter https://dominikbaki.com/ erreichbar.
 
 ### Datenschutz
 
