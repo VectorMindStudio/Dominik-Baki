@@ -22,6 +22,7 @@ Die Originaldokumente werden nicht im öffentlichen Repository abgelegt. Mehrere
 - eigenes responsives CSS ohne externe Bibliotheken
 - kleines Vanilla-JavaScript für die mobile Navigation und Jahreszahl
 - strukturierte Person- und Qualifikationsdaten nach Schema.org
+- `robots.txt` und XML-Sitemap für Suchmaschinen
 - GitHub Pages mit eigener Domain über `CNAME`
 
 ## Projektstruktur
