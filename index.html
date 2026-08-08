@@ -1,960 +1,285 @@
-<!DOCTYPE html>
-<html lang="de" class="scroll-smooth">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Lebenslauf von Dominik Baki – Native iOS App Developer mit Fokus auf SwiftUI, Firebase, MapKit und nutzerzentrierte MVP-Entwicklung.">
-    <title>Lebenslauf – Dominik Baki</title>
-    <link rel="canonical" href="https://dominikbaki.com/">
+<!doctype html>
+<html lang="de">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Dominik Baki | Produktentwicklung &amp; native Apps</title>
+    <meta name="description" content="Dominik Baki verbindet Erfahrung aus Handwerk, regulierter Produktion und Vertrieb mit nutzerzentrierter Produktentwicklung und nativer App-Entwicklung.">
+    <meta name="theme-color" content="#172126">
     <meta property="og:type" content="profile">
     <meta property="og:locale" content="de_DE">
+    <meta property="og:site_name" content="Dominik Baki">
     <meta property="og:url" content="https://dominikbaki.com/">
-    <meta property="og:title" content="Dominik Baki – App-Entwicklung &amp; Produktentwicklung">
-    <meta property="og:description" content="Technischer Lebenslauf, ausgewählte Projekte und beruflicher Hintergrund von Dominik Baki, Gründer von byte &amp; Handwerk.">
+    <meta property="og:title" content="Dominik Baki | Produktentwicklung &amp; native Apps">
+    <meta property="og:description" content="Praxis verstehen, Entscheidungen strukturieren und die kleinste wirksame digitale Lösung bauen.">
     <meta property="og:image" content="https://dominikbaki.com/Dominik%20Baki.png">
-
+    <link rel="canonical" href="https://dominikbaki.com/">
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
+    <link rel="stylesheet" href="assets/styles.css?v=20260808-1">
     <script type="application/ld+json">
-        {
-            "@context": "https://schema.org",
-            "@type": "Person",
-            "name": "Dominik Baki",
-            "url": "https://dominikbaki.com/",
-            "image": "https://dominikbaki.com/Dominik%20Baki.png",
-            "jobTitle": "App-Entwickler und Gründer von byte & Handwerk",
-            "worksFor": {
-                "@type": "Organization",
-                "name": "byte & Handwerk",
-                "url": "https://byteundhandwerk.de/"
-            },
-            "sameAs": [
-                "https://byteundhandwerk.de/partner.html",
-                "https://www.linkedin.com/in/dominik-baki",
-                "https://github.com/Code-Noob82"
-            ],
-            "knowsAbout": [
-                "Native iOS-Entwicklung",
-                "Android-Entwicklung",
-                "Produktentwicklung",
-                "SwiftUI",
-                "Kotlin",
-                "Firebase",
-                "Nutzergetriebene MVPs"
-            ]
-        }
-    </script>
-
-    <script src="https://cdn.tailwindcss.com"></script>
-
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
-
-    <script>
-        tailwind.config = {
-            darkMode: 'class',
-            theme: {
-                extend: {
-                    fontFamily: {
-                        sans: ['Inter', 'sans-serif']
-                    }
-                }
-            }
-        };
-    </script>
-
-    <style>
-        body {
-            font-family: 'Inter', sans-serif;
-        }
-
-        .timeline-item::before {
-            content: "";
-            position: absolute;
-            left: 0.55rem;
-            top: 1.4rem;
-            bottom: -1rem;
-            width: 2px;
-            background: #cbd5e1;
-        }
-
-        .timeline-item:last-child::before {
-            display: none;
-        }
-
-        .dark .timeline-item::before {
-            background: #475569;
-        }
-
-        @media print {
-            header,
-            #theme-toggle,
-            #language-switcher,
-            .print-hidden {
-                display: none !important;
-            }
-
-            body {
-                background: white !important;
-                color: #111827 !important;
-            }
-
-            main {
-                max-width: none !important;
-                padding: 0 !important;
-            }
-
-            section {
-                break-inside: avoid;
-                margin-bottom: 1.5rem !important;
-            }
-
-            .shadow-lg,
-            .shadow-sm {
-                box-shadow: none !important;
-            }
-
-            .bg-white,
-            .dark\:bg-slate-800 {
-                background: white !important;
-            }
-        }
-    </style>
-</head>
-
-<body class="bg-slate-100 text-slate-800 antialiased transition-colors duration-300 dark:bg-slate-950 dark:text-slate-100">
-
-<header class="sticky top-0 z-50 border-b border-slate-200 bg-white/90 backdrop-blur dark:border-slate-800 dark:bg-slate-900/90">
-    <nav class="mx-auto flex max-w-6xl items-center justify-between px-5 py-4">
-        <a href="#profil" class="font-bold tracking-tight text-slate-900 dark:text-white">
-            Dominik Baki
-        </a>
-
-        <div class="hidden items-center gap-6 md:flex">
-            <a href="#profil" class="text-sm text-slate-600 hover:text-blue-600 dark:text-slate-300">Profil</a>
-            <a href="#kompetenzen" class="text-sm text-slate-600 hover:text-blue-600 dark:text-slate-300">Kompetenzen</a>
-            <a href="#projekte" class="text-sm text-slate-600 hover:text-blue-600 dark:text-slate-300">Projekte</a>
-            <a href="#werdegang" class="text-sm text-slate-600 hover:text-blue-600 dark:text-slate-300">Werdegang</a>
-            <a href="#ausbildung" class="text-sm text-slate-600 hover:text-blue-600 dark:text-slate-300">Ausbildung</a>
-
-            <select id="language-switcher"
-                    class="rounded-lg border border-slate-300 bg-white px-3 py-2 text-sm dark:border-slate-700 dark:bg-slate-800">
-                <option value="de">Deutsch</option>
-                <option value="en">English</option>
-            </select>
-
-            <button id="theme-toggle"
-                    type="button"
-                    aria-label="Farbschema wechseln"
-                    class="rounded-full bg-slate-200 px-3 py-2 text-slate-800 transition hover:bg-slate-300 dark:bg-slate-700 dark:text-yellow-300 dark:hover:bg-slate-600">
-                <i id="theme-icon" class="fa-solid fa-sun"></i>
-            </button>
-        </div>
-
-        <div class="flex items-center gap-2 md:hidden">
-            <select id="mobile-language-switcher"
-                    class="rounded-lg border border-slate-300 bg-white px-2 py-2 text-sm dark:border-slate-700 dark:bg-slate-800">
-                <option value="de">DE</option>
-                <option value="en">EN</option>
-            </select>
-
-            <button id="mobile-theme-toggle"
-                    type="button"
-                    aria-label="Farbschema wechseln"
-                    class="rounded-full bg-slate-200 px-3 py-2 dark:bg-slate-700 dark:text-yellow-300">
-                <i id="mobile-theme-icon" class="fa-solid fa-sun"></i>
-            </button>
-        </div>
-    </nav>
-</header>
-
-<main class="mx-auto max-w-6xl px-5 py-8 md:py-12">
-
-    <section id="profil" class="scroll-mt-24">
-        <div class="overflow-hidden rounded-2xl bg-white shadow-lg dark:bg-slate-900">
-            <div class="h-2 bg-gradient-to-r from-green-500 to-blue-500"></div>
-
-            <div class="grid gap-8 p-7 md:grid-cols-[180px_1fr] md:p-10">
-                <div class="flex justify-center md:justify-start">
-                    <div class="flex h-40 w-40 items-center justify-center overflow-hidden rounded-full border-4 border-blue-200 bg-slate-200 shadow-md dark:border-blue-700 dark:bg-slate-800">
-                        <img
-                            src="Dominik Baki.png"
-                            alt="Profilbild von Dominik Baki"
-                            class="h-full w-full object-cover">
-                    </div>
-                </div>
-
-                <div>
-                    <p class="mb-2 text-sm font-semibold uppercase tracking-[0.2em] text-blue-600 dark:text-blue-400"
-                       data-key="eyebrow">
-                        Native Mobile Development
-                    </p>
-
-                    <h1 class="text-4xl font-extrabold tracking-tight text-slate-900 dark:text-white md:text-5xl">
-                        Dominik Baki
-                    </h1>
-
-                    <p class="mt-3 text-xl font-semibold text-slate-700 dark:text-slate-200"
-                       data-key="jobTitle">
-                        Native iOS App Developer
-                    </p>
-
-                    <p class="mt-5 max-w-3xl leading-relaxed text-slate-600 dark:text-slate-300"
-                       data-key="heroText">
-                        Ich entwickle native iOS-Anwendungen für reale Anwendungsfälle – gemeinsam mit den Menschen,
-                        die sie später im Alltag nutzen. Mein Schwerpunkt liegt auf SwiftUI, Firebase, MapKit,
-                        sauberer Architektur und iterativer MVP-Entwicklung auf Basis belastbaren Nutzerfeedbacks.
-                    </p>
-
-                    <div class="mt-6 flex flex-wrap gap-x-5 gap-y-3 text-sm text-slate-600 dark:text-slate-300">
-                        <a href="mailto:dominik.baki@outlook.com" class="hover:text-blue-600">
-                            <i class="fa-solid fa-envelope mr-1.5"></i>
-                            dominik.baki@outlook.com
-                        </a>
-
-                        <a href="tel:+4915229029773" class="hover:text-blue-600">
-                            <i class="fa-solid fa-phone mr-1.5"></i>
-                            +49 152 290 297 73
-                        </a>
-
-                        <a href="https://www.linkedin.com/in/dominik-baki"
-                           target="_blank"
-                           rel="noopener noreferrer"
-                           class="hover:text-blue-600">
-                            <i class="fa-brands fa-linkedin mr-1.5"></i>
-                            LinkedIn
-                        </a>
-
-                        <a href="https://github.com/Code-Noob82"
-                           target="_blank"
-                           rel="noopener noreferrer"
-                           class="hover:text-blue-600">
-                            <i class="fa-brands fa-github mr-1.5"></i>
-                            GitHub
-                        </a>
-
-                        <span>
-                            <i class="fa-solid fa-location-dot mr-1.5"></i>
-                            Mannheim, Deutschland
-                        </span>
-                    </div>
-
-                    <p class="mt-6 max-w-3xl text-sm leading-relaxed text-slate-600 dark:text-slate-300"
-                       data-key="companyContext">
-                        Mein unternehmerisches Angebot entwickle ich unter byte &amp; Handwerk: erst den Arbeitsalltag verstehen, dann die kleinste wirksame digitale Lösung umsetzen.
-                    </p>
-                    <div class="mt-4 flex flex-wrap gap-3 print-hidden">
-                        <a href="https://byteundhandwerk.de/"
-                           target="_blank"
-                           rel="noopener noreferrer"
-                           class="inline-flex items-center gap-2 rounded-full bg-blue-600 px-5 py-2.5 text-sm font-semibold text-white transition hover:bg-blue-700">
-                            <i class="fa-solid fa-arrow-up-right-from-square"></i>
-                            <span data-key="companyButton">byte &amp; Handwerk ansehen</span>
-                        </a>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="mt-8 grid gap-6 md:grid-cols-3">
-            <article class="rounded-2xl bg-white p-6 shadow-sm dark:bg-slate-900">
-                <p class="text-sm font-semibold uppercase tracking-wide text-blue-600 dark:text-blue-400"
-                   data-key="focusLabel">
-                    Fachlicher Fokus
-                </p>
-                <h2 class="mt-2 text-xl font-bold text-slate-900 dark:text-white"
-                    data-key="focusTitle">
-                    Native iOS-Entwicklung
-                </h2>
-                <p class="mt-3 text-sm leading-relaxed text-slate-600 dark:text-slate-300"
-                   data-key="focusText">
-                    Swift, SwiftUI, SwiftData, MapKit, Firebase Authentication und Firestore.
-                </p>
-            </article>
-
-            <article class="rounded-2xl bg-white p-6 shadow-sm dark:bg-slate-900">
-                <p class="text-sm font-semibold uppercase tracking-wide text-blue-600 dark:text-blue-400"
-                   data-key="methodLabel">
-                    Arbeitsweise
-                </p>
-                <h2 class="mt-2 text-xl font-bold text-slate-900 dark:text-white"
-                    data-key="methodTitle">
-                    Nutzergetriebene MVPs
-                </h2>
-                <p class="mt-3 text-sm leading-relaxed text-slate-600 dark:text-slate-300"
-                   data-key="methodText">
-                    Problemvalidierung, frühe Pilotgruppen, strukturierte Feedbackschleifen und schrittweise Weiterentwicklung.
-                </p>
-            </article>
-
-            <article class="rounded-2xl bg-white p-6 shadow-sm dark:bg-slate-900">
-                <p class="text-sm font-semibold uppercase tracking-wide text-blue-600 dark:text-blue-400"
-                   data-key="backgroundLabel">
-                    Beruflicher Hintergrund
-                </p>
-                <h2 class="mt-2 text-xl font-bold text-slate-900 dark:text-white"
-                    data-key="backgroundTitle">
-                    Praxis vor Theorie
-                </h2>
-                <p class="mt-3 text-sm leading-relaxed text-slate-600 dark:text-slate-300"
-                   data-key="backgroundText">
-                    Erfahrung aus Lebensmittelhandwerk, Biotechnologie, GMP-Produktion und Vertrieb.
-                </p>
-            </article>
-        </div>
-    </section>
-
-    <section id="kompetenzen" class="mt-16 scroll-mt-24">
-        <div class="mb-8 text-center">
-            <h2 class="text-3xl font-bold text-slate-900 dark:text-white" data-key="skillsTitle">
-                Technische Kompetenzen
-            </h2>
-            <p class="mx-auto mt-3 max-w-3xl text-slate-600 dark:text-slate-300" data-key="skillsIntro">
-                Keine abstrakten Prozentwerte, sondern Technologien und Methoden, die ich in Ausbildung,
-                Projektarbeit und Pilotanwendungen praktisch eingesetzt habe.
-            </p>
-        </div>
-
-        <div class="grid gap-6 md:grid-cols-2 lg:grid-cols-4">
-            <article class="rounded-2xl bg-white p-6 shadow-sm dark:bg-slate-900">
-                <h3 class="text-lg font-bold text-slate-900 dark:text-white" data-key="iosTitle">iOS</h3>
-                <ul class="mt-4 space-y-2 text-sm text-slate-600 dark:text-slate-300">
-                    <li>Swift</li>
-                    <li>SwiftUI</li>
-                    <li>SwiftData / Core Data</li>
-                    <li>MapKit</li>
-                    <li>async/await</li>
-                    <li>Swift Package Manager</li>
-                </ul>
-            </article>
-
-            <article class="rounded-2xl bg-white p-6 shadow-sm dark:bg-slate-900">
-                <h3 class="text-lg font-bold text-slate-900 dark:text-white" data-key="androidTitle">Android</h3>
-                <ul class="mt-4 space-y-2 text-sm text-slate-600 dark:text-slate-300">
-                    <li>Kotlin</li>
-                    <li>Jetpack Compose</li>
-                    <li>Room</li>
-                    <li>DataStore</li>
-                    <li>Coroutines & Flows</li>
-                    <li>Hilt / Koin</li>
-                </ul>
-            </article>
-
-            <article class="rounded-2xl bg-white p-6 shadow-sm dark:bg-slate-900">
-                <h3 class="text-lg font-bold text-slate-900 dark:text-white" data-key="backendTitle">
-                    Backend & Daten
-                </h3>
-                <ul class="mt-4 space-y-2 text-sm text-slate-600 dark:text-slate-300">
-                    <li>Firebase Authentication</li>
-                    <li>Cloud Firestore</li>
-                    <li>Supabase</li>
-                    <li>REST APIs</li>
-                    <li>SQL-Grundlagen</li>
-                    <li>Repository Pattern</li>
-                </ul>
-            </article>
-
-            <article class="rounded-2xl bg-white p-6 shadow-sm dark:bg-slate-900">
-                <h3 class="text-lg font-bold text-slate-900 dark:text-white" data-key="architectureTitle">
-                    Architektur & Delivery
-                </h3>
-                <ul class="mt-4 space-y-2 text-sm text-slate-600 dark:text-slate-300">
-                    <li>MVVM / MVVM-C</li>
-                    <li>Clean Architecture</li>
-                    <li>Git & GitHub</li>
-                    <li>GitHub Actions</li>
-                    <li>TestFlight</li>
-                    <li>GitHub Issues & Projects</li>
-                </ul>
-            </article>
-        </div>
-
-        <div class="mt-6 rounded-2xl bg-white p-6 shadow-sm dark:bg-slate-900">
-            <h3 class="text-lg font-bold text-slate-900 dark:text-white" data-key="productSkillsTitle">
-                Produktentwicklung & Zusammenarbeit
-            </h3>
-
-            <div class="mt-4 flex flex-wrap gap-2">
-                <span class="rounded-full bg-blue-100 px-3 py-1.5 text-sm text-blue-800 dark:bg-blue-950 dark:text-blue-200">Problemvalidierung</span>
-                <span class="rounded-full bg-blue-100 px-3 py-1.5 text-sm text-blue-800 dark:bg-blue-950 dark:text-blue-200">User Stories</span>
-                <span class="rounded-full bg-blue-100 px-3 py-1.5 text-sm text-blue-800 dark:bg-blue-950 dark:text-blue-200">Wireframes</span>
-                <span class="rounded-full bg-blue-100 px-3 py-1.5 text-sm text-blue-800 dark:bg-blue-950 dark:text-blue-200">Figma</span>
-                <span class="rounded-full bg-blue-100 px-3 py-1.5 text-sm text-blue-800 dark:bg-blue-950 dark:text-blue-200">Human Interface Guidelines</span>
-                <span class="rounded-full bg-blue-100 px-3 py-1.5 text-sm text-blue-800 dark:bg-blue-950 dark:text-blue-200">Material Design</span>
-                <span class="rounded-full bg-blue-100 px-3 py-1.5 text-sm text-blue-800 dark:bg-blue-950 dark:text-blue-200">Kanban</span>
-                <span class="rounded-full bg-blue-100 px-3 py-1.5 text-sm text-blue-800 dark:bg-blue-950 dark:text-blue-200">Iterative Entwicklung</span>
-                <span class="rounded-full bg-blue-100 px-3 py-1.5 text-sm text-blue-800 dark:bg-blue-950 dark:text-blue-200">Stakeholder-Kommunikation</span>
-            </div>
-        </div>
-    </section>
-
-    <section id="projekte" class="mt-16 scroll-mt-24">
-        <div class="mb-8 text-center">
-            <h2 class="text-3xl font-bold text-slate-900 dark:text-white" data-key="projectsTitle">
-                Ausgewählte Projekte
-            </h2>
-            <p class="mx-auto mt-3 max-w-3xl text-slate-600 dark:text-slate-300" data-key="projectsIntro">
-                Projekte mit realem Anwendungskontext, Pilotgruppen und kontinuierlicher Weiterentwicklung.
-            </p>
-        </div>
-
-        <div class="grid gap-6 lg:grid-cols-2">
-            <article class="rounded-2xl bg-white p-7 shadow-lg dark:bg-slate-900">
-                <div class="flex flex-wrap items-start justify-between gap-3">
-                    <div>
-                        <p class="text-sm font-semibold uppercase tracking-wide text-green-600 dark:text-green-400">
-                            iOS · TestFlight
-                        </p>
-                        <h3 class="mt-1 text-2xl font-bold text-slate-900 dark:text-white">RevierHege</h3>
-                    </div>
-                    <span class="rounded-full bg-green-100 px-3 py-1 text-xs font-semibold text-green-800 dark:bg-green-950 dark:text-green-200">
-                        Pilotphase
-                    </span>
-                </div>
-
-                <p class="mt-4 leading-relaxed text-slate-600 dark:text-slate-300" data-key="projectRevierText">
-                    Native iOS-App zur digitalen Unterstützung kleiner Jagdgemeinschaften.
-                    Entstanden in Zusammenarbeit mit einer realen Nutzergruppe und fortlaufend durch Praxisfeedback weiterentwickelt.
-                </p>
-
-                <div class="mt-5 flex flex-wrap gap-2 text-xs">
-                    <span class="rounded-full bg-slate-100 px-3 py-1.5 dark:bg-slate-800">SwiftUI</span>
-                    <span class="rounded-full bg-slate-100 px-3 py-1.5 dark:bg-slate-800">Firebase</span>
-                    <span class="rounded-full bg-slate-100 px-3 py-1.5 dark:bg-slate-800">Firestore</span>
-                    <span class="rounded-full bg-slate-100 px-3 py-1.5 dark:bg-slate-800">MapKit</span>
-                    <span class="rounded-full bg-slate-100 px-3 py-1.5 dark:bg-slate-800">MVVM</span>
-                    <span class="rounded-full bg-slate-100 px-3 py-1.5 dark:bg-slate-800">TestFlight</span>
-                </div>
-                <a href="https://byteundhandwerk.de/referenz-revierhege.html"
-                   target="_blank"
-                   rel="noopener noreferrer"
-                   class="mt-6 inline-flex items-center gap-2 text-sm font-semibold text-blue-600 hover:text-blue-700 dark:text-blue-400 dark:hover:text-blue-300">
-                    <span data-key="projectCaseStudyButton">Fallstudie bei byte &amp; Handwerk lesen</span>
-                    <i class="fa-solid fa-arrow-right"></i>
-                </a>
-            </article>
-
-            <article class="rounded-2xl bg-white p-7 shadow-lg dark:bg-slate-900">
-                <div class="flex flex-wrap items-start justify-between gap-3">
-                    <div>
-                        <p class="text-sm font-semibold uppercase tracking-wide text-orange-600 dark:text-orange-400">
-                            Android · Showcase
-                        </p>
-                        <h3 class="mt-1 text-2xl font-bold text-slate-900 dark:text-white">TreueBiss</h3>
-                    </div>
-                    <span class="rounded-full bg-orange-100 px-3 py-1 text-xs font-semibold text-orange-800 dark:bg-orange-950 dark:text-orange-200">
-                        Showcase
-                    </span>
-                </div>
-
-                <p class="mt-4 leading-relaxed text-slate-600 dark:text-slate-300" data-key="projectTreueText">
-                    White-Label-Konzept für digitale Kundenbindung im Lebensmittelhandwerk.
-                    Fokus auf einfache Stempel- und Gutscheinlogik für Bäckereien und vergleichbare Betriebe.
-                </p>
-
-                <div class="mt-5 flex flex-wrap gap-2 text-xs">
-                    <span class="rounded-full bg-slate-100 px-3 py-1.5 dark:bg-slate-800">Kotlin</span>
-                    <span class="rounded-full bg-slate-100 px-3 py-1.5 dark:bg-slate-800">Jetpack Compose</span>
-                    <span class="rounded-full bg-slate-100 px-3 py-1.5 dark:bg-slate-800">Hilt</span>
-                    <span class="rounded-full bg-slate-100 px-3 py-1.5 dark:bg-slate-800">Room</span>
-                    <span class="rounded-full bg-slate-100 px-3 py-1.5 dark:bg-slate-800">Supabase</span>
-                </div>
-            </article>
-
-            <article class="rounded-2xl bg-white p-7 shadow-lg dark:bg-slate-900">
-                <div class="flex flex-wrap items-start justify-between gap-3">
-                    <div>
-                        <p class="text-sm font-semibold uppercase tracking-wide text-purple-600 dark:text-purple-400">
-                            iOS · Abschlussprojekt
-                        </p>
-                        <h3 class="mt-1 text-2xl font-bold text-slate-900 dark:text-white">EmigrateIn</h3>
-                    </div>
-                    <span class="rounded-full bg-purple-100 px-3 py-1 text-xs font-semibold text-purple-800 dark:bg-purple-950 dark:text-purple-200">
-                        Abgeschlossen
-                    </span>
-                </div>
-
-                <p class="mt-4 leading-relaxed text-slate-600 dark:text-slate-300" data-key="projectEmigrateText">
-                    IHK-Abschlussprojekt: iOS-MVP zur strukturierten Unterstützung von Familien bei der Vorbereitung einer Auswanderung.
-                </p>
-
-                <div class="mt-5 flex flex-wrap gap-2 text-xs">
-                    <span class="rounded-full bg-slate-100 px-3 py-1.5 dark:bg-slate-800">Swift</span>
-                    <span class="rounded-full bg-slate-100 px-3 py-1.5 dark:bg-slate-800">SwiftUI</span>
-                    <span class="rounded-full bg-slate-100 px-3 py-1.5 dark:bg-slate-800">Core Data</span>
-                    <span class="rounded-full bg-slate-100 px-3 py-1.5 dark:bg-slate-800">Firebase</span>
-                    <span class="rounded-full bg-slate-100 px-3 py-1.5 dark:bg-slate-800">MVVM</span>
-                </div>
-            </article>
-        </div>
-
-        <div class="mt-8 text-center">
-            <a href="https://github.com/Code-Noob82"
-               target="_blank"
-               rel="noopener noreferrer"
-               class="inline-flex items-center gap-2 rounded-full bg-slate-900 px-6 py-3 font-semibold text-white transition hover:bg-blue-700 dark:bg-blue-600 dark:hover:bg-blue-500">
-                <i class="fa-brands fa-github"></i>
-                <span data-key="githubButton">Projekte auf GitHub ansehen</span>
-            </a>
-        </div>
-    </section>
-
-    <section id="werdegang" class="mt-16 scroll-mt-24">
-        <div class="mb-8 text-center">
-            <h2 class="text-3xl font-bold text-slate-900 dark:text-white" data-key="experienceTitle">
-                Beruflicher Werdegang
-            </h2>
-            <p class="mx-auto mt-3 max-w-3xl text-slate-600 dark:text-slate-300" data-key="experienceIntro">
-                Mein beruflicher Hintergrund verbindet technische Präzision, regulierte Produktionsumgebungen,
-                Kundenorientierung und praktische Problemlösung.
-            </p>
-        </div>
-
-        <div id="timeline" class="mx-auto max-w-4xl rounded-2xl bg-white p-7 shadow-lg dark:bg-slate-900 md:p-9"></div>
-    </section>
-
-    <section id="ausbildung" class="mt-16 scroll-mt-24">
-        <div class="mb-8 text-center">
-            <h2 class="text-3xl font-bold text-slate-900 dark:text-white" data-key="educationTitle">
-                Ausbildung & Zertifikate
-            </h2>
-        </div>
-
-        <div class="grid gap-6 md:grid-cols-2">
-            <article class="rounded-2xl border-l-4 border-blue-500 bg-white p-6 shadow-sm dark:bg-slate-900">
-                <p class="text-sm text-slate-500 dark:text-slate-400">09/2024 – 10/2025</p>
-                <h3 class="mt-1 text-lg font-bold text-slate-900 dark:text-white" data-key="syntaxTitle">
-                    IT-Fachkraft für App-Entwicklung (iOS & Android)
-                </h3>
-                <p class="mt-1 text-slate-600 dark:text-slate-300">Syntax Institut · Remote</p>
-                <p class="mt-3 text-sm leading-relaxed text-slate-600 dark:text-slate-300" data-key="syntaxText">
-                    Rund 2.300 Unterrichtseinheiten mit Schwerpunkt auf nativer App-Entwicklung,
-                    UX/UI, Architektur, Datenhaltung, APIs und Projektarbeit.
-                </p>
-            </article>
-
-            <article class="rounded-2xl border-l-4 border-green-500 bg-white p-6 shadow-sm dark:bg-slate-900">
-                <p class="text-sm text-slate-500 dark:text-slate-400">06/2025</p>
-                <h3 class="mt-1 text-lg font-bold text-slate-900 dark:text-white">
-                    iOS App Developer (IHK)
-                </h3>
-                <p class="mt-1 text-slate-600 dark:text-slate-300">IHK-Zertifikatslehrgang · 290 UE</p>
-                <p class="mt-3 text-sm leading-relaxed text-slate-600 dark:text-slate-300" data-key="iosCertificateText">
-                    Abschlussprojekt EmigrateIn mit Swift, SwiftUI, MVVM, Core Data und Firebase.
-                </p>
-            </article>
-
-            <article class="rounded-2xl bg-white p-6 shadow-sm dark:bg-slate-900">
-                <p class="text-sm text-slate-500 dark:text-slate-400">09/2002 – 07/2004</p>
-                <h3 class="mt-1 text-lg font-bold text-slate-900 dark:text-white" data-key="bioTitle">
-                    Biotechnologischer Assistent
-                </h3>
-                <p class="mt-1 text-slate-600 dark:text-slate-300">
-                    Johannes-Gutenberg-Schule, Heidelberg
-                </p>
-            </article>
-
-            <article class="rounded-2xl bg-white p-6 shadow-sm dark:bg-slate-900">
-                <p class="text-sm text-slate-500 dark:text-slate-400">09/1998 – 07/2001</p>
-                <h3 class="mt-1 text-lg font-bold text-slate-900 dark:text-white" data-key="bakerTitle">
-                    Ausbildung zum Bäcker
-                </h3>
-                <p class="mt-1 text-slate-600 dark:text-slate-300">
-                    Stadtbäckerei Frick, Sinsheim
-                </p>
-            </article>
-        </div>
-    </section>
-
-</main>
-
-<footer class="mt-16 border-t border-slate-200 bg-white dark:border-slate-800 dark:bg-slate-900">
-    <div class="mx-auto flex max-w-6xl flex-col items-center justify-between gap-3 px-5 py-7 text-sm text-slate-500 md:flex-row dark:text-slate-400">
-        <p>© 2026 Dominik Baki</p>
-        <p data-key="footerText">Native Apps. Reale Probleme. Iterative Lösungen.</p>
-        <a href="https://byteundhandwerk.de/" target="_blank" rel="noopener noreferrer" class="font-medium hover:text-blue-600">byte &amp; Handwerk</a>
-    </div>
-</footer>
-
-<script>
-document.addEventListener('DOMContentLoaded', () => {
-    const translations = {
-        de: {
-            pageTitle: 'Lebenslauf – Dominik Baki',
-            eyebrow: 'Native Mobile Development',
-            jobTitle: 'Native iOS App Developer',
-            heroText: 'Ich entwickle native iOS-Anwendungen für reale Anwendungsfälle – gemeinsam mit den Menschen, die sie später im Alltag nutzen. Mein Schwerpunkt liegt auf SwiftUI, Firebase, MapKit, sauberer Architektur und iterativer MVP-Entwicklung auf Basis belastbaren Nutzerfeedbacks.',
-            focusLabel: 'Fachlicher Fokus',
-            focusTitle: 'Native iOS-Entwicklung',
-            focusText: 'Swift, SwiftUI, SwiftData, MapKit, Firebase Authentication und Firestore.',
-            methodLabel: 'Arbeitsweise',
-            methodTitle: 'Nutzergetriebene MVPs',
-            methodText: 'Problemvalidierung, frühe Pilotgruppen, strukturierte Feedbackschleifen und schrittweise Weiterentwicklung.',
-            backgroundLabel: 'Beruflicher Hintergrund',
-            backgroundTitle: 'Praxis vor Theorie',
-            backgroundText: 'Erfahrung aus Lebensmittelhandwerk, Biotechnologie, GMP-Produktion und Vertrieb.',
-            skillsTitle: 'Technische Kompetenzen',
-            skillsIntro: 'Keine abstrakten Prozentwerte, sondern Technologien und Methoden, die ich in Ausbildung, Projektarbeit und Pilotanwendungen praktisch eingesetzt habe.',
-            iosTitle: 'iOS',
-            androidTitle: 'Android',
-            backendTitle: 'Backend & Daten',
-            architectureTitle: 'Architektur & Delivery',
-            productSkillsTitle: 'Produktentwicklung & Zusammenarbeit',
-            projectsTitle: 'Ausgewählte Projekte',
-            projectsIntro: 'Projekte mit realem Anwendungskontext, Pilotgruppen und kontinuierlicher Weiterentwicklung.',
-            projectRevierText: 'Native iOS-App zur digitalen Unterstützung kleiner Jagdgemeinschaften. Entstanden in Zusammenarbeit mit einer realen Nutzergruppe und fortlaufend durch Praxisfeedback weiterentwickelt.',
-            projectKirrungText: 'Schlanke Revier-App zur Verwaltung von Kirrungen, Sitzen und Fallen. Mit Kartenansicht, Historie, Rollenmodell und Admin-Freigabe für kleine Jagdgruppen.',
-            projectTreueText: 'White-Label-Konzept für digitale Kundenbindung im Lebensmittelhandwerk. Fokus auf einfache Stempel- und Gutscheinlogik für Bäckereien und vergleichbare Betriebe.',
-            projectEmigrateText: 'IHK-Abschlussprojekt: iOS-MVP zur strukturierten Unterstützung von Familien bei der Vorbereitung einer Auswanderung.',
-            companyContext: 'Mein unternehmerisches Angebot entwickle ich unter byte & Handwerk: erst den Arbeitsalltag verstehen, dann die kleinste wirksame digitale Lösung umsetzen.',
-            companyButton: 'byte & Handwerk ansehen',
-            projectCaseStudyButton: 'Fallstudie bei byte & Handwerk lesen',
-            githubButton: 'Projekte auf GitHub ansehen',
-            experienceTitle: 'Beruflicher Werdegang',
-            experienceIntro: 'Mein beruflicher Hintergrund verbindet technische Präzision, regulierte Produktionsumgebungen, Kundenorientierung und praktische Problemlösung.',
-            educationTitle: 'Ausbildung & Zertifikate',
-            syntaxTitle: 'IT-Fachkraft für App-Entwicklung (iOS & Android)',
-            syntaxText: 'Rund 2.300 Unterrichtseinheiten mit Schwerpunkt auf nativer App-Entwicklung, UX/UI, Architektur, Datenhaltung, APIs und Projektarbeit.',
-            iosCertificateText: 'Abschlussprojekt EmigrateIn mit Swift, SwiftUI, MVVM, Core Data und Firebase.',
-            bioTitle: 'Biotechnologischer Assistent',
-            bakerTitle: 'Ausbildung zum Bäcker',
-            footerText: 'Native Apps. Reale Probleme. Iterative Lösungen.',
-            showDetails: 'Details anzeigen',
-            hideDetails: 'Details verbergen'
+      {
+        "@context": "https://schema.org",
+        "@type": "Person",
+        "name": "Dominik Baki",
+        "url": "https://dominikbaki.com/",
+        "image": "https://dominikbaki.com/Dominik%20Baki.png",
+        "email": "mailto:dominik.baki@byteundhandwerk.de",
+        "jobTitle": "Gründer und App-Entwickler",
+        "address": {
+          "@type": "PostalAddress",
+          "addressLocality": "Mannheim",
+          "addressRegion": "Baden-Württemberg",
+          "addressCountry": "DE"
         },
-        en: {
-            pageTitle: 'Resume – Dominik Baki',
-            eyebrow: 'Native Mobile Development',
-            jobTitle: 'Native iOS App Developer',
-            heroText: 'I build native iOS applications for real-world use cases together with the people who use them in their daily work. My focus is on SwiftUI, Firebase, MapKit, maintainable architecture and iterative MVP development based on meaningful user feedback.',
-            focusLabel: 'Technical focus',
-            focusTitle: 'Native iOS development',
-            focusText: 'Swift, SwiftUI, SwiftData, MapKit, Firebase Authentication and Firestore.',
-            methodLabel: 'Approach',
-            methodTitle: 'User-driven MVPs',
-            methodText: 'Problem validation, early pilot groups, structured feedback loops and incremental product development.',
-            backgroundLabel: 'Professional background',
-            backgroundTitle: 'Practice before theory',
-            backgroundText: 'Experience in food craftsmanship, biotechnology, GMP production and sales.',
-            skillsTitle: 'Technical Skills',
-            skillsIntro: 'No arbitrary percentage ratings, but technologies and methods I have used in training, project work and pilot applications.',
-            iosTitle: 'iOS',
-            androidTitle: 'Android',
-            backendTitle: 'Backend & Data',
-            architectureTitle: 'Architecture & Delivery',
-            productSkillsTitle: 'Product Development & Collaboration',
-            projectsTitle: 'Selected Projects',
-            projectsIntro: 'Projects with real-world contexts, pilot groups and continuous iteration.',
-            projectRevierText: 'Native iOS app supporting small hunting communities. Developed with a real user group and continuously improved through practical feedback.',
-            projectKirrungText: 'Focused territory app for managing feeding sites, hunting stands and traps, including map view, history, roles and admin approval.',
-            projectTreueText: 'White-label concept for digital customer loyalty in the food trade, focused on simple stamp and voucher logic for bakeries and similar businesses.',
-            projectEmigrateText: 'IHK final project: an iOS MVP designed to support families in planning and structuring an emigration process.',
-            companyContext: 'I develop my business offering through byte & Handwerk: understand the daily work first, then build the smallest effective digital solution.',
-            companyButton: 'Visit byte & Handwerk',
-            projectCaseStudyButton: 'Read the case study at byte & Handwerk',
-            githubButton: 'View projects on GitHub',
-            experienceTitle: 'Professional Experience',
-            experienceIntro: 'My professional background combines technical precision, regulated production environments, customer orientation and practical problem solving.',
-            educationTitle: 'Education & Certifications',
-            syntaxTitle: 'IT Specialist for App Development (iOS & Android)',
-            syntaxText: 'Approximately 2,300 training units focused on native app development, UX/UI, architecture, persistence, APIs and project work.',
-            iosCertificateText: 'Final project EmigrateIn using Swift, SwiftUI, MVVM, Core Data and Firebase.',
-            bioTitle: 'Biotechnology Assistant',
-            bakerTitle: 'Apprenticeship as a Baker',
-            footerText: 'Native apps. Real problems. Iterative solutions.',
-            showDetails: 'Show details',
-            hideDetails: 'Hide details'
-        }
-    };
-
-    const experienceData = {
-        de: [
-            {
-                title: 'App-Entwicklung & eigene Produktprojekte',
-                company: 'byte & Handwerk / Eigenprojekte',
-                period: 'Seit 2025',
-                details: [
-                    'Konzeption und Entwicklung nativer iOS- und Android-Anwendungen.',
-                    'Aufbau realer Pilotprojekte mit kleinen Nutzergruppen und kontinuierlichen Feedbackschleifen.',
-                    'Arbeit mit SwiftUI, Firebase, Firestore, MapKit, Kotlin und Jetpack Compose.',
-                    'Strukturierung der Entwicklung über GitHub Issues, Tickets, Roadmaps und dokumentierte Anforderungen.'
-                ],
-                open: true
-            },
-            {
-                title: 'Teilzeitbeschäftigung',
-                company: 'Aktuelle berufliche Tätigkeit',
-                period: 'Seit 04/2026',
-                details: [
-                    'Berufliche Tätigkeit parallel zur Weiterentwicklung eigener App-Projekte.',
-                    'Schwerpunkt auf verlässlicher Organisation und eigenständiger Arbeitsweise.'
-                ]
-            },
-            {
-                title: 'Selbstständiger Vertriebspartner',
-                company: 'LR Health & Beauty',
-                period: '06/2022 – 09/2024',
-                details: [
-                    'Beratung und Betreuung von Kunden im Gesundheits- und Schönheitsbereich.',
-                    'Aufbau und Pflege langfristiger Kundenbeziehungen.',
-                    'Bedarfsanalyse, verständliche Kommunikation und lösungsorientierter Vertrieb.'
-                ]
-            },
-            {
-                title: 'Selbstständiger Handelsvertreter',
-                company: 'Vorwerk Gruppe, Ladenburg',
-                period: '04/2023 – 12/2023',
-                details: [
-                    'Beratung und Verkauf erklärungsbedürftiger Produkte.',
-                    'Eigenständige Terminplanung, Kundenbetreuung und Nachverfolgung.',
-                    'Regelmäßige Produkt- und Vertriebsschulungen.'
-                ]
-            },
-            {
-                title: 'Coordinator Combination Products',
-                company: 'AbbVie, Ludwigshafen',
-                period: '09/2021 – 07/2022',
-                details: [
-                    'Koordination regulatorisch relevanter Prozesse für Combination Products.',
-                    'Zusammenarbeit mit interdisziplinären Teams.',
-                    'Risikoanalyse, Produktbewertung und strukturierte Dokumentation.'
-                ]
-            },
-            {
-                title: 'Technician Process Transfer',
-                company: 'AGC Biologics, Heidelberg',
-                period: '07/2021 – 08/2021',
-                details: [
-                    'Übertragung und Skalierung biotechnologischer Produktionsprozesse.',
-                    'Arbeit nach GMP-Vorgaben in regulierten Reinraumbereichen.',
-                    'Durchführung von Fermentation, Filtration, Aufreinigung und Inprozesskontrollen.'
-                ]
-            },
-            {
-                title: 'Technician Upstream Processing',
-                company: 'AGC Biologics, Heidelberg',
-                period: '01/2015 – 07/2021',
-                details: [
-                    'Vorbereitung und Durchführung biopharmazeutischer Fermentationsprozesse.',
-                    'Auswertung von Prozessdaten und Mitarbeit an kontinuierlicher Prozessverbesserung.',
-                    'GMP-gerechte Dokumentation sowie Unterstützung bei Qualifizierung und Kalibrierung.'
-                ]
-            },
-            {
-                title: 'Technician Cellbanking',
-                company: 'AGC Biologics, Heidelberg',
-                period: '01/2005 – 12/2014',
-                details: [
-                    'Herstellung, Charakterisierung, Lagerung und Versand von Zellbanken.',
-                    'Aseptisches Arbeiten in kontrollierten Reinraumbereichen.',
-                    'Sicherstellung von Qualität, Rückverfolgbarkeit und GMP-konformer Dokumentation.'
-                ]
-            },
-            {
-                title: 'Ausbildung zum Bäcker',
-                company: 'Stadtbäckerei Frick, Sinsheim',
-                period: '09/1998 – 07/2001',
-                details: [
-                    'Handwerkliche Ausbildung mit Schwerpunkt auf Zuverlässigkeit, Qualität und strukturierten Arbeitsabläufen.'
-                ]
-            }
+        "worksFor": {
+          "@type": "Organization",
+          "name": "byte & Handwerk",
+          "url": "https://byteundhandwerk.de/"
+        },
+        "sameAs": [
+          "https://byteundhandwerk.de/team/dominik-baki/",
+          "https://www.linkedin.com/in/dominik-baki",
+          "https://github.com/Code-Noob82"
         ],
-        en: [
-            {
-                title: 'App Development & Product Projects',
-                company: 'byte & Handwerk / Independent Projects',
-                period: 'Since 2025',
-                details: [
-                    'Design and development of native iOS and Android applications.',
-                    'Creation of pilot projects with small user groups and continuous feedback loops.',
-                    'Work with SwiftUI, Firebase, Firestore, MapKit, Kotlin and Jetpack Compose.',
-                    'Structured delivery through GitHub Issues, tickets, roadmaps and documented requirements.'
-                ],
-                open: true
-            },
-            {
-                title: 'Part-time Employment',
-                company: 'Current role',
-                period: 'Since 04/2026',
-                details: [
-                    'Professional employment alongside ongoing development of independent app projects.',
-                    'Focus on reliable organisation and autonomous work.'
-                ]
-            },
-            {
-                title: 'Independent Sales Partner',
-                company: 'LR Health & Beauty',
-                period: '06/2022 – 09/2024',
-                details: [
-                    'Customer consulting in the health and beauty sector.',
-                    'Development and maintenance of long-term customer relationships.',
-                    'Needs analysis, clear communication and solution-oriented sales.'
-                ]
-            },
-            {
-                title: 'Independent Sales Representative',
-                company: 'Vorwerk Group, Ladenburg',
-                period: '04/2023 – 12/2023',
-                details: [
-                    'Consulting and sales of products requiring detailed explanation.',
-                    'Independent appointment planning, customer support and follow-up.',
-                    'Regular product and sales training.'
-                ]
-            },
-            {
-                title: 'Coordinator Combination Products',
-                company: 'AbbVie, Ludwigshafen',
-                period: '09/2021 – 07/2022',
-                details: [
-                    'Coordination of regulatory processes for combination products.',
-                    'Collaboration with interdisciplinary teams.',
-                    'Risk analysis, product evaluation and structured documentation.'
-                ]
-            },
-            {
-                title: 'Technician Process Transfer',
-                company: 'AGC Biologics, Heidelberg',
-                period: '07/2021 – 08/2021',
-                details: [
-                    'Transfer and scale-up of biotechnological production processes.',
-                    'Work under GMP requirements in regulated clean-room environments.',
-                    'Fermentation, filtration, purification and in-process controls.'
-                ]
-            },
-            {
-                title: 'Technician Upstream Processing',
-                company: 'AGC Biologics, Heidelberg',
-                period: '01/2015 – 07/2021',
-                details: [
-                    'Preparation and execution of biopharmaceutical fermentation processes.',
-                    'Process data analysis and continuous process improvement.',
-                    'GMP documentation and support for equipment qualification and calibration.'
-                ]
-            },
-            {
-                title: 'Technician Cell Banking',
-                company: 'AGC Biologics, Heidelberg',
-                period: '01/2005 – 12/2014',
-                details: [
-                    'Production, characterisation, storage and shipment of cell banks.',
-                    'Aseptic work in controlled clean-room environments.',
-                    'Quality assurance, traceability and GMP-compliant documentation.'
-                ]
-            },
-            {
-                title: 'Apprenticeship as a Baker',
-                company: 'Stadtbäckerei Frick, Sinsheim',
-                period: '09/1998 – 07/2001',
-                details: [
-                    'Craft apprenticeship with a focus on reliability, quality and structured workflows.'
-                ]
-            }
+        "hasCredential": [
+          {
+            "@type": "EducationalOccupationalCredential",
+            "name": "IT-Fachkraft für App-Entwicklung (iOS & Android)",
+            "credentialCategory": "Berufliche Qualifizierung",
+            "recognizedBy": {"@type": "Organization", "name": "Syntax Institut"}
+          },
+          {
+            "@type": "EducationalOccupationalCredential",
+            "name": "iOS App Developer (IHK)",
+            "credentialCategory": "IHK-Zertifikatslehrgang",
+            "recognizedBy": {"@type": "Organization", "name": "IHK Akademie München und Oberbayern"}
+          },
+          {
+            "@type": "EducationalOccupationalCredential",
+            "name": "Android App Developer IHK",
+            "credentialCategory": "IHK-Zertifikatslehrgang",
+            "recognizedBy": {"@type": "Organization", "name": "IHK Akademie München und Oberbayern"}
+          }
+        ],
+        "knowsAbout": [
+          "Lebensmittelhandwerk",
+          "Problemvalidierung",
+          "Produktentwicklung",
+          "Native iOS-Entwicklung",
+          "Android-Entwicklung",
+          "SwiftUI",
+          "Kotlin",
+          "Firebase",
+          "Nutzergetriebene MVPs"
         ]
-    };
+      }
+    </script>
+    <script src="assets/site.js" defer></script>
+  </head>
+  <body>
+    <a class="skip-link" href="#main-content">Zum Hauptinhalt springen</a>
 
-    const desktopLanguage = document.getElementById('language-switcher');
-    const mobileLanguage = document.getElementById('mobile-language-switcher');
-    const themeToggle = document.getElementById('theme-toggle');
-    const mobileThemeToggle = document.getElementById('mobile-theme-toggle');
-    const themeIcon = document.getElementById('theme-icon');
-    const mobileThemeIcon = document.getElementById('mobile-theme-icon');
-    const timeline = document.getElementById('timeline');
+    <header class="site-header">
+      <a class="personal-brand" href="#profil" aria-label="Dominik Baki – Startseite">
+        <span class="brand-mark" aria-hidden="true">DB</span>
+        <span><strong>Dominik Baki</strong><small>Produkt &amp; App-Entwicklung</small></span>
+      </a>
+      <nav class="desktop-nav" aria-label="Hauptnavigation">
+        <a href="#haltung">Haltung</a>
+        <a href="#arbeitsweise">Arbeitsweise</a>
+        <a href="#projekte">Projekte</a>
+        <a href="#erfahrung">Erfahrung</a>
+        <a href="#qualifikationen">Qualifikationen</a>
+      </nav>
+      <a class="button button-small" href="https://byteundhandwerk.de/">byte &amp; Handwerk</a>
+      <button class="nav-toggle" type="button" data-nav-toggle aria-label="Menü öffnen" aria-expanded="false"><span></span></button>
+    </header>
+    <nav class="mobile-nav" data-mobile-nav aria-label="Mobile Navigation" aria-hidden="true">
+      <a href="#haltung">Haltung</a>
+      <a href="#arbeitsweise">Arbeitsweise</a>
+      <a href="#projekte">Projekte</a>
+      <a href="#erfahrung">Erfahrung</a>
+      <a href="#qualifikationen">Qualifikationen</a>
+      <a href="https://byteundhandwerk.de/">Unternehmensseite</a>
+    </nav>
 
-    let currentLanguage = localStorage.getItem('language') || 'de';
+    <main id="main-content">
+      <section class="personal-hero" id="profil">
+        <div class="hero-copy">
+          <p class="eyebrow">Dominik Baki · Mannheim</p>
+          <h1>Praxis verstehen. <span>Digitale Lösungen bauen.</span></h1>
+          <p class="hero-lead">Ich verbinde Erfahrung aus Handwerk, regulierter Produktion und Vertrieb mit nutzerzentrierter Produktentwicklung und nativer App-Entwicklung.</p>
+          <div class="hero-actions">
+            <a class="button" href="#projekte">Projekte ansehen</a>
+            <a class="button button-outline" href="mailto:dominik.baki@byteundhandwerk.de">Direkt schreiben</a>
+          </div>
+          <dl class="hero-facts" aria-label="Profil in Zahlen">
+            <div><dt>2.300</dt><dd>Unterrichtseinheiten App-Entwicklung</dd></div>
+            <div><dt>iOS + Android</dt><dd>Native Produktentwicklung</dd></div>
+            <div><dt>4 Perspektiven</dt><dd>Handwerk, Biotech, Vertrieb, Software</dd></div>
+          </dl>
+        </div>
+        <div class="portrait-wrap">
+          <div class="portrait"><img src="Dominik Baki.png" alt="Dominik Baki, Gründer und App-Entwickler"></div>
+          <p class="portrait-note"><strong>Gründer von byte &amp; Handwerk</strong><span>Digitale Lösungen ausgehend von realen Arbeitsabläufen.</span></p>
+        </div>
+      </section>
 
-    function renderTimeline(lang) {
-        timeline.innerHTML = '';
+      <section class="section section-white" id="haltung">
+        <div class="story-grid">
+          <div>
+            <p class="eyebrow">Was mich antreibt</p>
+            <h2>Code ist für mich kein Selbstzweck.</h2>
+          </div>
+          <div class="story-copy">
+            <p>Mich reizt der Moment, in dem aus einer zunächst unklaren Idee ein Werkzeug wird, das Menschen im Alltag wirklich unterstützt. Dafür muss ich zuerst verstehen, wo Zeit verloren geht, welche Entscheidung schwerfällt und was eine Lösung tatsächlich leisten soll.</p>
+            <p>Meine beruflichen Stationen wirken auf den ersten Blick unterschiedlich. Für meine heutige Arbeit ergeben sie ein klares Muster: sorgfältig beobachten, komplexe Abläufe strukturieren, Verantwortung übernehmen und Ergebnisse so umsetzen, dass sie praktisch funktionieren.</p>
+            <p>Unter byte &amp; Handwerk übertrage ich diese Arbeitsweise auf digitale Produkte. Die Branche kann wechseln. Die Methode bleibt.</p>
+            <div class="values-list">
+              <div>Problem vor Technologie</div>
+              <div>Klarheit vor Funktionsumfang</div>
+              <div>Pilot vor Großprojekt</div>
+              <div>Belege vor Behauptungen</div>
+            </div>
+          </div>
+        </div>
+      </section>
 
-        experienceData[lang].forEach((item) => {
-            const wrapper = document.createElement('article');
-            wrapper.className = 'timeline-item relative pb-8 pl-9';
+      <section class="section section-dark" id="arbeitsweise">
+        <div class="process-layout">
+          <div class="section-heading">
+            <p class="eyebrow eyebrow-light">Arbeitsweise</p>
+            <h2>Von der Beobachtung zur belastbaren Entscheidung.</h2>
+            <p class="text-muted">Ich begrenze früh den Umfang, arbeite mit realen Nutzern und mache Ergebnisse nachvollziehbar.</p>
+          </div>
+          <div class="process-list">
+            <article><span>01</span><h3>Verstehen</h3><p>Arbeitsabläufe, Beteiligte und die eigentliche Entscheidung hinter einer Anfrage sichtbar machen.</p></article>
+            <article><span>02</span><h3>Prüfen</h3><p>Annahmen mit Gesprächen, vorhandenen Daten und konkreten Alltagssituationen abgleichen.</p></article>
+            <article><span>03</span><h3>Begrenzen</h3><p>Die kleinste Lösung definieren, die einen echten Erkenntnisgewinn oder praktischen Nutzen erzeugt.</p></article>
+            <article><span>04</span><h3>Lernen</h3><p>Mit einer Pilotgruppe testen, Feedback dokumentieren und die nächste Entscheidung aus Ergebnissen ableiten.</p></article>
+          </div>
+        </div>
+      </section>
 
-            const detailsId = `details-${crypto.randomUUID()}`;
-            const initiallyOpen = Boolean(item.open);
+      <section class="section section-paper" id="projekte">
+        <div class="section-heading">
+          <p class="eyebrow">Ausgewählte Projekte</p>
+          <h2>Technik im realen Anwendungskontext.</h2>
+          <p>Die Projekte stammen aus unterschiedlichen Branchen. Gemeinsam ist ihnen ein klar begrenzter Anwendungsfall und eine Entwicklung entlang echter Rückmeldungen.</p>
+        </div>
+        <div class="project-grid">
+          <article class="project-card project-card-featured">
+            <div class="project-meta"><span>iOS · TestFlight</span><strong>Pilotphase</strong></div>
+            <h3>RevierHege</h3>
+            <p>Native iOS-App für kleine Jagdgemeinschaften. Entwickelt mit einer realen Pilotgruppe, Kartenansicht, Rollenmodell und fortlaufenden Feedbackschleifen.</p>
+            <ul class="tag-list" aria-label="Technologien"><li>SwiftUI</li><li>Firebase</li><li>Firestore</li><li>MapKit</li><li>MVVM</li></ul>
+            <a class="text-link" href="https://byteundhandwerk.de/referenz-revierhege.html">Fallstudie lesen</a>
+          </article>
+          <article class="project-card project-card-accent">
+            <div class="project-meta"><span>Android · Showcase</span><strong>Abgeschlossen</strong></div>
+            <h3>TreueBiss</h3>
+            <p>White-Label-Konzept für digitale Kundenbindung im Lebensmittelhandwerk mit einfacher Stempel- und Gutscheinlogik.</p>
+            <ul class="tag-list" aria-label="Technologien"><li>Kotlin</li><li>Jetpack Compose</li><li>Room</li><li>Supabase</li><li>Clean Architecture</li></ul>
+          </article>
+          <article class="project-card">
+            <div class="project-meta"><span>iOS · Abschlussprojekt</span><strong>Sehr gut</strong></div>
+            <h3>EmigrateIn</h3>
+            <p>iOS-MVP zur strukturierten Unterstützung von Familien bei der Vorbereitung einer Auswanderung. Die Modulbewertung hebt Architektur, Codequalität und Bedienung hervor.</p>
+            <ul class="tag-list" aria-label="Technologien"><li>Swift</li><li>SwiftUI</li><li>Firebase</li><li>Dependency Injection</li><li>Repository Pattern</li></ul>
+          </article>
+        </div>
+        <div class="section-actions"><a class="button" href="https://github.com/Code-Noob82">Weitere Projekte auf GitHub</a></div>
+      </section>
 
-            wrapper.innerHTML = `
-                <div class="absolute left-0 top-1.5 h-5 w-5 rounded-full border-4 border-white bg-blue-500 dark:border-slate-900"></div>
-                <button type="button"
-                        class="w-full text-left"
-                        aria-expanded="${initiallyOpen}"
-                        aria-controls="${detailsId}">
-                    <p class="text-sm text-slate-500 dark:text-slate-400">${item.period}</p>
-                    <h3 class="mt-1 text-lg font-bold text-slate-900 dark:text-white">${item.title}</h3>
-                    <p class="text-slate-600 dark:text-slate-300">${item.company}</p>
-                    <span class="mt-2 inline-block text-sm font-medium text-blue-600 dark:text-blue-400">
-                        ${initiallyOpen ? translations[lang].hideDetails : translations[lang].showDetails}
-                    </span>
-                </button>
+      <section class="section section-white" id="kompetenzen">
+        <div class="section-heading">
+          <p class="eyebrow">Technische Kompetenz</p>
+          <h2>Von der Produktidee bis zur auslieferbaren Anwendung.</h2>
+          <p>Keine Prozentbalken, sondern Technologien und Methoden, die ich in Ausbildung, Projekten und Pilotanwendungen eingesetzt habe.</p>
+        </div>
+        <div class="skills-grid">
+          <article><span class="card-number">01</span><h3>Native Apps</h3><p>Swift, SwiftUI, SwiftData, MapKit, Kotlin, Jetpack Compose, Room und Coroutines.</p></article>
+          <article><span class="card-number">02</span><h3>Backend &amp; Daten</h3><p>Firebase Authentication, Firestore, Supabase, REST-Schnittstellen, SQL und nachvollziehbare Datenmodelle.</p></article>
+          <article><span class="card-number">03</span><h3>Architektur &amp; Qualität</h3><p>MVVM, Clean Architecture, Repository Pattern, Dependency Injection, Unit Tests und UI Tests.</p></article>
+          <article><span class="card-number">04</span><h3>Produkt &amp; Delivery</h3><p>User Research, Wireframes, Figma, GitHub Actions, TestFlight, Tickets und dokumentierte Feedbackschleifen.</p></article>
+        </div>
+      </section>
 
-                <div id="${detailsId}" class="${initiallyOpen ? '' : 'hidden'} mt-4 border-l-2 border-slate-200 pl-4 dark:border-slate-700">
-                    <ul class="space-y-2 text-sm leading-relaxed text-slate-600 dark:text-slate-300">
-                        ${item.details.map(detail => `<li class="flex gap-2"><span class="mt-2 h-1.5 w-1.5 flex-none rounded-full bg-blue-500"></span><span>${detail}</span></li>`).join('')}
-                    </ul>
-                </div>
-            `;
+      <section class="section section-deep" id="erfahrung">
+        <div class="career-layout">
+          <div class="section-heading">
+            <p class="eyebrow">Beruflicher Hintergrund</p>
+            <h2>Vier Arbeitswelten prägen meinen Blick.</h2>
+            <p>Jede Station hat andere Anforderungen gestellt. Zusammen ergeben sie die Arbeitsweise, mit der ich heute Produkte entwickle.</p>
+          </div>
+          <div class="career-list">
+            <details open>
+              <summary><span>Seit 2025</span><strong>App-Entwicklung &amp; eigene Produktprojekte</strong></summary>
+              <p>Konzeption und Entwicklung nativer iOS- und Android-Anwendungen, Aufbau kleiner Pilotgruppen sowie strukturierte Entwicklung über Anforderungen, Tickets und Roadmaps.</p>
+            </details>
+            <details>
+              <summary><span>2022–2024</span><strong>Beratung &amp; Vertrieb</strong></summary>
+              <p>Bedarfsanalyse, verständliche Kommunikation und eigenständige Kundenbetreuung als Vertriebspartner und Handelsvertreter.</p>
+            </details>
+            <details>
+              <summary><span>2021–2022</span><strong>Prozess- und Produktkoordination</strong></summary>
+              <p>Regulatorisch relevante Prozesse, Risikoanalysen, Prozessübertragung und Zusammenarbeit in interdisziplinären Teams bei AbbVie und AGC Biologics.</p>
+            </details>
+            <details>
+              <summary><span>2005–2021</span><strong>Biotechnologische Produktion</strong></summary>
+              <p>Aseptische Herstellung, Fermentation, Prozessdaten, Qualitätssicherung und GMP-konforme Dokumentation in kontrollierten Produktionsumgebungen.</p>
+            </details>
+            <details>
+              <summary><span>1998–2001</span><strong>Ausbildung zum Bäcker</strong></summary>
+              <p>Handwerkliche Grundlage mit Zeitdruck, Frische, Qualität, Teamübergaben und verlässlichen Arbeitsabläufen.</p>
+            </details>
+          </div>
+        </div>
+      </section>
 
-            const button = wrapper.querySelector('button');
-            const details = wrapper.querySelector(`#${CSS.escape(detailsId)}`);
-            const label = button.querySelector('span');
+      <section class="section section-white" id="qualifikationen">
+        <div class="section-heading">
+          <p class="eyebrow">Qualifikationen &amp; Nachweise</p>
+          <h2>Strukturiert gelernt. Praktisch angewendet.</h2>
+          <p>Die Angaben basieren auf den vorliegenden Zertifikaten und Modulabschlussbewertungen.</p>
+        </div>
+        <div class="qualification-grid">
+          <article><p class="qualification-date">09/2024–09/2025</p><h3>IT-Fachkraft für App-Entwicklung</h3><p>iOS &amp; Android · Syntax Institut</p><strong>2.300 Unterrichtseinheiten</strong><span>UX/UI, Swift, SwiftUI, Kotlin, Compose, Datenhaltung, APIs, Architektur und Testing.</span></article>
+          <article><p class="qualification-date">06/2025</p><h3>iOS App Developer (IHK)</h3><p>IHK Akademie München und Oberbayern</p><strong>290 Unterrichtsstunden</strong><span>Swift, SwiftUI, Navigation, MVVM, Core Data, Netzwerke, Repository Pattern und Firebase.</span></article>
+          <article><p class="qualification-date">10/2025</p><h3>Android App Developer IHK</h3><p>IHK Akademie München und Oberbayern</p><strong>245 Unterrichtsstunden</strong><span>Compose, App-Architektur, State, Datenbanken, APIs, Theming, Animationen und App-Testing.</span></article>
+          <article><p class="qualification-date">2025</p><h3>Modulabschlüsse</h3><p>EmigrateIn &amp; TreueBiss</p><strong>Gesamtbewertung: sehr gut</strong><span>Bewertet wurden technisches Verständnis, Funktionsweise, Planung, Code Style, Nutzbarkeit und Präsentation.</span></article>
+        </div>
+        <aside class="document-note" aria-label="Hinweis zu Nachweisen">
+          <div><span aria-hidden="true">✓</span></div>
+          <p><strong>Originalnachweise sind vorhanden.</strong> Da die Dokumente Geburtsdatum, Unterschriften und weitere persönliche Angaben enthalten, werden sie nicht ungefiltert öffentlich verlinkt. Im passenden beruflichen Kontext stelle ich die Nachweise gezielt bereit.</p>
+        </aside>
+      </section>
 
-            button.addEventListener('click', () => {
-                const isOpen = button.getAttribute('aria-expanded') === 'true';
-                button.setAttribute('aria-expanded', String(!isOpen));
-                details.classList.toggle('hidden');
-                label.textContent = isOpen
-                    ? translations[currentLanguage].showDetails
-                    : translations[currentLanguage].hideDetails;
-            });
+      <section class="personal-quote">
+        <p class="eyebrow">Mein Warum</p>
+        <blockquote>„Nicht nur Code schreiben, sondern aus einzelnen Bausteinen etwas schaffen, das für Menschen verständlich, zuverlässig und nützlich ist.“</blockquote>
+        <p>Diese Haltung verbindet meine frühen Erfahrungen im Handwerk mit meiner heutigen Arbeit an digitalen Produkten.</p>
+      </section>
 
-            timeline.appendChild(wrapper);
-        });
-    }
+      <section class="cta" id="kontakt">
+        <p class="eyebrow eyebrow-light">Austausch</p>
+        <h2>Ein gutes Gespräch beginnt mit der richtigen Frage.</h2>
+        <p>Ob Produktidee, Pilotvorhaben oder technischer Austausch: Wir klären zuerst, was tatsächlich besser werden soll.</p>
+        <div class="cta-actions">
+          <a class="button button-light" href="mailto:dominik.baki@byteundhandwerk.de">E-Mail schreiben</a>
+          <a class="button button-ghost-light" href="https://www.linkedin.com/in/dominik-baki">Auf LinkedIn vernetzen</a>
+        </div>
+      </section>
+    </main>
 
-    function setLanguage(lang) {
-        currentLanguage = lang;
-        document.documentElement.lang = lang;
-        document.title = translations[lang].pageTitle;
-
-        document.querySelectorAll('[data-key]').forEach(element => {
-            const key = element.dataset.key;
-            if (translations[lang][key]) {
-                element.textContent = translations[lang][key];
-            }
-        });
-
-        desktopLanguage.value = lang;
-        mobileLanguage.value = lang;
-        localStorage.setItem('language', lang);
-        renderTimeline(lang);
-    }
-
-    function applyTheme(theme) {
-        const dark = theme === 'dark';
-        document.documentElement.classList.toggle('dark', dark);
-
-        themeIcon.className = dark ? 'fa-solid fa-moon' : 'fa-solid fa-sun';
-        mobileThemeIcon.className = dark ? 'fa-solid fa-moon' : 'fa-solid fa-sun';
-
-        localStorage.setItem('theme', theme);
-    }
-
-    function toggleTheme() {
-        const dark = document.documentElement.classList.contains('dark');
-        applyTheme(dark ? 'light' : 'dark');
-    }
-
-    desktopLanguage.addEventListener('change', event => setLanguage(event.target.value));
-    mobileLanguage.addEventListener('change', event => setLanguage(event.target.value));
-    themeToggle.addEventListener('click', toggleTheme);
-    mobileThemeToggle.addEventListener('click', toggleTheme);
-
-    const savedTheme = localStorage.getItem('theme');
-    const preferredTheme = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
-
-    applyTheme(savedTheme || preferredTheme);
-    setLanguage(currentLanguage);
-});
-</script>
-
-</body>
+    <footer class="site-footer">
+      <div class="footer-identity">
+        <span class="brand-mark" aria-hidden="true">DB</span>
+        <div><strong>Dominik Baki</strong><p>Produktentwicklung und native Apps.</p></div>
+      </div>
+      <div class="footer-contact"><strong>Kontakt</strong><span>Mannheim · Baden-Württemberg</span><a href="mailto:dominik.baki@byteundhandwerk.de">dominik.baki@byteundhandwerk.de</a></div>
+      <div class="footer-links"><a href="https://byteundhandwerk.de/">byte &amp; Handwerk</a><a href="https://github.com/Code-Noob82">GitHub</a><a href="https://www.linkedin.com/in/dominik-baki">LinkedIn</a><a href="https://byteundhandwerk.de/impressum.html">Impressum</a><a href="https://byteundhandwerk.de/datenschutz.html">Datenschutz</a></div>
+      <div class="footer-meta">© <span data-current-year>2026</span> Dominik Baki.</div>
+    </footer>
+  </body>
 </html>
