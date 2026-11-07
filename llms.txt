@@ -1,0 +1,16 @@
+# Dominik Baki
+
+> Dominik Baki verbindet Erfahrung aus Handwerk, regulierter Produktion und Vertrieb mit nutzerzentrierter Produktentwicklung und nativer App-Entwicklung.
+
+Dominik Baki ist Gründer von byte & Handwerk in Mannheim (https://byteundhandwerk.de/), für Kunden in ganz Deutschland. Kontakt: dominik.baki@byteundhandwerk.de.
+
+## Seiten
+
+- [Fragen zur Zusammenarbeit](https://dominikbaki.com/fragen): Wie die Zusammenarbeit läuft, was bei unterschiedlicher Meinung passiert und für welche Projekte ich nicht der Richtige bin: sieben Antworten von Dominik Baki.
+- [Quereinstieg zum App-Entwickler: mein Weg](https://dominikbaki.com/quereinstieg-app-entwickler): Vom Bäckerhandwerk über regulierte Produktion zur App-Entwicklung: welche Ausbildung dahintersteht, was der Beruf täglich bedeutet und was dabei entstand.
+- [TestFlight in der Praxis: mein Beta-Test](https://dominikbaki.com/testflight-praxistest): Wie ein Beta-Test über TestFlight im Alltag abläuft: Einladung, Rückmeldungen, Änderungen – am Beispiel RevierHege und einer echten Pilotgruppe.
+
+## Unternehmen
+
+- [byte & Handwerk](https://byteundhandwerk.de/)
+- [App-Entwicklung zum Festpreis](https://byteundhandwerk.de/leistungen)
